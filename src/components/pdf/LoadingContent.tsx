@@ -117,7 +117,7 @@ const LoadingContent = ({ loadingProgress = 0 }: LoadingContentProps) => {
               <span className="text-navy text-sm font-medium">Progress</span>
               <span className="text-navy text-sm font-medium">{Math.round(loadingProgress)}%</span>
             </div>
-            <Progress value={loadingProgress} className="h-2 bg-navy/20" />
+            <Progress value={loadingProgress} className="h-2 bg-purple-100" />
             <div className="mt-2 text-center">
               <span className="text-navy/70 text-sm">Time elapsed: {formatTime(seconds)}</span>
             </div>
