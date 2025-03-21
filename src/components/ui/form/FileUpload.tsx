@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import * as pdfjs from 'pdfjs-dist';
@@ -92,7 +91,7 @@ export const FileUpload = ({
       />
       <div 
         className={cn(
-          "bg-white/10 border border-dashed border-white/30 rounded-lg p-6 text-center cursor-pointer hover:bg-white/5 transition-colors",
+          "bg-navy/10 border border-dashed border-navy/30 rounded-lg p-6 text-center cursor-pointer hover:bg-navy/5 transition-colors",
           error ? "border-red-400" : "",
           isExtracting ? "opacity-70" : "",
           className
@@ -124,7 +123,7 @@ export const FileUpload = ({
               </>
             )}
           </div>
-          <p className="text-xs text-navy">PDF (MAX. 10MB)</p>
+          <p className="text-xs text-navy/70">PDF (MAX. 10MB)</p>
         </div>
       </div>
     </div>

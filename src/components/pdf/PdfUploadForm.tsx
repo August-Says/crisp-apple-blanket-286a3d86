@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from 'sonner';
@@ -85,16 +84,16 @@ const PdfUploadForm = ({ onSubmit, initialTextContent = '' }: PdfUploadFormProps
         className="w-full"
         onValueChange={(value) => setActiveTab(value as 'upload' | 'text')}
       >
-        <TabsList className="grid w-full grid-cols-2 bg-white/10 text-navy">
+        <TabsList className="grid w-full grid-cols-2 bg-navy/10 text-navy">
           <TabsTrigger 
             value="upload" 
-            className="data-[state=active]:bg-white/20 data-[state=active]:text-navy font-medium"
+            className="data-[state=active]:bg-navy/20 data-[state=active]:text-navy font-medium"
           >
             Upload PDF
           </TabsTrigger>
           <TabsTrigger 
             value="text" 
-            className="data-[state=active]:bg-white/20 data-[state=active]:text-navy font-medium"
+            className="data-[state=active]:bg-navy/20 data-[state=active]:text-navy font-medium"
           >
             Paste Text
           </TabsTrigger>
