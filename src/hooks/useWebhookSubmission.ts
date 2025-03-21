@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { WebhookOptions, WebhookSubmissionResult } from '@/types/webhook';
 import { formatWebhookResponse } from '@/utils/webhookFormatter';
@@ -25,8 +24,7 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
     currentHistoryEntry
   } = useSubmissionHistory();
 
-  // Changed to test webhook URL
-  const defaultWebhookUrl = 'https://sonarai.app.n8n.cloud/webhook/test-webhook';
+  const defaultWebhookUrl = 'https://sonarai.app.n8n.cloud/webhook/715d27f7-f730-437c-8abe-cda82e04210e';
   const webhookUrl = options?.webhookUrl || defaultWebhookUrl;
   const fallbackGenerator = options?.fallbackGenerator || defaultFallbackGenerator;
 
