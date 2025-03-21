@@ -44,7 +44,7 @@ const Home = () => {
               </p>
               <Button 
                 onClick={() => navigate('/fields')} 
-                variant="peach"
+                variant="navyGradient"
                 className="font-medium"
               >
                 Start with Fields
@@ -68,7 +68,7 @@ const Home = () => {
               </p>
               <Button 
                 onClick={() => navigate('/pdf')} 
-                variant="peach"
+                variant="navyGradient"
                 className="font-medium"
               >
                 Start with PDF
