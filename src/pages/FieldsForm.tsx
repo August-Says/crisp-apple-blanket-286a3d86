@@ -104,7 +104,7 @@ const FieldsForm = () => {
         <Button 
           onClick={handleBack} 
           variant="ghost" 
-          className="text-white/80 hover:text-white hover:bg-white/10"
+          className="text-navy hover:text-navy hover:bg-navy/10"
         >
           <ArrowLeft size={18} className="mr-2" />
           Back to Home
@@ -113,8 +113,8 @@ const FieldsForm = () => {
       
       <div className="max-w-3xl mx-auto">
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-white mb-4">Create Canvas Using Fields</h1>
-          <p className="text-white/80">
+          <h1 className="text-3xl font-bold text-navy mb-4">Create Canvas Using Fields</h1>
+          <p className="text-navy/80">
             Fill in the form below to generate a customized marketing canvas for your client.
           </p>
         </div>

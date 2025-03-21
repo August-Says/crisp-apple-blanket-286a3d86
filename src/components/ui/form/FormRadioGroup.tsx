@@ -35,7 +35,7 @@ export const FormRadioGroup = ({
           />
           <Label 
             htmlFor={`${id}-${option.value}`}
-            className="text-navy/80 font-normal"
+            className="text-navy font-normal"
           >
             {option.label}
           </Label>

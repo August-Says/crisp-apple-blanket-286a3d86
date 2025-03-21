@@ -25,7 +25,7 @@ const MarketingForm = ({
   onReset 
 }: MarketingFormProps) => {
   return (
-    <form onSubmit={onSubmit} className="glass-morphism rounded-2xl p-6 sm:p-8 shadow-lg">
+    <form onSubmit={onSubmit} className="glass-morphism rounded-2xl p-6 sm:p-8 shadow-lg text-navy">
       <FormSection title="Your Information">
         <UserRoleSection 
           formData={formData}
@@ -67,7 +67,7 @@ const MarketingForm = ({
       </FormSection>
       
       <div className="mb-6">
-        <h3 className="text-lg font-medium text-white/90 mb-4 border-b border-white/20 pb-2">
+        <h3 className="text-lg font-medium text-navy mb-4 border-b border-navy/20 pb-2">
           Additional Information
         </h3>
         <FormField
@@ -102,7 +102,7 @@ const MarketingForm = ({
             variant="outline"
             size="lg"
             onClick={onReset}
-            className="font-medium px-6 bg-white/5 hover:bg-white/10 text-white/80 hover:text-white border-white/20"
+            className="font-medium px-6 bg-white/5 hover:bg-white/10 text-navy border-navy/20"
           >
             Reset Form
           </Button>

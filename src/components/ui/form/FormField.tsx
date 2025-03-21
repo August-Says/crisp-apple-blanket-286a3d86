@@ -20,7 +20,7 @@ export const FormField = ({
 }: FormFieldProps) => {
   return (
     <div className={cn("space-y-2", className)}>
-      <Label htmlFor={htmlFor} className="text-navy/90 font-medium">
+      <Label htmlFor={htmlFor} className="text-navy font-medium">
         {label}
       </Label>
       {children}

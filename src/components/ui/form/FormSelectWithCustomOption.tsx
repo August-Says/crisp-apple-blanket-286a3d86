@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { 
   Select,
@@ -70,26 +71,26 @@ export const FormSelectWithCustomOption = ({
         <SelectTrigger 
           id={id} 
           className={cn(
-            "bg-white/10 border-white/20 text-white focus:ring-cloudai-purple", 
+            "bg-white/10 border-white/20 text-navy focus:ring-navy", 
             error ? "border-red-400" : "",
             className
           )}
         >
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
-        <SelectContent className="bg-cloudai-darkpurple/90 border-white/20 text-white backdrop-blur-md">
+        <SelectContent className="bg-peach/90 border-navy/20 text-navy backdrop-blur-md">
           {options.map((option) => (
             <SelectItem 
               key={option.value} 
               value={option.value}
-              className="text-white focus:bg-white/10 focus:text-white"
+              className="text-navy focus:bg-navy/10 focus:text-navy"
             >
               {option.label}
             </SelectItem>
           ))}
           <SelectItem 
             value="custom" 
-            className="text-white focus:bg-white/10 focus:text-white border-t border-white/20 mt-1 pt-1"
+            className="text-navy focus:bg-navy/10 focus:text-navy border-t border-navy/20 mt-1 pt-1"
           >
             {customOptionLabel}
           </SelectItem>
