@@ -100,7 +100,7 @@ export const FileUpload = ({
       >
         <div className="flex flex-col items-center justify-center gap-2">
           <svg 
-            className={cn("w-8 h-8 text-white/60", isExtracting ? "animate-spin" : "")} 
+            className={cn("w-8 h-8 text-navy", isExtracting ? "animate-spin" : "")} 
             fill="none" 
             stroke="currentColor" 
             viewBox="0 0 24 24" 
@@ -113,7 +113,7 @@ export const FileUpload = ({
               d={isExtracting ? "M12 6v6m0 0v6m0-6h6m-6 0H6" : "M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"}
             />
           </svg>
-          <div className="text-sm text-white/80">
+          <div className="text-sm text-navy">
             {isExtracting ? (
               <span>Extracting text...</span>
             ) : fileName ? (
@@ -124,7 +124,7 @@ export const FileUpload = ({
               </>
             )}
           </div>
-          <p className="text-xs text-white/60">PDF (MAX. 10MB)</p>
+          <p className="text-xs text-navy">PDF (MAX. 10MB)</p>
         </div>
       </div>
     </div>
