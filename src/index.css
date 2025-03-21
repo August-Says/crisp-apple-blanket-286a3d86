@@ -59,7 +59,7 @@
   }
   
   .canvas-gradient {
-    @apply bg-gradient-cloudai;
+    @apply bg-gradient-navy-peach;
   }
 
   .text-balance {
@@ -349,4 +349,3 @@
     }
   }
 }
-

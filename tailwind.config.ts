@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -161,6 +162,7 @@ export default {
 				'gradient-canvas': 'linear-gradient(130deg, #6330B4 0%, #3055B5 100%)',
 				'gradient-cloudai': 'linear-gradient(150deg, #120E29 0%, #301E63 40%, #2C3494 100%)',
 				'gradient-deepspace': 'linear-gradient(to bottom, #120E29 0%, #301E63 50%, #2C3494 100%)',
+				'gradient-navy-peach': 'linear-gradient(130deg, #20374c 0%, #2a4a67 100%)',
 			},
 		}
 	},
