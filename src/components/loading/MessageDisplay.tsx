@@ -12,7 +12,7 @@ const MessageDisplay = ({ message }: MessageDisplayProps) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="text-peach text-lg font-medium text-center"
+      className="text-navy text-lg font-medium text-center"
     >
       {message}
     </motion.p>

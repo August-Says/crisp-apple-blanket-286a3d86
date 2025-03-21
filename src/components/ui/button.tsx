@@ -10,16 +10,16 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-peach text-navy hover:bg-peach-dark",
+        default: "bg-navy text-peach hover:bg-navy-light",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
-          "border border-peach bg-transparent text-peach hover:bg-peach/10",
+          "border border-navy bg-transparent text-navy hover:bg-navy/10",
         secondary:
-          "bg-navy-light text-peach hover:bg-navy/80",
-        ghost: "hover:bg-navy-light hover:text-peach",
-        link: "text-peach underline-offset-4 hover:underline",
-        cloudai: "bg-gradient-to-r from-cloudai-purple to-cloudai-blue text-white hover:opacity-90 transition-opacity",
+          "bg-peach-light text-navy hover:bg-peach/80",
+        ghost: "hover:bg-peach-light hover:text-navy",
+        link: "text-navy underline-offset-4 hover:underline",
+        cloudai: "bg-gradient-to-r from-navy to-navy-light text-peach hover:opacity-90 transition-opacity",
         navy: "bg-navy text-peach hover:bg-navy-light transition-colors",
         peach: "bg-peach text-navy hover:bg-peach-dark transition-colors",
         navyGradient: "bg-gradient-to-r from-navy to-navy-light text-peach hover:opacity-90 transition-opacity",

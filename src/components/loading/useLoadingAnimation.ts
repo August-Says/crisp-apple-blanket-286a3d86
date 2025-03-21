@@ -39,17 +39,7 @@ export const useLoadingAnimation = ({ progress }: UseLoadingAnimationOptions) =>
   
   // Determine primary color based on progress
   const getPrimaryColor = () => {
-    if (displayProgress >= 100) {
-      return "#ffd2c8"; // peach
-    } else if (displayProgress >= 85) {
-      return "#ffe5e0"; // peach-light
-    } else if (displayProgress >= 55) {
-      return "#ffbfb0"; // peach-dark
-    } else if (displayProgress >= 30) {
-      return "#ffd2c8"; // peach
-    } else {
-      return "#ffd2c8"; // peach
-    }
+    return "#20374c"; // Always return navy
   };
   
   return {

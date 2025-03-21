@@ -8,33 +8,33 @@
 
 @layer base {
   :root {
-    --background: 208 58% 21%; /* navy blue */
-    --foreground: 11 100% 95%; /* Light peach for text on navy */
+    --background: 11 100% 89%; /* #ffd2c8 - peachy pink for background */
+    --foreground: 208 58% 21%; /* #20374c - dark navy for text */
 
-    --card: 208 58% 21%;
-    --card-foreground: 11 100% 95%;
+    --card: 11 100% 89%; /* Pink for cards */
+    --card-foreground: 208 58% 21%; /* Navy for card text */
 
-    --popover: 208 58% 21%;
-    --popover-foreground: 11 100% 95%;
+    --popover: 11 100% 89%;
+    --popover-foreground: 208 58% 21%;
 
-    --primary: 11 100% 89%; /* peachy pink */
-    --primary-foreground: 208 58% 15%; /* Darker navy for text on peach */
+    --primary: 208 58% 21%; /* Navy for primary elements */
+    --primary-foreground: 11 100% 89%; /* Pink for text on primary */
 
-    --secondary: 208 35% 30%; /* Lighter navy */
-    --secondary-foreground: 11 100% 89%; /* Peach for text on secondary */
+    --secondary: 11 80% 92%; /* Lighter pink */
+    --secondary-foreground: 208 58% 21%; /* Navy for text on secondary */
 
-    --muted: 208 25% 35%;
-    --muted-foreground: 11 30% 92%;
+    --muted: 11 70% 85%;
+    --muted-foreground: 208 30% 30%;
 
-    --accent: 11 100% 89%;
-    --accent-foreground: 208 58% 21%;
+    --accent: 208 58% 21%;
+    --accent-foreground: 11 100% 89%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 208 30% 30%;
-    --input: 208 30% 30%;
-    --ring: 11 100% 89%;
+    --border: 11 60% 80%;
+    --input: 11 60% 80%;
+    --ring: 208 58% 21%;
 
     --radius: 1rem;
   }
@@ -46,11 +46,11 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased font-sans;
+    @apply bg-peach text-navy antialiased font-sans;
   }
 
   ::selection {
-    @apply bg-peach/30 text-foreground;
+    @apply bg-navy/30 text-peach;
   }
 }
 
@@ -60,7 +60,7 @@
   }
   
   .canvas-gradient {
-    @apply bg-gradient-navy-peach;
+    @apply bg-gradient-peach-navy;
   }
 
   .text-balance {

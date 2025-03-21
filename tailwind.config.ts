@@ -83,12 +83,12 @@ export default {
 					darkpurple: '#120E29',
 				},
 				navy: {
-					DEFAULT: '#20374c',
+					DEFAULT: '#20374c', /* Dark navy blue */
 					light: '#2a4a67',
 					dark: '#182a3a'
 				},
 				peach: {
-					DEFAULT: '#ffd2c8',
+					DEFAULT: '#ffd2c8', /* Peachy pink */
 					light: '#ffe5e0',
 					dark: '#ffbfb0'
 				}
@@ -163,6 +163,7 @@ export default {
 				'gradient-cloudai': 'linear-gradient(150deg, #120E29 0%, #301E63 40%, #2C3494 100%)',
 				'gradient-deepspace': 'linear-gradient(to bottom, #120E29 0%, #301E63 50%, #2C3494 100%)',
 				'gradient-navy-peach': 'linear-gradient(130deg, #20374c 0%, #2a4a67 100%)',
+				'gradient-peach-navy': 'linear-gradient(130deg, #ffd2c8 0%, #ffe5e0 100%)',
 			},
 		}
 	},

@@ -13,7 +13,7 @@ const ElapsedTimeDisplay = ({ elapsedTime, formatTime }: ElapsedTimeDisplayProps
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="text-peach/80 text-sm font-medium"
+      className="text-navy/80 text-sm font-medium"
     >
       Time elapsed: {formatTime(elapsedTime)}
     </motion.div>

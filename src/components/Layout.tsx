@@ -57,7 +57,7 @@ const Layout = ({ children }: LayoutProps) => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#120E29] via-[#301E63] to-[#2C3494] overflow-hidden relative">
+    <div className="min-h-screen flex flex-col bg-peach overflow-hidden relative">
       {isAuthenticated && <Navbar />}
       <main className={`flex-1 ${isAuthenticated ? 'pt-16' : ''} flex flex-col`}>
         {children}
@@ -68,7 +68,7 @@ const Layout = ({ children }: LayoutProps) => {
         <div className="fixed bottom-6 right-6 z-40">
           <Button 
             onClick={openSupportChat}
-            className="rounded-full w-14 h-14 bg-august-accent hover:bg-august-accent/90 text-white shadow-lg"
+            className="rounded-full w-14 h-14 bg-navy hover:bg-navy-light text-peach shadow-lg"
           >
             <MessageCircle size={24} />
           </Button>
