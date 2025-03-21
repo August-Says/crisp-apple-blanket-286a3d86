@@ -9,7 +9,7 @@ import { supabase } from '@/integrations/supabase/client';
 
 const AugustLogo = () => (
   <svg 
-    className="h-10 mr-2" 
+    className="h-20 mr-2" 
     xmlns="http://www.w3.org/2000/svg" 
     version="1.1" 
     viewBox="0 0 1920 1080"
