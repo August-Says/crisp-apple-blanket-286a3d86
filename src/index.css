@@ -7,33 +7,33 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    --background: 208 58% 21%; /* navy blue */
+    --foreground: 11 100% 95%; /* Light peach for text on navy */
 
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card: 208 58% 21%;
+    --card-foreground: 11 100% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    --popover: 208 58% 21%;
+    --popover-foreground: 11 100% 95%;
 
-    --primary: 262 76% 44%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 11 100% 89%; /* peachy pink */
+    --primary-foreground: 208 58% 15%; /* Darker navy for text on peach */
 
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
+    --secondary: 208 35% 30%; /* Lighter navy */
+    --secondary-foreground: 11 100% 89%; /* Peach for text on secondary */
 
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
+    --muted: 208 25% 35%;
+    --muted-foreground: 11 30% 92%;
 
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
+    --accent: 11 100% 89%;
+    --accent-foreground: 208 58% 21%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 262 76% 44%;
+    --border: 208 30% 30%;
+    --input: 208 30% 30%;
+    --ring: 11 100% 89%;
 
     --radius: 1rem;
   }
@@ -49,7 +49,7 @@
   }
 
   ::selection {
-    @apply bg-cloudai-purple/30 text-foreground;
+    @apply bg-peach/30 text-foreground;
   }
 }
 
@@ -349,3 +349,4 @@
     }
   }
 }
+

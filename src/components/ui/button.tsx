@@ -20,6 +20,10 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         cloudai: "bg-gradient-to-r from-cloudai-purple to-cloudai-blue text-white hover:opacity-90 transition-opacity",
+        navy: "bg-navy text-peach hover:bg-navy-light transition-colors",
+        peach: "bg-peach text-navy hover:bg-peach-dark transition-colors",
+        navyGradient: "bg-gradient-to-r from-navy to-navy-light text-peach hover:opacity-90 transition-opacity",
+        peachGradient: "bg-gradient-to-r from-peach to-peach-dark text-navy hover:opacity-90 transition-opacity",
       },
       size: {
         default: "h-10 px-4 py-2",

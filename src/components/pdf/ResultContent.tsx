@@ -24,7 +24,7 @@ const ResultContent = ({
         <Button 
           onClick={onBack} 
           variant="ghost" 
-          className="text-white/80 hover:text-white hover:bg-white/10"
+          className="text-peach hover:text-peach hover:bg-navy-light"
         >
           <ArrowLeft size={18} className="mr-2" />
           Back to Form
@@ -34,7 +34,7 @@ const ResultContent = ({
             onClick={() => onNavigate('back')}
             variant="outline"
             disabled={!canGoBack}
-            className="text-white border-white/20 hover:bg-white/10 disabled:opacity-50"
+            className="text-peach border-peach/20 hover:bg-navy-light disabled:opacity-50"
           >
             <ChevronLeft size={18} className="mr-1" />
             Previous
@@ -43,14 +43,14 @@ const ResultContent = ({
             onClick={() => onNavigate('forward')}
             variant="outline"
             disabled={!canGoForward}
-            className="text-white border-white/20 hover:bg-white/10 disabled:opacity-50"
+            className="text-peach border-peach/20 hover:bg-navy-light disabled:opacity-50"
           >
             Next
             <ChevronRight size={18} className="ml-1" />
           </Button>
         </div>
       </div>
-      <div className="bg-black/20 backdrop-blur-sm rounded-xl p-6 shadow-lg max-w-4xl mx-auto">
+      <div className="bg-navy-light/80 backdrop-blur-sm rounded-xl p-6 shadow-lg shadow-peach/5 max-w-4xl mx-auto">
         <ResultDisplay result={result} onBack={onBack} />
       </div>
     </div>
