@@ -1,12 +1,9 @@
+
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { 
-  FormField, 
-  FormTextarea,
-  FileUpload
-} from '@/components/ui/FormComponents';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from 'sonner';
+import PdfUploadTab from './PdfUploadTab';
+import TextInputTab from './TextInputTab';
 
 interface PdfUploadFormProps {
   onSubmit: (content: string, type: 'upload' | 'text') => void;
@@ -104,104 +101,27 @@ const PdfUploadForm = ({ onSubmit, initialTextContent = '' }: PdfUploadFormProps
         </TabsList>
         
         <TabsContent value="upload" className="mt-6">
-          <form onSubmit={(e) => handleSubmit(e, 'upload')}>
-            <FormField 
-              label="Upload PDF Document" 
-              htmlFor="pdfFile" 
-              error={errors.file}
-            >
-              <FileUpload
-                id="pdfFile"
-                onFileChange={handleFileChange}
-                error={errors.file}
-              />
-            </FormField>
-            
-            {extractedPdfText && (
-              <FormField
-                label="Extracted PDF Text (Editable)"
-                htmlFor="extractedText"
-                className="mt-6"
-              >
-                <FormTextarea
-                  id="extractedText"
-                  value={extractedPdfText}
-                  onChange={(e) => setExtractedPdfText(e.target.value)}
-                  placeholder="Extracted text from PDF..."
-                  rows={6}
-                />
-              </FormField>
-            )}
-            
-            <FormField
-              label="Additional Notes"
-              htmlFor="additionalNotes"
-              className="mt-6"
-            >
-              <FormTextarea
-                id="additionalNotes"
-                value={additionalNotes}
-                onChange={(e) => setAdditionalNotes(e.target.value)}
-                placeholder="Add any additional context or notes here..."
-                rows={3}
-              />
-            </FormField>
-            
-            <div className="mt-8 flex justify-center">
-              <Button 
-                type="submit" 
-                variant="navy"
-                size="lg"
-                disabled={!pdfFile}
-              >
-                Generate Canvas
-              </Button>
-            </div>
-          </form>
+          <PdfUploadTab 
+            pdfFile={pdfFile}
+            extractedPdfText={extractedPdfText}
+            additionalNotes={additionalNotes}
+            errors={errors}
+            onFileChange={handleFileChange}
+            onExtractedTextChange={(e) => setExtractedPdfText(e.target.value)}
+            onAdditionalNotesChange={(e) => setAdditionalNotes(e.target.value)}
+            onSubmit={(e) => handleSubmit(e, 'upload')}
+          />
         </TabsContent>
         
         <TabsContent value="text" className="mt-6">
-          <form onSubmit={(e) => handleSubmit(e, 'text')}>
-            <FormField 
-              label="Paste Text Content" 
-              htmlFor="textContent" 
-              error={errors.text}
-            >
-              <FormTextarea
-                id="textContent"
-                value={textContent}
-                onChange={(e) => setTextContent(e.target.value)}
-                placeholder="Paste the document text here..."
-                error={errors.text}
-                rows={10}
-              />
-            </FormField>
-            
-            <FormField
-              label="Additional Notes"
-              htmlFor="additionalNotesText"
-              className="mt-6"
-            >
-              <FormTextarea
-                id="additionalNotesText"
-                value={additionalNotes}
-                onChange={(e) => setAdditionalNotes(e.target.value)}
-                placeholder="Add any additional context or notes here..."
-                rows={3}
-              />
-            </FormField>
-            
-            <div className="mt-8 flex justify-center">
-              <Button 
-                type="submit" 
-                variant="navy"
-                size="lg"
-                disabled={!textContent.trim()}
-              >
-                Generate Canvas
-              </Button>
-            </div>
-          </form>
+          <TextInputTab 
+            textContent={textContent}
+            additionalNotes={additionalNotes}
+            errors={errors}
+            onTextContentChange={(e) => setTextContent(e.target.value)}
+            onAdditionalNotesChange={(e) => setAdditionalNotes(e.target.value)}
+            onSubmit={(e) => handleSubmit(e, 'text')}
+          />
         </TabsContent>
       </Tabs>
     </div>
