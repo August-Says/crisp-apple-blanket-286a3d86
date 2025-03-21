@@ -20,8 +20,7 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				sans: ['SF Pro Display', 'system-ui', 'sans-serif'],
-				mono: ['SF Mono', 'monospace'],
+				sans: ['Inter', 'SF Pro Display', 'system-ui', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -29,22 +28,6 @@ export default {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
-				apple: {
-					black: '#1d1d1f',
-					white: '#f5f5f7',
-					gray: '#86868b',
-					blue: '#0071e3',
-					'light-blue': '#2997ff',
-					silver: '#e8e8ed',
-					'off-white': '#fafafa',
-				},
-				// Adding our new color scheme
-				theme: {
-					navy: '#20374c',
-					peach: '#ffd2c8',
-					'dark-navy': '#182a3c',
-					'light-peach': '#ffe5df',
-				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
@@ -82,6 +65,22 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				august: {
+					purple: '#7B5CF0',
+					blue: '#3C86F0',
+					darkpurple: '#1F1344',
+					lightpurple: '#9B87F5',
+					accent: '#FF7D63',
+					lightgray: '#F7F8FA',
+					darkgray: '#2A2A2A',
+				},
+				cloudai: {
+					purple: '#6330B4',
+					violetpurple: '#7D49C6',
+					blue: '#3055B5',
+					lightblue: '#5280E1',
+					darkpurple: '#120E29',
 				}
 			},
 			borderRadius: {
@@ -107,35 +106,53 @@ export default {
 					}
 				},
 				'fade-in': {
-					'0%': { opacity: '0' },
-					'100%': { opacity: '1' }
+					from: {
+						opacity: '0',
+						transform: 'translateY(10px)'
+					},
+					to: {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
 				},
-				'fade-up': {
-					'0%': { opacity: '0', transform: 'translateY(20px)' },
-					'100%': { opacity: '1', transform: 'translateY(0)' }
+				'fade-out': {
+					from: {
+						opacity: '1'
+					},
+					to: {
+						opacity: '0'
+					}
 				},
-				'scale-in': {
-					'0%': { opacity: '0', transform: 'scale(0.95)' },
-					'100%': { opacity: '1', transform: 'scale(1)' }
+				'pulse-subtle': {
+					'0%, 100%': {
+						opacity: '1'
+					},
+					'50%': {
+						opacity: '0.7'
+					}
 				},
-				'blur-in': {
-					'0%': { opacity: '0', filter: 'blur(10px)' },
-					'100%': { opacity: '1', filter: 'blur(0)' }
-				},
-				float: {
-					'0%, 100%': { transform: 'translateY(0)' },
-					'50%': { transform: 'translateY(-10px)' }
+				'spin-slow': {
+					from: {
+						transform: 'rotate(0deg)'
+					},
+					to: {
+						transform: 'rotate(360deg)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'fade-in': 'fade-in 1s ease-out',
-				'fade-up': 'fade-up 0.8s ease-out',
-				'scale-in': 'scale-in 0.6s ease-out',
-				'blur-in': 'blur-in 0.8s ease-out',
-				'float': 'float 6s ease-in-out infinite'
-			}
+				'fade-in': 'fade-in 0.4s ease-out',
+				'fade-out': 'fade-out 0.3s ease-out',
+				'pulse-subtle': 'pulse-subtle 2s ease-in-out infinite',
+				'spin-slow': 'spin-slow 3s linear infinite'
+			},
+			backgroundImage: {
+				'gradient-canvas': 'linear-gradient(130deg, #6330B4 0%, #3055B5 100%)',
+				'gradient-cloudai': 'linear-gradient(150deg, #120E29 0%, #301E63 40%, #2C3494 100%)',
+				'gradient-deepspace': 'linear-gradient(to bottom, #120E29 0%, #301E63 50%, #2C3494 100%)',
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
