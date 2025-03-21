@@ -31,11 +31,11 @@ export const FormRadioGroup = ({
           <RadioGroupItem 
             id={`${id}-${option.value}`} 
             value={option.value} 
-            className="border-white/40 text-white bg-white/10 focus:ring-cloudai-purple"
+            className="border-navy/40 text-navy bg-white/10 focus:ring-navy"
           />
           <Label 
             htmlFor={`${id}-${option.value}`}
-            className="text-white/80 font-normal"
+            className="text-navy/80 font-normal"
           >
             {option.label}
           </Label>

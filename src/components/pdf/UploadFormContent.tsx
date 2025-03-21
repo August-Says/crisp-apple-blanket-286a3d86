@@ -16,7 +16,7 @@ const UploadFormContent = ({ onBack, onSubmit, textContent }: UploadFormContentP
         <Button 
           onClick={onBack} 
           variant="ghost" 
-          className="text-white/80 hover:text-white hover:bg-white/10"
+          className="text-navy/80 hover:text-navy hover:bg-navy/10"
         >
           <ArrowLeft size={18} className="mr-2" />
           Back to Home
@@ -25,8 +25,8 @@ const UploadFormContent = ({ onBack, onSubmit, textContent }: UploadFormContentP
       
       <div className="max-w-3xl mx-auto">
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-white mb-4">Create Canvas Using Document</h1>
-          <p className="text-white/80">
+          <h1 className="text-3xl font-bold text-navy mb-4">Create Canvas Using Document</h1>
+          <p className="text-navy/80">
             Upload a PDF or paste text to generate a customized marketing canvas.
           </p>
         </div>

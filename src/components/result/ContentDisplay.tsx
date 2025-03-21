@@ -11,7 +11,7 @@ interface ContentDisplayProps {
 
 const ContentDisplay = ({ sections, formatSectionTitle, contentRef }: ContentDisplayProps) => {
   return (
-    <div ref={contentRef} className="space-y-8 text-white pdf-content">
+    <div ref={contentRef} className="space-y-8 text-navy pdf-content">
       {sections.length > 0 ? (
         sections.map((section, index) => {
           const title = formatSectionTitle(section.title);
@@ -28,7 +28,7 @@ const ContentDisplay = ({ sections, formatSectionTitle, contentRef }: ContentDis
         })
       ) : (
         <div className="text-center py-10">
-          <p className="text-white/80">No content could be parsed from the response. Please check the raw response for details.</p>
+          <p className="text-navy/80">No content could be parsed from the response. Please check the raw response for details.</p>
         </div>
       )}
     </div>
