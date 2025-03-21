@@ -51,32 +51,32 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0">
-              <span className="text-white font-semibold text-2xl">
+              <span className="text-navy font-semibold text-2xl">
                 August Says
               </span>
             </Link>
             <div className="hidden md:block ml-10">
               <div className="flex space-x-8">
-                <Link to="/templates" className="text-white/80 hover:text-white transition-colors px-3 py-2 text-sm font-medium">
+                <Link to="/templates" className="text-navy/80 hover:text-navy transition-colors px-3 py-2 text-sm font-medium">
                   Templates
                 </Link>
-                <Link to="/clients" className="text-white/80 hover:text-white transition-colors px-3 py-2 text-sm font-medium">
+                <Link to="/clients" className="text-navy/80 hover:text-navy transition-colors px-3 py-2 text-sm font-medium">
                   Clients
                 </Link>
-                <Link to="/resources" className="text-white/80 hover:text-white transition-colors px-3 py-2 text-sm font-medium">
+                <Link to="/resources" className="text-navy/80 hover:text-navy transition-colors px-3 py-2 text-sm font-medium">
                   Resources
                 </Link>
               </div>
             </div>
           </div>
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="icon" className="text-white/80 hover:bg-white/10 hover:text-white">
+            <Button variant="ghost" size="icon" className="text-navy/80 hover:bg-white/10 hover:text-navy">
               <HelpCircle size={20} />
             </Button>
             <div className="relative">
               <Button 
                 variant="ghost" 
-                className="flex items-center text-white/80 hover:bg-white/10 hover:text-white"
+                className="flex items-center text-navy/80 hover:bg-white/10 hover:text-navy"
                 onClick={() => setIsProfileOpen(!isProfileOpen)}
               >
                 <User size={20} className="mr-2" />
@@ -85,15 +85,15 @@ const Navbar = () => {
               </Button>
               {isProfileOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-1 z-10 glass-morphism">
-                  <Link to="/profile" className="block px-4 py-2 text-sm text-white/90 hover:bg-white/10">
+                  <Link to="/profile" className="block px-4 py-2 text-sm text-navy/90 hover:bg-white/10">
                     Your Profile
                   </Link>
-                  <Link to="/settings" className="block px-4 py-2 text-sm text-white/90 hover:bg-white/10">
+                  <Link to="/settings" className="block px-4 py-2 text-sm text-navy/90 hover:bg-white/10">
                     Settings
                   </Link>
                   <button
                     onClick={handleLogout}
-                    className="block w-full text-left px-4 py-2 text-sm text-white/90 hover:bg-white/10"
+                    className="block w-full text-left px-4 py-2 text-sm text-navy/90 hover:bg-white/10"
                   >
                     Sign out
                   </button>
@@ -104,34 +104,34 @@ const Navbar = () => {
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-white">
+                <Button variant="ghost" size="icon" className="text-navy">
                   <Menu size={24} />
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] sm:w-[400px] glass-morphism">
                 <div className="flex flex-col h-full">
                   <div className="flex justify-between items-center py-4">
-                    <span className="text-white font-medium text-lg">Menu</span>
+                    <span className="text-navy font-medium text-lg">Menu</span>
                   </div>
                   <nav className="flex flex-col space-y-4 py-6">
-                    <Link to="/templates" className="text-white/90 hover:text-white px-3 py-2 text-base font-medium">
+                    <Link to="/templates" className="text-navy/90 hover:text-navy px-3 py-2 text-base font-medium">
                       Templates
                     </Link>
-                    <Link to="/clients" className="text-white/90 hover:text-white px-3 py-2 text-base font-medium">
+                    <Link to="/clients" className="text-navy/90 hover:text-navy px-3 py-2 text-base font-medium">
                       Clients
                     </Link>
-                    <Link to="/resources" className="text-white/90 hover:text-white px-3 py-2 text-base font-medium">
+                    <Link to="/resources" className="text-navy/90 hover:text-navy px-3 py-2 text-base font-medium">
                       Resources
                     </Link>
                   </nav>
                   <div className="mt-auto border-t border-white/10 py-4">
                     <div className="flex items-center px-3 py-2">
-                      <User size={20} className="text-white/80 mr-3" />
-                      <span className="text-white/90 font-medium">{userName}</span>
+                      <User size={20} className="text-navy/80 mr-3" />
+                      <span className="text-navy/90 font-medium">{userName}</span>
                     </div>
                     <button
                       onClick={handleLogout}
-                      className="w-full text-left text-white/90 hover:text-white px-3 py-2 text-base"
+                      className="w-full text-left text-navy/90 hover:text-navy px-3 py-2 text-base"
                     >
                       Sign out
                     </button>

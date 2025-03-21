@@ -56,41 +56,41 @@ const LinearProgressBar = ({ isLoading }: LinearProgressBarProps) => {
     <div className="flex flex-col items-center justify-center py-8">
       <div className="relative w-24 h-24 mb-6">
         {/* Outer spinning ring with gradient */}
-        <div className="absolute inset-0 rounded-full border-4 border-peach/30 animate-spin-slow"></div>
+        <div className="absolute inset-0 rounded-full border-4 border-navy/30 animate-spin-slow"></div>
         
         {/* Middle ring with slow reverse spin */}
-        <div className="absolute inset-2 rounded-full border-3 border-peach/40" 
+        <div className="absolute inset-2 rounded-full border-3 border-navy/40" 
              style={{ 
                transform: `rotate(${-rotation * 0.7}deg)`,
                borderWidth: '3px',
-               borderTopColor: 'rgba(255, 210, 200, 0.8)',
-               borderRightColor: 'rgba(255, 210, 200, 0.4)',
-               borderBottomColor: 'rgba(255, 210, 200, 0.2)',
-               borderLeftColor: 'rgba(255, 210, 200, 0.6)'
+               borderTopColor: 'rgba(32, 55, 76, 0.8)',
+               borderRightColor: 'rgba(32, 55, 76, 0.4)',
+               borderBottomColor: 'rgba(32, 55, 76, 0.2)',
+               borderLeftColor: 'rgba(32, 55, 76, 0.6)'
              }}>
         </div>
         
         {/* Inner pulsing ring */}
-        <div className="absolute inset-4 rounded-full border-2 border-peach/50 animate-pulse-subtle"></div>
+        <div className="absolute inset-4 rounded-full border-2 border-navy/50 animate-pulse-subtle"></div>
         
         {/* Dynamic color spinner */}
         <div className={cn(
           "absolute inset-6 rounded-full border-4 border-t-transparent border-l-transparent animate-spin",
           {
-            "border-peach": progressColor === "peach",
-            "border-peach-light": progressColor === "peach-light",
-            "border-peach-dark": progressColor === "peach-dark",
+            "border-navy": progressColor === "peach",
+            "border-navy-light": progressColor === "peach-light",
+            "border-navy-dark": progressColor === "peach-dark",
             "border-navy-light": progressColor === "navy-light",
           }
         )}></div>
         
         {/* Percentage text */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-peach text-sm font-medium">{progressPercent}%</span>
+          <span className="text-navy text-sm font-medium">{progressPercent}%</span>
         </div>
         
         {/* Orbiting dot */}
-        <div className="absolute w-3 h-3 bg-peach rounded-full" 
+        <div className="absolute w-3 h-3 bg-navy rounded-full" 
              style={{ 
                left: `${12 + 10 * Math.cos(rotation * Math.PI / 180)}px`, 
                top: `${12 + 10 * Math.sin(rotation * Math.PI / 180)}px` 
@@ -99,11 +99,11 @@ const LinearProgressBar = ({ isLoading }: LinearProgressBarProps) => {
       </div>
       
       <div className="w-full max-w-xs">
-        <p className="text-peach text-lg font-medium text-center mb-4">
+        <p className="text-navy text-lg font-medium text-center mb-4">
           Analyzing your document and generating canvas...
         </p>
         
-        <div className="text-peach/80 text-sm font-medium text-center">
+        <div className="text-navy/80 text-sm font-medium text-center">
           <div>Processing time: {formatTime(elapsedTime)}</div>
         </div>
       </div>

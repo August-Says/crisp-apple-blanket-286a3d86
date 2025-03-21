@@ -14,7 +14,7 @@ const Home = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-peach mb-6 tracking-tight"
+          className="text-4xl md:text-5xl font-bold text-navy mb-6 tracking-tight"
         >
           Start Generating Your Canvas
         </motion.h1>
@@ -22,7 +22,7 @@ const Home = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg text-peach/80 mb-10 max-w-2xl mx-auto"
+          className="text-lg text-navy/80 mb-10 max-w-2xl mx-auto"
         >
           Create professional marketing strategies for your clients using our intuitive AI-powered canvas generator.
         </motion.p>
@@ -36,10 +36,10 @@ const Home = () => {
           >
             <div className="glass-morphism p-8 rounded-2xl flex flex-col h-full">
               <div className="mb-6 mx-auto p-4 rounded-full bg-peach/10">
-                <Clipboard size={40} className="text-peach" />
+                <Clipboard size={40} className="text-navy" />
               </div>
-              <h2 className="text-xl font-semibold text-peach mb-3">Use Fields</h2>
-              <p className="text-peach/70 mb-6 flex-grow">
+              <h2 className="text-xl font-semibold text-navy mb-3">Use Fields</h2>
+              <p className="text-navy/70 mb-6 flex-grow">
                 Input specific information about your client and project using our structured form fields.
               </p>
               <Button 
@@ -60,10 +60,10 @@ const Home = () => {
           >
             <div className="glass-morphism p-8 rounded-2xl flex flex-col h-full">
               <div className="mb-6 mx-auto p-4 rounded-full bg-peach/10">
-                <FileText size={40} className="text-peach" />
+                <FileText size={40} className="text-navy" />
               </div>
-              <h2 className="text-xl font-semibold text-peach mb-3">Use PDF</h2>
-              <p className="text-peach/70 mb-6 flex-grow">
+              <h2 className="text-xl font-semibold text-navy mb-3">Use PDF</h2>
+              <p className="text-navy/70 mb-6 flex-grow">
                 Upload an existing document or paste text to quickly generate a marketing canvas.
               </p>
               <Button 
