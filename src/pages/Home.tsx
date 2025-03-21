@@ -14,7 +14,7 @@ const Home = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight"
+          className="text-4xl md:text-5xl font-bold text-peach mb-6 tracking-tight"
         >
           Start Generating Your Canvas
         </motion.h1>
@@ -22,7 +22,7 @@ const Home = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg text-white/80 mb-10 max-w-2xl mx-auto"
+          className="text-lg text-peach/80 mb-10 max-w-2xl mx-auto"
         >
           Create professional marketing strategies for your clients using our intuitive AI-powered canvas generator.
         </motion.p>
@@ -35,16 +35,17 @@ const Home = () => {
             className="flex flex-col h-full"
           >
             <div className="glass-morphism p-8 rounded-2xl flex flex-col h-full">
-              <div className="mb-6 mx-auto p-4 rounded-full bg-white/10">
-                <Clipboard size={40} className="text-white" />
+              <div className="mb-6 mx-auto p-4 rounded-full bg-peach/10">
+                <Clipboard size={40} className="text-peach" />
               </div>
-              <h2 className="text-xl font-semibold text-white mb-3">Use Fields</h2>
-              <p className="text-white/70 mb-6 flex-grow">
+              <h2 className="text-xl font-semibold text-peach mb-3">Use Fields</h2>
+              <p className="text-peach/70 mb-6 flex-grow">
                 Input specific information about your client and project using our structured form fields.
               </p>
               <Button 
                 onClick={() => navigate('/fields')} 
-                className="bg-white text-[#301E63] hover:bg-white/90 font-medium"
+                variant="peach"
+                className="font-medium"
               >
                 Start with Fields
               </Button>
@@ -58,16 +59,17 @@ const Home = () => {
             className="flex flex-col h-full"
           >
             <div className="glass-morphism p-8 rounded-2xl flex flex-col h-full">
-              <div className="mb-6 mx-auto p-4 rounded-full bg-white/10">
-                <FileText size={40} className="text-white" />
+              <div className="mb-6 mx-auto p-4 rounded-full bg-peach/10">
+                <FileText size={40} className="text-peach" />
               </div>
-              <h2 className="text-xl font-semibold text-white mb-3">Use PDF</h2>
-              <p className="text-white/70 mb-6 flex-grow">
+              <h2 className="text-xl font-semibold text-peach mb-3">Use PDF</h2>
+              <p className="text-peach/70 mb-6 flex-grow">
                 Upload an existing document or paste text to quickly generate a marketing canvas.
               </p>
               <Button 
                 onClick={() => navigate('/pdf')} 
-                className="bg-white text-[#301E63] hover:bg-white/90 font-medium"
+                variant="peach"
+                className="font-medium"
               >
                 Start with PDF
               </Button>

@@ -47,15 +47,15 @@ const LoadingAnimation = ({
   // Determine primary color based on progress
   const getPrimaryColor = () => {
     if (displayProgress >= 100) {
-      return "rgb(138, 43, 226)"; // BlueViolet
+      return "#ffd2c8"; // peach
     } else if (displayProgress >= 85) {
-      return "rgb(0, 191, 255)"; // DeepSkyBlue
+      return "#ffe5e0"; // peach-light
     } else if (displayProgress >= 55) {
-      return "rgb(153, 102, 204)"; // Medium purple
+      return "#ffbfb0"; // peach-dark
     } else if (displayProgress >= 30) {
-      return "rgb(147, 112, 219)"; // Medium slate blue
+      return "#ffd2c8"; // peach
     } else {
-      return "rgb(30, 144, 255)"; // DodgerBlue
+      return "#ffd2c8"; // peach
     }
   };
   
@@ -92,7 +92,7 @@ const LoadingAnimation = ({
           min={0}
           value={displayProgress}
           gaugePrimaryColor={getPrimaryColor()}
-          gaugeSecondaryColor="rgba(255, 255, 255, 0.2)"
+          gaugeSecondaryColor="rgba(32, 55, 76, 0.2)"
           size={160}
           strokeWidth={14}
           showValue={true}
@@ -114,7 +114,7 @@ const LoadingAnimation = ({
             ease: "easeInOut" 
           }}
         >
-          <Zap className="w-8 h-8 text-yellow-300" />
+          <Zap className="w-8 h-8 text-peach" />
         </motion.div>
         
         {/* Rotating flywheel in the center */}
@@ -126,9 +126,9 @@ const LoadingAnimation = ({
             ease: "linear"
           }}
           className="absolute"
-          style={{ filter: 'drop-shadow(0 0 5px rgba(255,255,255,0.7))' }}
+          style={{ filter: 'drop-shadow(0 0 5px rgba(255,210,200,0.7))' }}
         >
-          <RefreshCw className="w-10 h-10 text-white" />
+          <RefreshCw className="w-10 h-10 text-peach" />
         </motion.div>
         
         {/* Percentage text highlight */}
@@ -156,7 +156,7 @@ const LoadingAnimation = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="text-white/90 text-lg font-medium text-center"
+        className="text-peach text-lg font-medium text-center"
       >
         {message}
       </motion.p>
@@ -166,7 +166,7 @@ const LoadingAnimation = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="text-white/80 text-sm font-medium"
+        className="text-peach/80 text-sm font-medium"
       >
         Time elapsed: {formatTime(elapsedTime)}
       </motion.div>
