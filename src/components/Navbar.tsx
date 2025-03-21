@@ -7,26 +7,11 @@ import { signOut } from '@/services/authService';
 import { supabase } from '@/integrations/supabase/client';
 
 const AugustLogo = () => (
-  <svg 
-    width="40" 
-    height="40" 
-    viewBox="0 0 200 200" 
-    fill="none" 
-    xmlns="http://www.w3.org/2000/svg"
-    className="mr-2"
-  >
-    {/* Circle on the left */}
-    <circle cx="40" cy="160" r="40" fill="#20374C" />
-    
-    {/* Diagonal slash element */}
-    <path d="M100 0L30 100L60 180L130 80L100 0Z" fill="#20374C" />
-    
-    {/* Circle on the right with slash */}
-    <path d="M120 20C120 20 170 100 170 140C170 162 152 180 130 180C108 180 90 162 90 140C90 118 108 100 130 100C152 100 170 118 170 140" fill="#20374C" />
-    
-    {/* White diagonal line through right circle */}
-    <path d="M170 100L90 180" stroke="white" strokeWidth="8" />
-  </svg>
+  <img 
+    src="/lovable-uploads/2c042089-c793-4b7b-a75c-cff98422ede4.png" 
+    alt="August Says Logo" 
+    className="h-10 mr-2"
+  />
 );
 
 const Navbar = () => {
