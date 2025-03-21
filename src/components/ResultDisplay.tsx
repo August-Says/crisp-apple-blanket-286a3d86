@@ -46,11 +46,11 @@ const ResultDisplay = ({ result, onBack }: ResultDisplayProps) => {
         contentRef={contentRef}
       />
       
-      <div className="mt-8 pt-4 border-t border-white/10 flex justify-between items-center">
+      <div className="mt-8 pt-4 border-t border-navy/20 flex justify-between items-center">
         <Button
           onClick={onBack}
           variant="outline"
-          className="bg-cloudai-purple text-navy hover:bg-cloudai-violetpurple border-transparent font-medium shadow-md"
+          className="bg-cloudai-purple text-white hover:bg-cloudai-violetpurple border-transparent font-medium shadow-md"
         >
           Generate New Canvas
         </Button>

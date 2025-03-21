@@ -16,10 +16,10 @@ export const SectionRenderer: React.FC<SectionProps> = ({ title, content, index 
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.1 * index }}
-      className="border-b border-white/10 pb-6 last:border-0"
+      className="border-b border-navy/20 pb-6 last:border-0"
     >
-      <h3 className="text-xl font-bold text-white mb-3 tracking-wide">{title}</h3>
-      <div className="text-white/80 prose prose-sm prose-invert max-w-none">
+      <h3 className="text-xl font-bold text-navy mb-3 tracking-wide">{title}</h3>
+      <div className="text-navy/90 prose prose-sm max-w-none">
         <MarkdownContentRenderer content={content} />
       </div>
     </motion.div>

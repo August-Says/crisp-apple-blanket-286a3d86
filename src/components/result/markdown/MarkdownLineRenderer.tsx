@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {
   MarkdownHeading,
@@ -39,8 +40,8 @@ export const MarkdownLineRenderer: React.FC<MarkdownLineRendererProps> = ({ line
       const parts = parseFormattedText(contentWithTags, lineIndex, /<strong>([^<]+)<\/strong>/g, 'bold');
       return (
         <div key={lineIndex} className="flex items-start space-x-2 my-1 ml-4">
-          <span className="text-white min-w-[20px]">{numberedMatch[1]}.</span>
-          <div className="text-white/90">
+          <span className="text-navy min-w-[20px]">{numberedMatch[1]}.</span>
+          <div className="text-navy/90">
             <BoldFormattedText parts={parts} lineIndex={lineIndex} />
           </div>
         </div>
