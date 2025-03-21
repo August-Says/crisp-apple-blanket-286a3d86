@@ -22,14 +22,14 @@ export function AnimatedCircularProgressBar({
   value,
   min,
   max,
-  gaugePrimaryColor = "rgb(79 70 229)",
+  gaugePrimaryColor = "#7B5CF0", // Updated default to purple instead of rgb(79 70 229)
   gaugeSecondaryColor = "rgba(0, 0, 0, 0.1)",
   size = 100,
   strokeWidth = 10,
   showValue = false,
   valueSize = 24,
   valueFontWeight = 500,
-  valueColor = "#000",
+  valueColor = "#fff", // Updated default to white
 }: AnimatedCircularProgressBarProps) {
   const actualValue = React.useMemo(() => {
     if (value < min) return min

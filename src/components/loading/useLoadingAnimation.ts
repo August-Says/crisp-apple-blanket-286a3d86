@@ -39,7 +39,8 @@ export const useLoadingAnimation = ({ progress }: UseLoadingAnimationOptions) =>
   
   // Determine primary color based on progress
   const getPrimaryColor = () => {
-    return "#20374c"; // Always return navy
+    // Return purple instead of navy
+    return "#7B5CF0";
   };
   
   return {

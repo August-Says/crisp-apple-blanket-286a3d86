@@ -40,8 +40,8 @@ const LoadingContent = ({ loadingProgress = 0 }: LoadingContentProps) => {
             <motion.div 
               className="w-48 h-48 rounded-full flex items-center justify-center"
               style={{
-                boxShadow: "0 0 25px rgba(32, 55, 76, 0.6)",
-                background: "linear-gradient(135deg, rgba(255, 210, 200, 0.2) 0%, rgba(255, 229, 224, 0.2) 100%)",
+                boxShadow: "0 0 25px rgba(123, 92, 240, 0.6)",
+                background: "linear-gradient(135deg, rgba(155, 135, 245, 0.2) 0%, rgba(229, 222, 255, 0.2) 100%)",
                 backdropFilter: "blur(10px)"
               }}
             >
@@ -49,8 +49,8 @@ const LoadingContent = ({ loadingProgress = 0 }: LoadingContentProps) => {
               <motion.div
                 className="absolute inset-0 rounded-full border-4 border-transparent"
                 style={{
-                  borderLeftColor: "#20374c",
-                  borderRightColor: "#ffd2c8",
+                  borderLeftColor: "#7B5CF0",
+                  borderRightColor: "#E5DEFF",
                   borderTopWidth: "4px",
                   borderBottomWidth: "4px",
                 }}
@@ -63,8 +63,8 @@ const LoadingContent = ({ loadingProgress = 0 }: LoadingContentProps) => {
                 className="absolute w-40 h-40 rounded-full border-2 border-transparent"
                 style={{
                   borderTopColor: "rgba(255, 255, 255, 0.8)",
-                  borderRightColor: "rgba(32, 55, 76, 0.6)",
-                  boxShadow: "0 0 15px rgba(32, 55, 76, 0.4)"
+                  borderRightColor: "rgba(123, 92, 240, 0.6)",
+                  boxShadow: "0 0 15px rgba(123, 92, 240, 0.4)"
                 }}
                 animate={{ rotate: -180 }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
@@ -77,12 +77,12 @@ const LoadingContent = ({ loadingProgress = 0 }: LoadingContentProps) => {
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               >
                 <motion.div
-                  className="text-navy text-5xl"
-                  style={{ filter: "drop-shadow(0 0 8px rgba(32,55,76,0.7))" }}
+                  className="text-purple-500 text-5xl"
+                  style={{ filter: "drop-shadow(0 0 8px rgba(123,92,240,0.7))" }}
                   animate={{ opacity: [0.7, 1, 0.7] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <Loader2 className="w-12 h-12 text-navy animate-spin" />
+                  <Loader2 className="w-12 h-12 text-purple-500 animate-spin" />
                 </motion.div>
               </motion.div>
               
@@ -90,9 +90,9 @@ const LoadingContent = ({ loadingProgress = 0 }: LoadingContentProps) => {
               {[0, 1, 2, 3].map((i) => (
                 <motion.div
                   key={i}
-                  className="absolute w-3 h-3 rounded-full bg-navy"
+                  className="absolute w-3 h-3 rounded-full bg-purple-400"
                   style={{ 
-                    boxShadow: "0 0 10px rgba(32,55,76,0.8)",
+                    boxShadow: "0 0 10px rgba(123,92,240,0.8)",
                   }}
                   animate={{
                     x: Math.cos(i * Math.PI / 2) * 70,
@@ -135,15 +135,15 @@ const LoadingContent = ({ loadingProgress = 0 }: LoadingContentProps) => {
             {["Analyzing", "Processing", "Optimizing", "Finalizing"].map((text, index) => (
               <motion.div 
                 key={index}
-                className="flex items-center bg-navy/10 px-4 py-2 rounded-full"
+                className="flex items-center bg-purple-100 px-4 py-2 rounded-full"
                 initial={{ opacity: 0.3, x: -5 }}
                 animate={{ 
                   opacity: [0.3, 1, 0.3], 
                   x: 0,
                   boxShadow: [
-                    "0 0 0 rgba(32,55,76,0)",
-                    "0 0 10px rgba(32,55,76,0.8)",
-                    "0 0 0 rgba(32,55,76,0)"
+                    "0 0 0 rgba(123,92,240,0)",
+                    "0 0 10px rgba(123,92,240,0.8)",
+                    "0 0 0 rgba(123,92,240,0)"
                   ]
                 }}
                 transition={{ 
@@ -153,7 +153,7 @@ const LoadingContent = ({ loadingProgress = 0 }: LoadingContentProps) => {
                   ease: "easeInOut"
                 }}
               >
-                <span className="text-navy text-sm mr-2">{text}</span>
+                <span className="text-purple-800 text-sm mr-2">{text}</span>
                 <motion.div
                   animate={{
                     scale: [1, 1.2, 1],
@@ -169,7 +169,7 @@ const LoadingContent = ({ loadingProgress = 0 }: LoadingContentProps) => {
                   {index === 3 ? (
                     <Check className="w-4 h-4 text-green-600" />
                   ) : (
-                    <Loader2 className="w-4 h-4 text-navy animate-spin" />
+                    <Loader2 className="w-4 h-4 text-purple-600 animate-spin" />
                   )}
                 </motion.div>
               </motion.div>

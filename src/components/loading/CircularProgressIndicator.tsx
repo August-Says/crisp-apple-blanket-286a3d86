@@ -67,7 +67,7 @@ const CircularProgressIndicator = ({
           ease: "easeInOut" 
         }}
       >
-        <Zap className="w-8 h-8 text-peach" />
+        <Zap className="w-8 h-8 text-white" />
       </motion.div>
       
       {/* Rotating flywheel in the center */}
@@ -79,9 +79,9 @@ const CircularProgressIndicator = ({
           ease: "linear"
         }}
         className="absolute"
-        style={{ filter: 'drop-shadow(0 0 5px rgba(255,210,200,0.7))' }}
+        style={{ filter: 'drop-shadow(0 0 5px rgba(123, 92, 240, 0.7))' }}
       >
-        <RefreshCw className="w-10 h-10 text-peach" />
+        <RefreshCw className="w-10 h-10 text-purple-300" />
       </motion.div>
       
       {/* Percentage text highlight */}

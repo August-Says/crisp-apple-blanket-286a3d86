@@ -21,9 +21,9 @@ const PulseIndicator = ({ getPrimaryColor }: PulseIndicatorProps) => {
           animate={{ 
             scale: [0.8, 1.2, 0.8],
             boxShadow: [
-              `0 0 5px #20374c`,
-              `0 0 15px #20374c`,
-              `0 0 5px #20374c`
+              `0 0 5px #7B5CF0`,
+              `0 0 15px #7B5CF0`,
+              `0 0 5px #7B5CF0`
             ]
           }}
           transition={{
@@ -33,7 +33,7 @@ const PulseIndicator = ({ getPrimaryColor }: PulseIndicatorProps) => {
             ease: "easeInOut",
           }}
           className="w-3 h-3 rounded-full"
-          style={{ backgroundColor: "#20374c" }}
+          style={{ backgroundColor: "#9B87F5" }}
         />
       ))}
     </motion.div>
