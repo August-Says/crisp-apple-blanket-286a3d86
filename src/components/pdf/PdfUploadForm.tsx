@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { 
@@ -31,7 +30,6 @@ const PdfUploadForm = ({ onSubmit, initialTextContent = '' }: PdfUploadFormProps
         newErrors.file = 'Please upload a PDF file';
         isValid = false;
       } else if (!extractedPdfText) {
-        // We have a file but no extracted text
         toast.warning('No text could be extracted from the PDF. The submission may not be as useful.');
         // Continue anyway since we have a file
       }
@@ -69,14 +67,12 @@ const PdfUploadForm = ({ onSubmit, initialTextContent = '' }: PdfUploadFormProps
         : textContent;
       onSubmit(contentWithNotes, 'text');
     } else {
-      // For upload type, use the extracted text if available
       if (extractedPdfText) {
         const contentWithNotes = additionalNotes.trim() 
           ? `${extractedPdfText}\n\nADDITIONAL NOTES:\n${additionalNotes}`
           : extractedPdfText;
-        onSubmit(contentWithNotes, 'text'); // Send as text type since we have the content
+        onSubmit(contentWithNotes, 'text');
       } else {
-        // Fall back to just sending the file name if no text was extracted
         const fileNameWithNotes = additionalNotes.trim()
           ? `${pdfFile?.name || 'Uploaded PDF'}\n\nADDITIONAL NOTES:\n${additionalNotes}`
           : pdfFile?.name || 'Uploaded PDF';
@@ -92,16 +88,16 @@ const PdfUploadForm = ({ onSubmit, initialTextContent = '' }: PdfUploadFormProps
         className="w-full"
         onValueChange={(value) => setActiveTab(value as 'upload' | 'text')}
       >
-        <TabsList className="grid w-full grid-cols-2 bg-white/10 text-white">
+        <TabsList className="grid w-full grid-cols-2 bg-white/10 text-navy">
           <TabsTrigger 
             value="upload" 
-            className="data-[state=active]:bg-white/20 data-[state=active]:text-white"
+            className="data-[state=active]:bg-white/20 data-[state=active]:text-navy font-medium"
           >
             Upload PDF
           </TabsTrigger>
           <TabsTrigger 
             value="text" 
-            className="data-[state=active]:bg-white/20 data-[state=active]:text-white"
+            className="data-[state=active]:bg-white/20 data-[state=active]:text-navy font-medium"
           >
             Paste Text
           </TabsTrigger>
@@ -154,7 +150,7 @@ const PdfUploadForm = ({ onSubmit, initialTextContent = '' }: PdfUploadFormProps
             <div className="mt-8 flex justify-center">
               <Button 
                 type="submit" 
-                className="bg-august-purple hover:bg-august-purple/90 text-white font-medium px-10"
+                variant="navy"
                 size="lg"
                 disabled={!pdfFile}
               >
@@ -198,7 +194,7 @@ const PdfUploadForm = ({ onSubmit, initialTextContent = '' }: PdfUploadFormProps
             <div className="mt-8 flex justify-center">
               <Button 
                 type="submit" 
-                className="bg-august-purple hover:bg-august-purple/90 text-white font-medium px-10"
+                variant="navy"
                 size="lg"
                 disabled={!textContent.trim()}
               >
