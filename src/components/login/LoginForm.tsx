@@ -1,14 +1,12 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { FormField } from '@/components/ui/FormComponents';
 import { FormInput } from '@/components/ui/form/FormInput';
 import { Label } from '@/components/ui/label';
-import { Eye, EyeOff } from 'lucide-react';
 import { toast } from 'sonner';
 import { signIn, resetPassword } from '@/services/authService';
 import EmailConfirmationAlert from './EmailConfirmationAlert';
+import PasswordInput from './PasswordInput';
 
 type LoginErrors = {
   email: string;
@@ -20,7 +18,6 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<LoginErrors>({ email: '', password: '' });
   const [emailNotConfirmed, setEmailNotConfirmed] = useState(false);
   const [showResetPassword, setShowResetPassword] = useState(false);
@@ -107,27 +104,11 @@ const LoginForm = () => {
         </div>
         
         {!showResetPassword && (
-          <div className="space-y-2">
-            <Label htmlFor="password" className="text-navy">Password</Label>
-            <div className="relative">
-              <FormInput
-                id="password"
-                type={showPassword ? 'text' : 'password'}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                error={errors.password}
-                className="bg-white/80 border-navy/20 text-navy placeholder:text-navy/50 focus-visible:ring-navy pr-10"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-navy/60 hover:text-navy"
-              >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
-            </div>
-          </div>
+          <PasswordInput 
+            password={password}
+            onChange={(e) => setPassword(e.target.value)}
+            error={errors.password}
+          />
         )}
         
         <div className="flex items-center justify-between">
