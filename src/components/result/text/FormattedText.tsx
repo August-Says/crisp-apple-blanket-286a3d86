@@ -13,7 +13,7 @@ interface FormattedTextProps {
 }
 
 export const BoldFormattedText: React.FC<FormattedTextProps> = ({ parts, lineIndex }) => (
-  <p key={lineIndex} className="my-1 text-white/90">
+  <p key={lineIndex} className="my-1 text-navy/90">
     {parts.map(part => {
       if (part.type === 'bold') {
         return <strong key={part.key} className="font-bold">{part.content}</strong>;
@@ -24,7 +24,7 @@ export const BoldFormattedText: React.FC<FormattedTextProps> = ({ parts, lineInd
 );
 
 export const ItalicFormattedText: React.FC<FormattedTextProps> = ({ parts, lineIndex }) => (
-  <p key={lineIndex} className="my-1 text-white/90">
+  <p key={lineIndex} className="my-1 text-navy/90">
     {parts.map(part => {
       if (part.type === 'italic') {
         return <em key={part.key} className="italic">{part.content}</em>;
