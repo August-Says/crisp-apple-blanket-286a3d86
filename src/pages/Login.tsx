@@ -80,8 +80,8 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center p-4 animate-fade-in">
       <div className="w-full max-w-md glass-morphism rounded-2xl p-8 shadow-xl">
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-white mb-2">Welcome Back</h1>
-          <p className="text-white/80">Sign in to your August Says account</p>
+          <h1 className="text-3xl font-bold text-navy mb-2">Welcome Back</h1>
+          <p className="text-navy/80">Sign in to your August Says account</p>
         </div>
         
         {emailNotConfirmed && (
@@ -95,23 +95,23 @@ const Login = () => {
         
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-white/90">Email</Label>
+            <Label htmlFor="email" className="text-navy">Email</Label>
             <Input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="claire@augustsays.com"
-              className={`bg-white/10 border-white/20 text-white placeholder:text-white/50 focus-visible:ring-august-purple ${
+              className={`bg-white/80 border-navy/20 text-navy placeholder:text-navy/50 focus-visible:ring-navy ${
                 errors.email ? 'border-red-400' : ''
               }`}
             />
-            {errors.email && <p className="text-sm text-red-400">{errors.email}</p>}
+            {errors.email && <p className="text-sm text-red-600">{errors.email}</p>}
           </div>
           
           {!showResetPassword && (
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-white/90">Password</Label>
+              <Label htmlFor="password" className="text-navy">Password</Label>
               <div className="relative">
                 <Input
                   id="password"
@@ -119,19 +119,19 @@ const Login = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className={`bg-white/10 border-white/20 text-white placeholder:text-white/50 focus-visible:ring-august-purple pr-10 ${
+                  className={`bg-white/80 border-navy/20 text-navy placeholder:text-navy/50 focus-visible:ring-navy pr-10 ${
                     errors.password ? 'border-red-400' : ''
                   }`}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/60 hover:text-white"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-navy/60 hover:text-navy"
                 >
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
-              {errors.password && <p className="text-sm text-red-400">{errors.password}</p>}
+              {errors.password && <p className="text-sm text-red-600">{errors.password}</p>}
             </div>
           )}
           
@@ -142,9 +142,9 @@ const Login = () => {
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
-                  className="h-4 w-4 rounded border-white/20 bg-white/10 text-august-purple focus:ring-august-purple"
+                  className="h-4 w-4 rounded border-navy/20 bg-white/80 text-navy focus:ring-navy"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-white/80">
+                <label htmlFor="remember-me" className="ml-2 block text-sm text-navy">
                   Remember me
                 </label>
               </div>
@@ -153,7 +153,7 @@ const Login = () => {
             <button 
               type="button" 
               onClick={() => setShowResetPassword(!showResetPassword)}
-              className="text-sm text-white/80 hover:text-white"
+              className="text-sm text-navy/80 hover:text-navy"
             >
               {showResetPassword ? 'Back to sign in' : 'Forgot password?'}
             </button>
@@ -161,7 +161,7 @@ const Login = () => {
           
           <Button
             type="submit"
-            className="w-full bg-august-purple hover:bg-august-purple/90 text-white font-medium"
+            className="w-full bg-navy hover:bg-navy-light text-peach font-medium"
             disabled={isLoading || resetLoading}
           >
             {isLoading 
@@ -175,9 +175,9 @@ const Login = () => {
         </form>
         
         <div className="mt-6 text-center">
-          <span className="text-white/60 text-sm">
+          <span className="text-navy/80 text-sm">
             Don't have an account?{' '}
-            <a href="#" className="text-white hover:underline">
+            <a href="#" className="text-navy hover:underline">
               Contact your administrator
             </a>
           </span>
