@@ -28,7 +28,7 @@ export const FormTextarea = ({
       onChange={onChange}
       placeholder={placeholder}
       className={cn(
-        "bg-navy/10 border-navy/30 text-navy placeholder:text-navy/60 focus-visible:ring-navy",
+        "bg-navy/5 border-navy/30 text-navy placeholder:text-navy/60 focus-visible:ring-navy",
         error ? "border-red-400" : "",
         className
       )}

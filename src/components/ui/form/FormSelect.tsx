@@ -32,7 +32,7 @@ export const FormSelect = ({
       <SelectTrigger 
         id={id} 
         className={cn(
-          "bg-white/10 border-white/20 text-navy focus:ring-navy", 
+          "bg-navy/5 border-navy/30 text-navy focus:ring-navy", 
           error ? "border-red-400" : "",
           className
         )}
