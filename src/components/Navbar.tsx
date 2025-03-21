@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -75,9 +74,6 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center">
               <AugustLogo />
-              <span className="text-navy font-semibold text-2xl font-display">
-                August Says
-              </span>
             </Link>
             <div className="hidden md:block ml-10">
               <div className="flex space-x-8">
