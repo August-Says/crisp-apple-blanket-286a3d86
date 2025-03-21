@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -9,7 +8,7 @@ import { supabase } from '@/integrations/supabase/client';
 
 const AugustLogo = () => (
   <svg 
-    className="h-10 w-auto mr-2" 
+    className="h-12 w-auto mr-2" 
     xmlns="http://www.w3.org/2000/svg" 
     viewBox="342.114990234375 219.42776489257812 465.49493408203125 127.2662353515625" 
     width="400" 
@@ -160,3 +159,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
