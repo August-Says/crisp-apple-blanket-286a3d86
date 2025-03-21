@@ -1,5 +1,5 @@
 
-import { FormField, FormSelectWithCustomOption } from '@/components/ui/FormComponents';
+import { FormField, FormSelectWithCustomOption, FormInput } from '@/components/ui/FormComponents';
 import { FormData } from '@/hooks/useFormSubmission';
 import * as options from '@/constants/formOptions';
 
@@ -17,14 +17,13 @@ const ClientInfoSection = ({ formData, errors, onChange }: ClientInfoSectionProp
         htmlFor="clientName" 
         error={errors.clientName}
       >
-        <FormSelectWithCustomOption
+        <FormInput
           id="clientName"
-          value={formData.clientName}
-          onChange={(value) => onChange('clientName', value)}
-          options={options.clientOptions}
-          placeholder="Select client"
+          value={formData.clientName || 'Brand_Name'}
+          onChange={(e) => onChange('clientName', e.target.value)}
+          placeholder="Enter client name"
           error={errors.clientName}
-          customOptionLabel="Other client (specify)"
+          className="w-full"
         />
       </FormField>
       

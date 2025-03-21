@@ -16,7 +16,7 @@ export const useFormSubmission = () => {
     const savedData = localStorage.getItem(FORM_DATA_STORAGE_KEY);
     return savedData ? JSON.parse(savedData) : {
       role: '',
-      clientName: '',
+      clientName: 'Brand_Name',
       clientIndustry: '',
       sponsored: '',
       event: '',
@@ -63,7 +63,7 @@ export const useFormSubmission = () => {
   const resetForm = () => {
     setFormData({
       role: '',
-      clientName: '',
+      clientName: 'Brand_Name',
       clientIndustry: '',
       sponsored: '',
       event: '',
