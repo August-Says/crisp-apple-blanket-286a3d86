@@ -7,6 +7,22 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { signOut } from '@/services/authService';
 import { supabase } from '@/integrations/supabase/client';
 
+const AugustLogo = () => (
+  <svg 
+    width="32" 
+    height="32" 
+    viewBox="0 0 600 600" 
+    fill="none" 
+    xmlns="http://www.w3.org/2000/svg"
+    className="mr-2"
+  >
+    <path 
+      d="M289.5 122L452 500H127L289.5 122Z M442 217.5C442 294.603 379.603 357 302.5 357C225.397 357 163 294.603 163 217.5C163 140.397 225.397 78 302.5 78C379.603 78 442 140.397 442 217.5Z M127 428C127 466.66 95.6599 498 57 498C18.3401 498 -13 466.66 -13 428C-13 389.34 18.3401 358 57 358C95.6599 358 127 389.34 127 428Z" 
+      fill="#20374c"
+    />
+  </svg>
+);
+
 const Navbar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
@@ -50,8 +66,9 @@ const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <Link to="/" className="flex-shrink-0">
-              <span className="text-navy font-semibold text-2xl">
+            <Link to="/" className="flex-shrink-0 flex items-center">
+              <AugustLogo />
+              <span className="text-navy font-semibold text-2xl font-display">
                 August Says
               </span>
             </Link>
@@ -111,7 +128,10 @@ const Navbar = () => {
               <SheetContent side="right" className="w-[300px] sm:w-[400px] glass-morphism">
                 <div className="flex flex-col h-full">
                   <div className="flex justify-between items-center py-4">
-                    <span className="text-navy font-medium text-lg">Menu</span>
+                    <div className="flex items-center">
+                      <AugustLogo />
+                      <span className="text-navy font-medium text-lg">August Says</span>
+                    </div>
                   </div>
                   <nav className="flex flex-col space-y-4 py-6">
                     <Link to="/templates" className="text-navy/90 hover:text-navy px-3 py-2 text-base font-medium">
