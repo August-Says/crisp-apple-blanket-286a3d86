@@ -3,12 +3,12 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="bg-apple-white py-16">
+    <footer className="bg-theme-peach py-16">
       <div className="container max-w-7xl mx-auto px-6">
-        <div className="border-t border-gray-200 pt-10">
+        <div className="border-t border-theme-navy/10 pt-10">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
             <div>
-              <h3 className="text-sm font-semibold text-apple-black mb-4">Product</h3>
+              <h3 className="text-sm font-semibold text-theme-navy mb-4">Product</h3>
               <ul className="space-y-3">
                 <FooterLink>Overview</FooterLink>
                 <FooterLink>Features</FooterLink>
@@ -18,7 +18,7 @@ const Footer = () => {
             </div>
             
             <div>
-              <h3 className="text-sm font-semibold text-apple-black mb-4">Shop & Learn</h3>
+              <h3 className="text-sm font-semibold text-theme-navy mb-4">Shop & Learn</h3>
               <ul className="space-y-3">
                 <FooterLink>Store</FooterLink>
                 <FooterLink>Accessories</FooterLink>
@@ -28,7 +28,7 @@ const Footer = () => {
             </div>
             
             <div>
-              <h3 className="text-sm font-semibold text-apple-black mb-4">About</h3>
+              <h3 className="text-sm font-semibold text-theme-navy mb-4">About</h3>
               <ul className="space-y-3">
                 <FooterLink>Our Story</FooterLink>
                 <FooterLink>Newsroom</FooterLink>
@@ -38,7 +38,7 @@ const Footer = () => {
             </div>
             
             <div>
-              <h3 className="text-sm font-semibold text-apple-black mb-4">Legal</h3>
+              <h3 className="text-sm font-semibold text-theme-navy mb-4">Legal</h3>
               <ul className="space-y-3">
                 <FooterLink>Terms of Use</FooterLink>
                 <FooterLink>Privacy Policy</FooterLink>
@@ -48,10 +48,10 @@ const Footer = () => {
             </div>
           </div>
           
-          <div className="mt-16 pt-8 border-t border-gray-200">
+          <div className="mt-16 pt-8 border-t border-theme-navy/10">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <div className="mb-4 md:mb-0">
-                <p className="text-xs text-apple-gray">
+                <p className="text-xs text-theme-navy/70">
                   Copyright © {new Date().getFullYear()} Product Company. All rights reserved.
                 </p>
               </div>
@@ -83,14 +83,14 @@ const Footer = () => {
 
 const FooterLink = ({ children }: { children: React.ReactNode }) => (
   <li>
-    <a href="#" className="text-sm text-apple-gray hover:text-apple-black transition-colors">
+    <a href="#" className="text-sm text-theme-navy/70 hover:text-theme-navy transition-colors">
       {children}
     </a>
   </li>
 );
 
 const SocialIcon = ({ children }: { children: React.ReactNode }) => (
-  <a href="#" className="text-apple-gray hover:text-apple-black transition-colors">
+  <a href="#" className="text-theme-navy/70 hover:text-theme-navy transition-colors">
     {children}
   </a>
 );

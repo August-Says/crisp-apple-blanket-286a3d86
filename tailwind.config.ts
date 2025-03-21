@@ -38,6 +38,13 @@ export default {
 					silver: '#e8e8ed',
 					'off-white': '#fafafa',
 				},
+				// Adding our new color scheme
+				theme: {
+					navy: '#20374c',
+					peach: '#ffd2c8',
+					'dark-navy': '#182a3c',
+					'light-peach': '#ffe5df',
+				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
