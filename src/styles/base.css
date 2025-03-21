@@ -1,0 +1,98 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Give+You+Glory|Exo:800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 208 58% 21%; /* navy blue */
+    --foreground: 11 100% 95%; /* Light peach for text on navy */
+
+    --card: 208 58% 21%;
+    --card-foreground: 11 100% 95%;
+
+    --popover: 208 58% 21%;
+    --popover-foreground: 11 100% 95%;
+
+    --primary: 11 100% 89%; /* peachy pink */
+    --primary-foreground: 208 58% 15%; /* Darker navy for text on peach */
+
+    --secondary: 208 35% 30%; /* Lighter navy */
+    --secondary-foreground: 11 100% 89%; /* Peach for text on secondary */
+
+    --muted: 208 25% 35%;
+    --muted-foreground: 11 30% 92%;
+
+    --accent: 11 100% 89%;
+    --accent-foreground: 208 58% 21%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 208 30% 30%;
+    --input: 208 30% 30%;
+    --ring: 11 100% 89%;
+
+    --radius: 1rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased font-sans;
+  }
+
+  ::selection {
+    @apply bg-peach/30 text-foreground;
+  }
+}
+
+@layer utilities {
+  .glass-morphism {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-lg;
+  }
+  
+  .canvas-gradient {
+    @apply bg-gradient-navy-peach;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* App-specific styles */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
