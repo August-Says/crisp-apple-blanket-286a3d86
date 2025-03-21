@@ -25,7 +25,7 @@ const ResultDisplay = ({ result, onBack }: ResultDisplayProps) => {
       className="w-full max-w-4xl mx-auto glass-morphism rounded-2xl p-8 md:p-10 my-8 shadow-lg overflow-y-auto"
     >
       <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
-        <h2 className="text-2xl md:text-3xl font-bold text-navy mb-4 md:mb-0">Your Marketing Canvas</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-navy mb-4 md:mb-0 text-left">Your Marketing Canvas</h2>
         <div className="flex space-x-4">
           <PdfExportButton contentRef={contentRef} />
           <ShareButton contentRef={contentRef} />
@@ -66,8 +66,8 @@ const ResultDisplay = ({ result, onBack }: ResultDisplayProps) => {
       
       {showRawJson && (
         <div className="mt-6 p-4 bg-black/20 rounded-md">
-          <h3 className="text-lg font-medium text-navy mb-2">Raw Response Data:</h3>
-          <pre className="text-xs text-navy/70 overflow-auto max-h-[400px] p-2">
+          <h3 className="text-lg font-medium text-navy mb-2 text-left">Raw Response Data:</h3>
+          <pre className="text-xs text-navy/70 overflow-auto max-h-[400px] p-2 text-left">
             {result}
           </pre>
         </div>

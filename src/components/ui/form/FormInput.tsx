@@ -2,6 +2,16 @@
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 
+interface FormInputProps {
+  id: string;
+  type?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  error?: string;
+  className?: string;
+}
+
 export const FormInput = ({
   id,
   type = "text",
@@ -26,4 +36,3 @@ export const FormInput = ({
     />
   );
 };
-

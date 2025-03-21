@@ -2,6 +2,16 @@
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 
+interface FormTextareaProps {
+  id: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  placeholder?: string;
+  error?: string;
+  className?: string;
+  rows?: number;
+}
+
 export const FormTextarea = ({
   id,
   value,
@@ -26,4 +36,3 @@ export const FormTextarea = ({
     />
   );
 };
-
