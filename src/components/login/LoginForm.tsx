@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -8,7 +7,6 @@ import { toast } from 'sonner';
 import { signIn, resetPassword } from '@/services/authService';
 import EmailConfirmationAlert from './EmailConfirmationAlert';
 import PasswordInput from './PasswordInput';
-import CreateUserButton from './CreateUserButton';
 
 type LoginErrors = {
   email: string;
@@ -151,11 +149,6 @@ const LoginForm = () => {
                 : 'Sign in'}
         </Button>
       </form>
-      
-      <CreateUserButton 
-        presetEmail="nick@impactandagency.com" 
-        presetPassword="password123" 
-      />
       
       <div className="mt-6 text-center">
         <span className="text-navy/80 text-sm">
