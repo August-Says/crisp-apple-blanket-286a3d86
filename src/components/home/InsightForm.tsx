@@ -21,7 +21,8 @@ const InsightForm = ({ industries }: InsightFormProps) => {
 
   const handleQuickStart = () => {
     if (companyName && industry) {
-      navigate('/fields', { 
+      // Navigate to the original home page after form submission
+      navigate('/home', { 
         state: { 
           companyName,
           industry,

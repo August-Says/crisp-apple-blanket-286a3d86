@@ -17,6 +17,9 @@ const Layout = ({ children }: LayoutProps) => {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  
+  // Check if we're on the landing page
+  const isLandingPage = location.pathname === '/';
 
   useEffect(() => {
     // Check if user is authenticated with Supabase
@@ -39,14 +42,14 @@ const Layout = ({ children }: LayoutProps) => {
   }, []);
 
   useEffect(() => {
-    // If not authenticated and not on login page, redirect to login
-    if (!isLoading && !isAuthenticated && location.pathname !== '/login') {
+    // If not authenticated and not on login page or landing page, redirect to login
+    if (!isLoading && !isAuthenticated && location.pathname !== '/login' && location.pathname !== '/') {
       navigate('/login');
     }
 
     // If authenticated and on login page, redirect to home
     if (!isLoading && isAuthenticated && location.pathname === '/login') {
-      navigate('/');
+      navigate('/home');
     }
   }, [isAuthenticated, location.pathname, navigate, isLoading]);
 
@@ -58,13 +61,15 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className="min-h-screen flex flex-col bg-peach overflow-hidden relative">
-      {isAuthenticated && <Navbar />}
-      <main className={`flex-1 ${isAuthenticated ? 'pt-16' : ''} flex flex-col`}>
+      {/* Only show navbar when authenticated and not on landing page */}
+      {isAuthenticated && !isLandingPage && <Navbar />}
+      
+      <main className={`flex-1 ${isAuthenticated && !isLandingPage ? 'pt-16' : ''} flex flex-col`}>
         {children}
       </main>
       
-      {/* Support chat button (only show when authenticated) */}
-      {isAuthenticated && (
+      {/* Support chat button (only show when authenticated and not on landing page) */}
+      {isAuthenticated && !isLandingPage && (
         <div className="fixed bottom-6 right-6 z-40">
           <Button 
             onClick={openSupportChat}
@@ -75,7 +80,8 @@ const Layout = ({ children }: LayoutProps) => {
         </div>
       )}
       
-      {isAuthenticated && <Footer />}
+      {/* Only show footer when authenticated and not on landing page */}
+      {isAuthenticated && !isLandingPage && <Footer />}
     </div>
   );
 };
