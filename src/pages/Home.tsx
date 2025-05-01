@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Clipboard, FileText, CheckCircle } from 'lucide-react';
+import { Clipboard, CheckCircle } from 'lucide-react';
 import AugustLogo from '@/components/AugustLogo';
 import { FormSelect } from '@/components/ui/form/FormSelect';
 import { FormInput } from '@/components/ui/form/FormInput';
@@ -55,15 +55,14 @@ const Home = () => {
           </p>
         </motion.div>
 
-        {/* Interactive Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {/* Card 1 with Form */}
+        {/* Main Feature Card */}
+        <div className="max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <Card className="h-full glass-morphism border-navy/10 overflow-hidden">
+            <Card className="glass-morphism border-navy/10 overflow-hidden">
               <CardHeader className="pb-2">
                 <div className="w-full flex justify-center mb-4">
                   <div className="p-4 rounded-full bg-peach/20">
@@ -122,55 +121,6 @@ const Home = () => {
                   disabled={!industry || !companyName}
                 >
                   Generate My Free Report
-                </Button>
-              </CardFooter>
-            </Card>
-          </motion.div>
-
-          {/* Card 2 */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <Card className="h-full glass-morphism border-navy/10">
-              <CardHeader className="pb-2">
-                <div className="w-full flex justify-center mb-4">
-                  <div className="p-4 rounded-full bg-peach/20">
-                    <FileText size={32} className="text-navy" />
-                  </div>
-                </div>
-                <CardTitle className="text-2xl font-bold text-navy">Upload Existing Data</CardTitle>
-                <CardDescription className="text-navy/70">
-                  Already have data? Upload it to get your sentiment canvas instantly.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <p className="text-navy/80 mb-4">
-                  Skip the form and upload your existing customer feedback, survey responses, or text data to receive an instant sentiment analysis canvas.
-                </p>
-                <ul className="space-y-2 mb-4">
-                  <li className="flex items-center text-navy/70">
-                    <CheckCircle size={18} className="mr-2 text-navy/60" />
-                    <span>Supports PDF, CSV, and plain text</span>
-                  </li>
-                  <li className="flex items-center text-navy/70">
-                    <CheckCircle size={18} className="mr-2 text-navy/60" />
-                    <span>Automatic data extraction</span>
-                  </li>
-                  <li className="flex items-center text-navy/70">
-                    <CheckCircle size={18} className="mr-2 text-navy/60" />
-                    <span>Instant AI-powered analysis</span>
-                  </li>
-                </ul>
-              </CardContent>
-              <CardFooter>
-                <Button 
-                  onClick={() => navigate('/pdf')} 
-                  variant="navyGradient"
-                  className="w-full font-medium"
-                >
-                  Start with Upload
                 </Button>
               </CardFooter>
             </Card>
