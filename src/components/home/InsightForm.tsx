@@ -17,7 +17,7 @@ const InsightForm = ({ industries }: InsightFormProps) => {
   const navigate = useNavigate();
   const [industry, setIndustry] = useState('');
   const [companyName, setCompanyName] = useState('');
-  const [painPoints, setPainPoints] = useState('');
+  const [painPoints, setPainPoints] = useState('Improving customer retention and engagement');
 
   const handleQuickStart = () => {
     if (companyName && industry) {
