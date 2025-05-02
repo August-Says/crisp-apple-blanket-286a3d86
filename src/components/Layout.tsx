@@ -18,8 +18,8 @@ const Layout = ({ children }: LayoutProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   
-  // Check if we're on the landing page
-  const isLandingPage = location.pathname === '/';
+  // Check if we're on a public page
+  const isPublicPage = location.pathname === '/' || location.pathname === '/login' || location.pathname === '/report';
 
   useEffect(() => {
     // Check if user is authenticated with Supabase
@@ -42,8 +42,8 @@ const Layout = ({ children }: LayoutProps) => {
   }, []);
 
   useEffect(() => {
-    // If not authenticated and not on login page or landing page, redirect to login
-    if (!isLoading && !isAuthenticated && location.pathname !== '/login' && location.pathname !== '/') {
+    // If not authenticated and not on public pages, redirect to login
+    if (!isLoading && !isAuthenticated && !isPublicPage) {
       navigate('/login');
     }
 
@@ -51,7 +51,10 @@ const Layout = ({ children }: LayoutProps) => {
     if (!isLoading && isAuthenticated && location.pathname === '/login') {
       navigate('/home');
     }
-  }, [isAuthenticated, location.pathname, navigate, isLoading]);
+  }, [isAuthenticated, location.pathname, navigate, isLoading, isPublicPage]);
+
+  // Check if we're on the landing page
+  const isLandingPage = location.pathname === '/';
 
   const openSupportChat = () => {
     // Production webhook URL

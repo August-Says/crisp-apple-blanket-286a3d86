@@ -2,7 +2,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Download, Share2 } from 'lucide-react';
+import { ArrowLeft, Download, Share2, LogIn, UserPlus } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import LoadingAnimation from '@/components/LoadingAnimation';
 import { useState, useEffect } from 'react';
@@ -27,9 +27,13 @@ const ReportPage = () => {
     
     return () => clearTimeout(timer);
   }, []);
-  
+
   const handleBack = () => {
     navigate('/');
+  };
+
+  const handleLogin = () => {
+    navigate('/login');
   };
   
   if (isLoading) {
@@ -49,13 +53,13 @@ const ReportPage = () => {
         </Button>
         
         <div className="flex gap-2">
-          <Button variant="outline" className="flex items-center gap-2">
-            <Share2 size={16} />
-            Share
+          <Button variant="outline" className="flex items-center gap-2" onClick={handleLogin}>
+            <LogIn size={16} />
+            Login
           </Button>
-          <Button variant="outline" className="flex items-center gap-2">
-            <Download size={16} />
-            Download
+          <Button variant="outline" className="flex items-center gap-2" onClick={handleLogin}>
+            <UserPlus size={16} />
+            Sign Up
           </Button>
         </div>
       </div>
@@ -150,7 +154,7 @@ const ReportPage = () => {
         
         <div className="mt-12 text-center">
           <p className="text-navy/60 mb-4">Want a more detailed analysis with actionable insights?</p>
-          <Button onClick={() => navigate('/home')} variant="navyGradient" className="px-8 py-6 text-lg">
+          <Button onClick={handleLogin} variant="navyGradient" className="px-8 py-6 text-lg">
             Upgrade to Full Report
           </Button>
         </div>
