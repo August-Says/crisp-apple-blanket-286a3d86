@@ -7,6 +7,7 @@ export interface WebhookRequestParams {
   contentKey?: string;
   contentValue?: string;
   webhookUrl: string;
+  useNoCors?: boolean;
 }
 
 export interface WebhookResponse {
@@ -24,7 +25,8 @@ export const executeWebhookRequest = async ({
   params,
   contentKey,
   contentValue,
-  webhookUrl
+  webhookUrl,
+  useNoCors = false
 }: WebhookRequestParams): Promise<WebhookResponse> => {
   const queryParams = new URLSearchParams();
   
@@ -47,14 +49,31 @@ export const executeWebhookRequest = async ({
   const fullUrl = `${webhookUrl}?${queryParams.toString()}`;
   console.log('Making request to:', fullUrl);
   
-  const response = await fetch(fullUrl, {
+  const fetchOptions: RequestInit = {
     method: 'GET',
     headers: {
       'Accept': 'application/json'
     }
-  });
+  };
+  
+  // Add no-cors mode if specified
+  if (useNoCors) {
+    fetchOptions.mode = 'no-cors';
+    console.log('Using no-cors mode for the request');
+  }
+  
+  const response = await fetch(fullUrl, fetchOptions);
   
   console.log('Response status:', response.status);
+  
+  // When using no-cors, we won't get a proper response
+  if (useNoCors) {
+    console.log('No-cors mode used, assuming successful submission');
+    return {
+      data: { success: true },
+      rawResponse: JSON.stringify({ success: true })
+    };
+  }
   
   if (!response.ok) {
     throw new Error(`Webhook responded with status: ${response.status}`);

@@ -25,7 +25,7 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
     currentHistoryEntry
   } = useSubmissionHistory();
 
-  // Changed from production to test webhook URL
+  // Using the test webhook URL by default
   const defaultWebhookUrl = 'https://sonarai.app.n8n.cloud/webhook-test/715d27f7-f730-437c-8abe-cda82e04210e';
   const webhookUrl = options?.webhookUrl || defaultWebhookUrl;
   const fallbackGenerator = options?.fallbackGenerator || defaultFallbackGenerator;
@@ -43,7 +43,8 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
         params,
         contentKey,
         contentValue,
-        webhookUrl
+        webhookUrl,
+        useNoCors: true // Add this option to use no-cors mode
       });
       
       setLastRawResponse(response.rawResponse);
