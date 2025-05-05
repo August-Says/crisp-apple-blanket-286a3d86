@@ -25,8 +25,8 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
     currentHistoryEntry
   } = useSubmissionHistory();
 
-  // Updated to use the production webhook URL since n8n workflow is active
-  const defaultWebhookUrl = 'https://sonarai.app.n8n.cloud/webhook/ff546d84-5999-4dcc-88ee-8ba645810225';
+  // Using the test webhook URL by default
+  const defaultWebhookUrl = 'https://sonarai.app.n8n.cloud/webhook-test/715d27f7-f730-437c-8abe-cda82e04210e';
   const webhookUrl = options?.webhookUrl || defaultWebhookUrl;
   const fallbackGenerator = options?.fallbackGenerator || defaultFallbackGenerator;
 
@@ -43,7 +43,8 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
         params,
         contentKey,
         contentValue,
-        webhookUrl
+        webhookUrl,
+        useNoCors: true // Add this option to use no-cors mode
       });
       
       setLastRawResponse(response.rawResponse);
