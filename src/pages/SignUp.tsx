@@ -118,7 +118,6 @@ const SignUp = () => {
               password={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               error={errors.confirmPassword}
-              id="confirmPassword"
             />
           </div>
           

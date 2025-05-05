@@ -64,7 +64,8 @@ const LoginForm = () => {
       setEmailNotConfirmed(true);
     } else if (user) {
       toast.success('Successfully logged in!');
-      navigate('/');
+      // Redirect to the PDF page after successful login
+      navigate('/pdf');
     }
     
     setIsLoading(false);
