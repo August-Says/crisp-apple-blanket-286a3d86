@@ -3,11 +3,12 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 import FieldsForm from "./pages/FieldsForm";
 import PdfUpload from "./pages/PdfUpload";
 import NotFound from "./pages/NotFound";
@@ -39,12 +40,15 @@ const App = () => {
           <AnimatePresence mode="wait">
             <Layout>
               <Routes>
-                <Route path="/login" element={<Login />} />
+                {/* Set the LandingPage as the default route */}
                 <Route path="/" element={<LandingPage />} />
-                <Route path="/home" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<SignUp />} />
                 <Route path="/report" element={<ReportPage />} />
+                <Route path="/home" element={<Home />} />
                 <Route path="/fields" element={<FieldsForm />} />
                 <Route path="/pdf" element={<PdfUpload />} />
+                {/* Redirect any other paths to the landing page */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Layout>

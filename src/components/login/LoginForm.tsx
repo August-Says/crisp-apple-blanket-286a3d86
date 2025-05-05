@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -153,9 +154,13 @@ const LoginForm = () => {
       <div className="mt-6 text-center">
         <span className="text-navy/80 text-sm">
           Don't have an account?{' '}
-          <a href="#" className="text-navy hover:underline">
-            Contact your administrator
-          </a>
+          <button 
+            type="button"
+            onClick={() => navigate('/signup')}
+            className="text-navy hover:underline"
+          >
+            Sign up
+          </button>
         </span>
       </div>
     </div>
