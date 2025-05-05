@@ -8,6 +8,7 @@ import { FormSelect } from '@/components/ui/form/FormSelect';
 import { FormInput } from '@/components/ui/form/FormInput';
 import { FormTextarea } from '@/components/ui/form/FormTextarea';
 import { Clipboard } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface InsightFormProps {
   industries: Array<{ label: string; value: string }>;
@@ -18,17 +19,50 @@ const InsightForm = ({ industries }: InsightFormProps) => {
   const [industry, setIndustry] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [painPoints, setPainPoints] = useState('Improving customer retention and engagement');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleQuickStart = () => {
+  // The webhook URL provided by the user
+  const webhookUrl = 'https://sonarai.app.n8n.cloud/webhook-test/ff546d84-5999-4dcc-88ee-8ba645810225';
+
+  const handleQuickStart = async () => {
     if (companyName && industry) {
-      // Navigate to the report page with form data
-      navigate('/report', { 
-        state: { 
+      setIsSubmitting(true);
+      
+      try {
+        // Create the query parameters for the webhook URL
+        const params = new URLSearchParams({
           companyName,
           industry,
-          painPoints
-        } 
-      });
+          painPoints: painPoints || ''
+        });
+        
+        // Send the data to the webhook
+        const response = await fetch(`${webhookUrl}?${params.toString()}`, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        
+        console.log('Webhook response status:', response.status);
+        
+        if (!response.ok) {
+          throw new Error(`Webhook request failed with status ${response.status}`);
+        }
+        
+        // Navigate to the report page with form data
+        navigate('/report', { 
+          state: { 
+            companyName,
+            industry,
+            painPoints
+          } 
+        });
+      } catch (error) {
+        console.error('Error submitting data to webhook:', error);
+        toast.error('There was an error generating your report. Please try again.');
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -95,9 +129,9 @@ const InsightForm = ({ industries }: InsightFormProps) => {
               onClick={handleQuickStart} 
               variant="navyGradient" 
               className="w-full font-medium"
-              disabled={!industry || !companyName}
+              disabled={!industry || !companyName || isSubmitting}
             >
-              Generate My Free Report
+              {isSubmitting ? 'Generating...' : 'Generate My Free Report'}
             </Button>
           </CardFooter>
         </Card>
