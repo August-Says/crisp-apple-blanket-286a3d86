@@ -21,8 +21,8 @@ const InsightForm = ({ industries }: InsightFormProps) => {
   const [painPoints, setPainPoints] = useState('Improving customer retention and engagement');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // The webhook URL provided by the user
-  const webhookUrl = 'https://sonarai.app.n8n.cloud/webhook-test/ff546d84-5999-4dcc-88ee-8ba645810225';
+  // Updated to the production webhook URL
+  const webhookUrl = 'https://sonarai.app.n8n.cloud/webhook/ff546d84-5999-4dcc-88ee-8ba645810225';
 
   const handleQuickStart = async () => {
     if (companyName && industry) {
