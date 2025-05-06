@@ -26,8 +26,8 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
     currentHistoryEntry
   } = useSubmissionHistory();
 
-  // Using the test webhook URL by default
-  const defaultWebhookUrl = 'https://sonarai.app.n8n.cloud/webhook/test-webhook';
+  // Using the correct test webhook URL by default
+  const defaultWebhookUrl = 'https://sonarai.app.n8n.cloud/webhook-test/ff546d84-5999-4dcc-88ee-8ba645810225';
   const webhookUrl = options?.webhookUrl || defaultWebhookUrl;
   const fallbackGenerator = options?.fallbackGenerator || defaultFallbackGenerator;
 
