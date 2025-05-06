@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -25,8 +24,8 @@ const InsightForm = ({ industries }: InsightFormProps) => {
   // Use the webhook hook for submission
   const { callWebhook } = useWebhookSubmission();
 
-  // Use the production webhook URL
-  const webhookUrl = 'https://sonarai.app.n8n.cloud/webhook/ff546d84-5999-4dcc-88ee-8ba645810225';
+  // Use the test webhook URL
+  const webhookUrl = 'https://sonarai.app.n8n.cloud/webhook/test-webhook';
 
   const handleQuickStart = async () => {
     if (companyName && industry) {
