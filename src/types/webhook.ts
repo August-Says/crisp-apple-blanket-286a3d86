@@ -25,4 +25,5 @@ export interface WebhookSubmissionResult {
   canGoForward: boolean;
   currentHistoryEntry: SubmissionHistory | undefined;
   lastRawResponse: string;
+  debugInfo: any;
 }
