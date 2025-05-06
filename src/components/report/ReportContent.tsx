@@ -5,17 +5,28 @@ import KeyInsights from './KeyInsights';
 import RecommendedActions from './RecommendedActions';
 import UpgradeSection from './UpgradeSection';
 import WaitlistForm from './WaitlistForm';
+import { processContent } from '@/utils/contentProcessing';
 
 interface ReportContentProps {
   formData: {
     companyName: string;
     industry: string;
     painPoints: string;
+    webhookResponse?: any;
   };
   handleLogin: () => void;
 }
 
 const ReportContent = ({ formData, handleLogin }: ReportContentProps) => {
+  // Extract content from webhook response if available
+  const hasWebhookData = formData.webhookResponse && 
+    (formData.webhookResponse.data || formData.webhookResponse.fallbackContent);
+  
+  const webhookContent = hasWebhookData ? 
+    formData.webhookResponse.data || formData.webhookResponse.fallbackContent : null;
+
+  console.log('Report content received webhook data:', webhookContent);
+  
   return (
     <motion.div
       initial={{ opacity: 0 }}

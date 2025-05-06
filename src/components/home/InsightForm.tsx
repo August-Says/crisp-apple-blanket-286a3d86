@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -22,7 +23,7 @@ const InsightForm = ({ industries }: InsightFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Use the webhook hook for submission
-  const { callWebhook } = useWebhookSubmission();
+  const { callWebhook, isLoading } = useWebhookSubmission();
 
   // Use the correct test webhook URL
   const webhookUrl = 'https://sonarai.app.n8n.cloud/webhook-test/ff546d84-5999-4dcc-88ee-8ba645810225';
@@ -58,8 +59,11 @@ const InsightForm = ({ industries }: InsightFormProps) => {
       } catch (error) {
         console.error('Error submitting data to webhook:', error);
         toast.error('There was an error generating your report. Please try again.');
+      } finally {
         setIsSubmitting(false);
       }
+    } else {
+      toast.error('Please provide both company name and industry');
     }
   };
 
@@ -126,9 +130,9 @@ const InsightForm = ({ industries }: InsightFormProps) => {
               onClick={handleQuickStart} 
               variant="navyGradient" 
               className="w-full font-medium"
-              disabled={!industry || !companyName || isSubmitting}
+              disabled={!industry || !companyName || isSubmitting || isLoading}
             >
-              {isSubmitting ? 'Generating...' : 'Generate My Free Report'}
+              {isSubmitting || isLoading ? 'Generating...' : 'Generate My Free Report'}
             </Button>
           </CardFooter>
         </Card>
