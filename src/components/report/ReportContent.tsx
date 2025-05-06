@@ -6,6 +6,8 @@ import RecommendedActions from './RecommendedActions';
 import UpgradeSection from './UpgradeSection';
 import WaitlistForm from './WaitlistForm';
 import { processContent } from '@/utils/contentProcessing';
+import { useEffect } from 'react';
+import { toast } from 'sonner';
 
 interface ReportContentProps {
   formData: {
@@ -24,6 +26,25 @@ const ReportContent = ({ formData, handleLogin }: ReportContentProps) => {
   
   const webhookContent = hasWebhookData ? 
     formData.webhookResponse.data || formData.webhookResponse.fallbackContent : null;
+
+  // Add effect to show toast when content is loaded
+  useEffect(() => {
+    if (webhookContent) {
+      // Check if this is fallback content
+      const isFallback = formData.webhookResponse && formData.webhookResponse.fallbackContent;
+      
+      if (isFallback) {
+        toast.warning("Using fallback content. Webhook didn't return usable data.");
+        console.log("Using fallback content due to webhook issues.");
+      } else {
+        toast.success("Successfully loaded content from webhook!");
+        console.log("Successfully loaded data from webhook:", webhookContent);
+      }
+    } else {
+      toast.error("No content available to display.");
+      console.log("No content available from webhook response");
+    }
+  }, [webhookContent]);
 
   console.log('Report content received webhook data:', webhookContent);
   

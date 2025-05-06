@@ -25,9 +25,6 @@ const InsightForm = ({ industries }: InsightFormProps) => {
   // Use the webhook hook for submission
   const { callWebhook, isLoading } = useWebhookSubmission();
 
-  // Use the correct test webhook URL
-  const webhookUrl = 'https://sonarai.app.n8n.cloud/webhook-test/ff546d84-5999-4dcc-88ee-8ba645810225';
-
   const handleQuickStart = async () => {
     if (companyName && industry) {
       setIsSubmitting(true);
@@ -40,11 +37,12 @@ const InsightForm = ({ industries }: InsightFormProps) => {
           painPoints: painPoints || ''
         };
         
-        console.log('Submitting to webhook:', `${webhookUrl}?${new URLSearchParams(params).toString()}`);
+        toast.info(`Generating report for ${companyName} in ${industry} industry...`);
+        console.log('Submitting to webhook with params:', params);
         
         // Call the webhook using our hook
         const webhookResponse = await callWebhook(params);
-        console.log('Webhook response:', webhookResponse);
+        console.log('Webhook response received:', webhookResponse);
         
         // Navigate to the report page with form data
         navigate('/report', { 

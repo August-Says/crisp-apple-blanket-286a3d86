@@ -7,7 +7,7 @@ export const executeWebhookRequest = async ({
   contentKey,
   contentValue,
   webhookUrl,
-  useNoCors = true
+  useNoCors = false
 }) => {
   // Create a query string from the parameters
   const queryParams = new URLSearchParams();
@@ -31,45 +31,72 @@ export const executeWebhookRequest = async ({
   console.log('Executing webhook request to:', fullUrl);
 
   try {
-    // Make the request
-    const response = await fetch(fullUrl, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      mode: useNoCors ? 'no-cors' : 'cors'
-    });
-
-    // When using no-cors mode, we can't read the response
-    // This is because no-cors prevents JavaScript from seeing the response
-    if (useNoCors) {
-      console.log('Webhook request sent with no-cors mode. Cannot parse response.');
-      return {
-        success: true,
-        data: null,
-        rawResponse: 'No response available in no-cors mode'
-      };
-    }
-
-    // If not using no-cors, try to parse the response
-    let responseData;
-    const rawResponse = await response.text();
-    
+    // First try a standard CORS request
     try {
-      // Try to parse as JSON
-      responseData = JSON.parse(rawResponse);
-    } catch (e) {
-      // If not JSON, use the raw text
-      responseData = rawResponse;
-    }
+      console.log('Attempting standard CORS request...');
+      const response = await fetch(fullUrl, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors'
+      });
 
-    return {
-      success: response.ok,
-      status: response.status,
-      data: responseData,
-      rawResponse
-    };
+      // If we reach here, the request worked with CORS
+      console.log('Standard request succeeded with status:', response.status);
+      
+      // Parse response
+      const rawResponse = await response.text();
+      console.log('Raw response received:', rawResponse.substring(0, 100) + (rawResponse.length > 100 ? '...' : ''));
+      
+      try {
+        // Try to parse as JSON
+        const responseData = JSON.parse(rawResponse);
+        console.log('Successfully parsed JSON response:', responseData);
+        return {
+          success: response.ok,
+          status: response.status,
+          data: responseData,
+          rawResponse
+        };
+      } catch (e) {
+        // If not JSON, use the raw text
+        console.log('Response is not valid JSON, using raw text');
+        return {
+          success: response.ok,
+          status: response.status,
+          data: rawResponse,
+          rawResponse
+        };
+      }
+    } catch (corsError) {
+      // If CORS fails and we haven't tried no-cors yet, try with no-cors
+      console.error('CORS request failed:', corsError);
+      console.log('Falling back to no-cors mode...');
+      
+      if (useNoCors) {
+        console.log('Making request with no-cors mode');
+        const response = await fetch(fullUrl, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          mode: 'no-cors'
+        });
+
+        console.log('No-cors request completed (status details unavailable in no-cors)');
+        return {
+          success: true, // We assume success since no-cors doesn't give us status
+          data: null,
+          rawResponse: 'No response available in no-cors mode'
+        };
+      } else {
+        // If useNoCors is false, just throw the original error
+        throw corsError;
+      }
+    }
   } catch (error) {
     console.error('Webhook request failed:', error);
     throw error;

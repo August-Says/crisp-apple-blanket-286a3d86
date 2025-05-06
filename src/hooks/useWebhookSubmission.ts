@@ -27,7 +27,7 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
     currentHistoryEntry
   } = useSubmissionHistory();
 
-  // Using the correct test webhook URL by default
+  // Using the production webhook URL
   const defaultWebhookUrl = 'https://sonarai.app.n8n.cloud/webhook-test/ff546d84-5999-4dcc-88ee-8ba645810225';
   const webhookUrl = options?.webhookUrl || defaultWebhookUrl;
   const fallbackGenerator = options?.fallbackGenerator || defaultFallbackGenerator;
@@ -45,7 +45,7 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
       console.log('Calling webhook with params:', params);
       toast.info("Connecting to webhook...");
       
-      // First try with cors mode
+      // First try with CORS enabled
       const response = await executeWebhookRequest({
         params,
         contentKey,
@@ -70,8 +70,14 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
       setDebugInfo(response);
       setLastRawResponse(response.rawResponse || JSON.stringify(response));
       
+      // For debugging, log the raw response in full
+      if (response.rawResponse) {
+        console.log('Full raw response:', response.rawResponse);
+      }
+      
       if (response.data) {
         const formattedResult = formatWebhookResponse(response.data);
+        console.log('Formatted webhook result:', formattedResult);
         
         addToHistory({
           result: formattedResult,
@@ -88,6 +94,7 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
         
         // Generate a more useful fallback content using the input parameters
         const fallbackContent = fallbackGenerator(`Company: ${params.companyName}\nIndustry: ${params.industry}\nPain Points: ${params.painPoints || 'None provided'}`);
+        console.log('Generated fallback content:', fallbackContent);
         
         addToHistory({
           result: fallbackContent,
@@ -100,12 +107,14 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
       } else {
         const fallbackContent = handleEmptyWebhookResponse(fallbackGenerator, contentValue || JSON.stringify(params));
         setResult(fallbackContent);
+        console.log('Using fallback content due to empty response:', fallbackContent);
         return { fallbackContent, debug: response };
       }
     } catch (error) {
       console.error('Error in callWebhook:', error);
       setDebugInfo({ error: error.toString() });
       const fallbackContent = handleWebhookError(error, fallbackGenerator, contentValue || JSON.stringify(params));
+      console.log('Using fallback content due to error:', fallbackContent);
       setResult(fallbackContent);
       return { fallbackContent, error };
     } finally {

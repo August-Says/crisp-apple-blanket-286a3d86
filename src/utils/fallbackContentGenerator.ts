@@ -1,7 +1,10 @@
+
 /**
  * Default fallback content generator used when webhook fails or returns no valid data
  */
 export const defaultFallbackGenerator = (content: string) => {
+  console.log('Generating fallback content with input:', content);
+  
   // Try to extract company and industry from the content if it's in JSON format
   let companyName = 'Your Company';
   let industry = 'Your Industry';
@@ -16,6 +19,7 @@ export const defaultFallbackGenerator = (content: string) => {
         companyName = parsed.companyName || companyName;
         industry = parsed.industry || industry;
         painPoints = parsed.painPoints || painPoints;
+        console.log('Parsed JSON for fallback:', { companyName, industry, painPoints });
       } else {
         // Otherwise extract from string
         const companyMatch = content.match(/Company: ([^\n]+)/);
@@ -25,6 +29,7 @@ export const defaultFallbackGenerator = (content: string) => {
         if (companyMatch) companyName = companyMatch[1];
         if (industryMatch) industry = industryMatch[1];
         if (painPointsMatch) painPoints = painPointsMatch[1];
+        console.log('Extracted from string for fallback:', { companyName, industry, painPoints });
       }
     }
   } catch (e) {
@@ -32,7 +37,7 @@ export const defaultFallbackGenerator = (content: string) => {
     // Just use the defaults if parsing fails
   }
 
-  return `# Marketing Canvas for ${companyName}
+  const fallbackContent = `# Marketing Canvas for ${companyName}
 
 ## Executive Summary
 ${companyName} in the ${industry} industry is facing challenges related to ${painPoints}. This report provides actionable insights to address these challenges and improve business outcomes.
@@ -63,4 +68,7 @@ Copy Example: "Understand every step of your customer's experience to create mea
 Execution Plan: Develop targeted communication strategies for different customer segments based on engagement history.
 
 Copy Example: "Keep your valuable customers coming back with personalized experiences that show you understand their needs."`;
+
+  console.log('Generated fallback content:', fallbackContent.substring(0, 100) + '...');
+  return fallbackContent;
 };
