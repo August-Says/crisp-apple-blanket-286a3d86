@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import LoadingAnimation from '@/components/LoadingAnimation';
 import ReportHeader from '@/components/report/ReportHeader';
 import ReportContent from '@/components/report/ReportContent';
+import { toast } from 'sonner';
 
 const ReportPage = () => {
   const location = useLocation();
@@ -14,11 +15,20 @@ const ReportPage = () => {
   const formData = location.state || {
     companyName: 'Your Company',
     industry: 'Technology',
-    painPoints: 'Customer engagement'
+    painPoints: 'Customer engagement',
+    webhookResponse: null
   };
   
-  // Simulate loading the report
+  // Log the webhook response from the state for debugging
   useEffect(() => {
+    console.log('Report page received state:', location.state);
+    if (formData.webhookResponse) {
+      console.log('Webhook response data:', formData.webhookResponse);
+    } else {
+      console.log('No webhook response data received');
+    }
+    
+    // Simulate loading the report
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 3000);
@@ -54,7 +64,10 @@ const ReportPage = () => {
         handleSignUp={handleSignUp}
       />
       
-      <ReportContent formData={formData} handleLogin={handleLogin} />
+      <ReportContent 
+        formData={formData} 
+        handleLogin={handleLogin} 
+      />
     </div>
   );
 };

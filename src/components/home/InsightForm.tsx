@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -8,6 +9,7 @@ import { FormInput } from '@/components/ui/form/FormInput';
 import { FormTextarea } from '@/components/ui/form/FormTextarea';
 import { Clipboard } from 'lucide-react';
 import { toast } from 'sonner';
+import { useWebhookSubmission } from '@/hooks/useWebhookSubmission';
 
 interface InsightFormProps {
   industries: Array<{ label: string; value: string }>;
@@ -20,6 +22,9 @@ const InsightForm = ({ industries }: InsightFormProps) => {
   const [painPoints, setPainPoints] = useState('Improving customer retention and engagement');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Use the webhook hook for submission
+  const { callWebhook } = useWebhookSubmission();
+
   // Use the production webhook URL
   const webhookUrl = 'https://sonarai.app.n8n.cloud/webhook/ff546d84-5999-4dcc-88ee-8ba645810225';
 
@@ -29,32 +34,26 @@ const InsightForm = ({ industries }: InsightFormProps) => {
       
       try {
         // Create the query parameters for the webhook URL
-        const params = new URLSearchParams({
+        const params = {
           companyName,
           industry,
           painPoints: painPoints || ''
-        });
+        };
         
-        console.log('Submitting to webhook:', `${webhookUrl}?${params.toString()}`);
+        console.log('Submitting to webhook:', `${webhookUrl}?${new URLSearchParams(params).toString()}`);
+        
+        // Call the webhook using our hook
+        const webhookResponse = await callWebhook(params);
+        console.log('Webhook response:', webhookResponse);
         
         // Navigate to the report page with form data
         navigate('/report', { 
           state: { 
             companyName,
             industry,
-            painPoints
+            painPoints,
+            webhookResponse
           } 
-        });
-        
-        // Attempt to send the data in the background
-        fetch(`${webhookUrl}?${params.toString()}`, {
-          method: 'GET',
-          headers: {
-            'Accept': 'application/json'
-          },
-          mode: 'no-cors' // Add no-cors mode to handle CORS issues
-        }).catch(err => {
-          console.log('Background webhook request sent (errors ignored)');
         });
         
       } catch (error) {

@@ -1,98 +1,77 @@
 
 /**
- * Utility function for constructing and executing webhook requests
- */
-export interface WebhookRequestParams {
-  params: Record<string, string>;
-  contentKey?: string;
-  contentValue?: string;
-  webhookUrl: string;
-  useNoCors?: boolean;
-}
-
-export interface WebhookResponse {
-  data: any;
-  rawResponse: string;
-}
-
-/**
- * Constructs URL parameters and makes the webhook request
- * 
- * @param options - Request parameters and webhook URL
- * @returns The webhook response data and raw response text
+ * Makes a request to a webhook endpoint with the provided parameters
  */
 export const executeWebhookRequest = async ({
   params,
   contentKey,
   contentValue,
   webhookUrl,
-  useNoCors = false
-}: WebhookRequestParams): Promise<WebhookResponse> => {
+  useNoCors = true
+}) => {
+  // Create a query string from the parameters
   const queryParams = new URLSearchParams();
   
-  if (params.additionalNotes) {
-    queryParams.append('additionalNotes', params.additionalNotes);
-    delete params.additionalNotes;
+  // Add all params to query string
+  if (params) {
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        queryParams.append(key, String(value));
+      }
+    });
   }
-  
-  Object.entries(params).forEach(([key, value]) => {
-    if (value) {
-      queryParams.append(key, value);
-    }
-  });
-  
+
+  // Add content if provided
   if (contentKey && contentValue) {
     queryParams.append(contentKey, contentValue);
-    console.log(`Sending ${contentKey} to webhook:`, contentValue.substring(0, 100) + '...');
   }
-  
+
+  // Construct the full URL with query params
   const fullUrl = `${webhookUrl}?${queryParams.toString()}`;
-  console.log('Making request to:', fullUrl);
-  
-  const fetchOptions: RequestInit = {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json'
-    }
-  };
-  
-  // Add no-cors mode if specified
-  if (useNoCors) {
-    fetchOptions.mode = 'no-cors';
-    console.log('Using no-cors mode for the request');
-  }
-  
-  const response = await fetch(fullUrl, fetchOptions);
-  
-  console.log('Response status:', response.status);
-  
-  // When using no-cors, we won't get a proper response
-  if (useNoCors) {
-    console.log('No-cors mode used, assuming successful submission');
-    return {
-      data: { success: true },
-      rawResponse: JSON.stringify({ success: true })
-    };
-  }
-  
-  if (!response.ok) {
-    throw new Error(`Webhook responded with status: ${response.status}`);
-  }
-  
-  const responseText = await response.text();
-  console.log('Raw response:', responseText);
-  
-  let data;
+  console.log('Executing webhook request to:', fullUrl);
+
   try {
-    data = responseText ? JSON.parse(responseText) : null;
-    console.log('Webhook response:', data);
-  } catch (parseError) {
-    console.error('Failed to parse JSON response:', parseError);
-    data = responseText;
+    // Make the request
+    const response = await fetch(fullUrl, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      mode: useNoCors ? 'no-cors' : 'cors'
+    });
+
+    // When using no-cors mode, we can't read the response
+    // This is because no-cors prevents JavaScript from seeing the response
+    if (useNoCors) {
+      console.log('Webhook request sent with no-cors mode. Cannot parse response.');
+      return {
+        success: true,
+        data: null,
+        rawResponse: 'No response available in no-cors mode'
+      };
+    }
+
+    // If not using no-cors, try to parse the response
+    let responseData;
+    const rawResponse = await response.text();
+    
+    try {
+      // Try to parse as JSON
+      responseData = JSON.parse(rawResponse);
+    } catch (e) {
+      // If not JSON, use the raw text
+      responseData = rawResponse;
+    }
+
+    return {
+      success: response.ok,
+      status: response.status,
+      data: responseData,
+      rawResponse
+    };
+  } catch (error) {
+    console.error('Webhook request failed:', error);
+    throw error;
   }
-  
-  return {
-    data,
-    rawResponse: responseText
-  };
 };

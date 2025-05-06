@@ -15,6 +15,7 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState('');
   const [lastRawResponse, setLastRawResponse] = useState<string>('');
+  const [debugInfo, setDebugInfo] = useState<any>(null);
   
   const {
     addToHistory,
@@ -37,16 +38,31 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
   ) => {
     setIsLoading(true);
     setLastRawResponse('');
+    setDebugInfo(null);
     
     try {
+      console.log('Calling webhook with params:', params);
+      
       const response = await executeWebhookRequest({
         params,
         contentKey,
         contentValue,
         webhookUrl,
-        useNoCors: true // Add this option to use no-cors mode
+        useNoCors: false // Try without no-cors first
+      }).catch(async error => {
+        console.log('Regular request failed, trying with no-cors mode');
+        // If the regular request fails, try with no-cors mode
+        return executeWebhookRequest({
+          params,
+          contentKey,
+          contentValue,
+          webhookUrl,
+          useNoCors: true
+        });
       });
       
+      console.log('Webhook response received:', response);
+      setDebugInfo(response);
       setLastRawResponse(response.rawResponse);
       
       if (response.data) {
@@ -64,12 +80,14 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
       } else {
         const fallbackContent = handleEmptyWebhookResponse(fallbackGenerator, contentValue || '');
         setResult(fallbackContent);
-        return fallbackContent;
+        return { fallbackContent, debug: response };
       }
     } catch (error) {
+      console.error('Error in callWebhook:', error);
+      setDebugInfo({ error: error.toString() });
       const fallbackContent = handleWebhookError(error, fallbackGenerator, contentValue || '');
       setResult(fallbackContent);
-      return fallbackContent;
+      return { fallbackContent, error };
     } finally {
       setIsLoading(false);
     }
@@ -85,6 +103,7 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
     canGoBack,
     canGoForward,
     currentHistoryEntry,
-    lastRawResponse
+    lastRawResponse,
+    debugInfo
   };
 };
