@@ -15,8 +15,8 @@ const PdfUpload = () => {
   const [textContent, setTextContent] = useState('');
   const [showRawResponse, setShowRawResponse] = useState(false);
   
-  // Use the correct webhook URL for PDF processing
-  const webhookUrl = "https://sonarai.app.n8n.cloud/webhook/715d27f7-f730-437c-8abe-cda82e04210e";
+  // Use the test webhook URL for PDF processing
+  const webhookUrl = "https://sonarai.app.n8n.cloud/webhook-test/715d27f7-f730-437c-8abe-cda82e04210e";
   
   const generateFallbackCanvas = (content: string) => {
     return `# Generated Marketing Canvas
