@@ -37,7 +37,7 @@ const ReportPage = () => {
   }, []);
 
   const handleBack = () => {
-    navigate('/');
+    navigate('/'); // Updated to navigate to the root path
   };
 
   const handleLogin = () => {
