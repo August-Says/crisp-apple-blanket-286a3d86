@@ -6,8 +6,9 @@ import RecommendedActions from './RecommendedActions';
 import UpgradeSection from './UpgradeSection';
 import WaitlistForm from './WaitlistForm';
 import { processContent } from '@/utils/contentProcessing';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import { formatWebhookResponse } from '@/utils/webhookFormatter';
 
 interface ReportContentProps {
   formData: {
@@ -20,33 +21,39 @@ interface ReportContentProps {
 }
 
 const ReportContent = ({ formData, handleLogin }: ReportContentProps) => {
+  const [formattedWebhookData, setFormattedWebhookData] = useState<string | null>(null);
+  const [showRawData, setShowRawData] = useState(false);
+
   // Extract content from webhook response if available
   const hasWebhookData = formData.webhookResponse && 
-    (formData.webhookResponse.data || formData.webhookResponse.fallbackContent);
+    (typeof formData.webhookResponse === 'object' || typeof formData.webhookResponse === 'string');
   
-  const webhookContent = hasWebhookData ? 
-    formData.webhookResponse.data || formData.webhookResponse.fallbackContent : null;
-
-  // Add effect to show toast when content is loaded
+  // Process webhook response when it's available
   useEffect(() => {
-    if (webhookContent) {
-      // Check if this is fallback content
-      const isFallback = formData.webhookResponse && formData.webhookResponse.fallbackContent;
-      
-      if (isFallback) {
-        toast.warning("Using fallback content. Webhook didn't return usable data.");
-        console.log("Using fallback content due to webhook issues.");
-      } else {
-        toast.success("Successfully loaded content from webhook!");
-        console.log("Successfully loaded data from webhook:", webhookContent);
+    console.log('Report content received webhook data:', formData.webhookResponse);
+    
+    if (hasWebhookData) {
+      try {
+        // Format the webhook response for display
+        let formattedData: string;
+        
+        if (typeof formData.webhookResponse === 'string') {
+          formattedData = formData.webhookResponse;
+        } else {
+          formattedData = formatWebhookResponse(formData.webhookResponse);
+        }
+        
+        setFormattedWebhookData(formattedData);
+        toast.success("Successfully received data from webhook!");
+      } catch (error) {
+        console.error('Error processing webhook response:', error);
+        toast.error("Error processing webhook data");
       }
     } else {
-      toast.error("No content available to display.");
-      console.log("No content available from webhook response");
+      console.log('No content available from webhook response');
+      toast.error("No webhook response data received");
     }
-  }, [webhookContent]);
-
-  console.log('Report content received webhook data:', webhookContent);
+  }, [formData.webhookResponse]);
   
   return (
     <motion.div
@@ -59,17 +66,46 @@ const ReportContent = ({ formData, handleLogin }: ReportContentProps) => {
       </h1>
       <p className="text-navy/70 mb-8">Industry: {formData.industry}</p>
       
+      {/* Display the webhook response data if available */}
+      {formattedWebhookData && (
+        <div className="mb-8 p-6 bg-white/80 backdrop-blur-sm rounded-lg shadow-md">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold text-navy">Webhook Response Data</h2>
+            <button 
+              onClick={() => setShowRawData(!showRawData)}
+              className="text-sm text-navy/70 hover:text-navy underline"
+            >
+              {showRawData ? "Hide Raw JSON" : "Show Raw JSON"}
+            </button>
+          </div>
+          
+          {showRawData ? (
+            <pre className="bg-gray-100 p-4 rounded overflow-auto text-sm max-h-96">
+              {JSON.stringify(formData.webhookResponse, null, 2)}
+            </pre>
+          ) : (
+            <div className="prose max-w-none">
+              <pre className="whitespace-pre-wrap text-sm">
+                {formattedWebhookData}
+              </pre>
+            </div>
+          )}
+        </div>
+      )}
+      
       <div className="space-y-8">
         <ExecutiveSummary 
           companyName={formData.companyName} 
           industry={formData.industry} 
           painPoints={formData.painPoints}
+          webhookData={formData.webhookResponse}
         />
         <KeyInsights 
           industry={formData.industry} 
           painPoints={formData.painPoints}
+          webhookData={formData.webhookResponse}
         />
-        <RecommendedActions />
+        <RecommendedActions webhookData={formData.webhookResponse} />
       </div>
       
       <UpgradeSection handleLogin={handleLogin} />
