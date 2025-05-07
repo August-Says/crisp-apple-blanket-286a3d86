@@ -47,9 +47,9 @@ const Layout = ({ children }: LayoutProps) => {
       navigate('/login');
     }
 
-    // If authenticated and on login page, redirect to home
+    // If authenticated and on login page, redirect to pdf page
     if (!isLoading && isAuthenticated && location.pathname === '/login') {
-      navigate('/home');
+      navigate('/pdf');
     }
   }, [isAuthenticated, location.pathname, navigate, isLoading, isPublicPage]);
 
