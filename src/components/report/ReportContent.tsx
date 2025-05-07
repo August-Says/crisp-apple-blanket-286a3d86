@@ -21,9 +21,6 @@ interface ReportContentProps {
 }
 
 const ReportContent = ({ formData, handleLogin }: ReportContentProps) => {
-  const [formattedWebhookData, setFormattedWebhookData] = useState<string | null>(null);
-  const [showRawData, setShowRawData] = useState(false);
-
   // Extract content from webhook response if available
   const hasWebhookData = formData.webhookResponse && 
     (typeof formData.webhookResponse === 'object' || typeof formData.webhookResponse === 'string');
@@ -34,16 +31,6 @@ const ReportContent = ({ formData, handleLogin }: ReportContentProps) => {
     
     if (hasWebhookData) {
       try {
-        // Format the webhook response for display
-        let formattedData: string;
-        
-        if (typeof formData.webhookResponse === 'string') {
-          formattedData = formData.webhookResponse;
-        } else {
-          formattedData = formatWebhookResponse(formData.webhookResponse);
-        }
-        
-        setFormattedWebhookData(formattedData);
         toast.success("Successfully received data from webhook!");
       } catch (error) {
         console.error('Error processing webhook response:', error);
@@ -65,33 +52,6 @@ const ReportContent = ({ formData, handleLogin }: ReportContentProps) => {
         Customer Insight Report for {formData.companyName}
       </h1>
       <p className="text-navy/70 mb-8">Industry: {formData.industry}</p>
-      
-      {/* Display the webhook response data if available */}
-      {formattedWebhookData && (
-        <div className="mb-8 p-6 bg-white/80 backdrop-blur-sm rounded-lg shadow-md">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-navy">Webhook Response Data</h2>
-            <button 
-              onClick={() => setShowRawData(!showRawData)}
-              className="text-sm text-navy/70 hover:text-navy underline"
-            >
-              {showRawData ? "Hide Raw JSON" : "Show Raw JSON"}
-            </button>
-          </div>
-          
-          {showRawData ? (
-            <pre className="bg-gray-100 p-4 rounded overflow-auto text-sm max-h-96">
-              {JSON.stringify(formData.webhookResponse, null, 2)}
-            </pre>
-          ) : (
-            <div className="prose max-w-none">
-              <pre className="whitespace-pre-wrap text-sm">
-                {formattedWebhookData}
-              </pre>
-            </div>
-          )}
-        </div>
-      )}
       
       <div className="space-y-8">
         <ExecutiveSummary 
