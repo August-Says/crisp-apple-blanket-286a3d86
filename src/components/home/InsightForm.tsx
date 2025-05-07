@@ -10,7 +10,6 @@ import { FormTextarea } from '@/components/ui/form/FormTextarea';
 import { Clipboard } from 'lucide-react';
 import { toast } from 'sonner';
 import { useWebhookSubmission } from '@/hooks/useWebhookSubmission';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 interface InsightFormProps {
   industries: Array<{ label: string; value: string }>;
@@ -21,7 +20,6 @@ const InsightForm = ({ industries }: InsightFormProps) => {
   const [industry, setIndustry] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [painPoints, setPainPoints] = useState('Improving customer retention and engagement');
-  const [reportType, setReportType] = useState('mini');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Use the webhook hook for submission
@@ -39,17 +37,15 @@ const InsightForm = ({ industries }: InsightFormProps) => {
           painPoints: painPoints || ''
         };
         
-        const reportTypeText = reportType === 'mini' ? 'mini report' : 'full report';
-        toast.info(`Generating ${reportTypeText} for ${companyName} in ${industry} industry...`);
-        console.log(`Submitting to webhook for ${reportTypeText} with params:`, params);
+        toast.info(`Generating FREE report for ${companyName} in ${industry} industry...`);
+        console.log(`Submitting to webhook with params:`, params);
         
         // Call the webhook using our hook
         const webhookResponse = await callWebhook(params);
-        console.log(`Webhook response received for ${reportTypeText}:`, webhookResponse);
+        console.log(`Webhook response received:`, webhookResponse);
         
-        // Navigate to the appropriate report page with form data
-        const targetRoute = reportType === 'mini' ? '/mini-report' : '/report';
-        navigate(targetRoute, { 
+        // Navigate to the report page with form data
+        navigate('/report', { 
           state: { 
             companyName,
             industry,
@@ -125,23 +121,6 @@ const InsightForm = ({ industries }: InsightFormProps) => {
                   rows={3}
                 />
               </div>
-              
-              <div className="space-y-2 pt-2">
-                <label className="text-navy font-medium">
-                  Report Type
-                </label>
-                <Tabs 
-                  defaultValue="mini" 
-                  value={reportType} 
-                  onValueChange={setReportType}
-                  className="w-full"
-                >
-                  <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="mini">Quick Mini Report</TabsTrigger>
-                    <TabsTrigger value="full">Full Report</TabsTrigger>
-                  </TabsList>
-                </Tabs>
-              </div>
             </form>
           </CardContent>
           <CardFooter>
@@ -151,7 +130,7 @@ const InsightForm = ({ industries }: InsightFormProps) => {
               className="w-full font-medium"
               disabled={!industry || !companyName || isSubmitting || isLoading}
             >
-              {isSubmitting || isLoading ? 'Generating...' : `Generate My ${reportType === 'mini' ? 'Quick' : 'Free'} Report`}
+              {isSubmitting || isLoading ? 'Generating...' : 'Generate My FREE Report'}
             </Button>
           </CardFooter>
         </Card>
