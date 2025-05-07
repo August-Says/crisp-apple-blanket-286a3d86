@@ -37,6 +37,8 @@ export const formatSectionTitle = (title: string): string => {
       return 'Customer Support and Engagement';
     case 'QUESTIONS':
       return 'Questions';
+    case 'CANVASS GAME':
+      return 'Canvass Game';
     case 'ACTIVATION ADD-ONS':
       return 'Activation Add-ons';
     default:

@@ -6,6 +6,7 @@ import PdfExportButton from '@/components/result/PdfExportButton';
 import ShareButton from '@/components/result/ShareButton';
 import ContentDisplay from '@/components/result/ContentDisplay';
 import { processContent, formatSectionTitle } from '@/components/result/ContentParser';
+import CanvassGameSection from '@/components/result/section/CanvassGameSection';
 
 interface ResultDisplayProps {
   result: string;
@@ -37,6 +38,9 @@ const ResultDisplay = ({ result, onBack }: ResultDisplayProps) => {
         formatSectionTitle={formatSectionTitle}
         contentRef={contentRef}
       />
+      
+      {/* Add Canvass Game section after Questions */}
+      <CanvassGameSection />
       
       <div className="mt-8 pt-4 border-t border-navy/20 flex justify-between items-center">
         <Button
