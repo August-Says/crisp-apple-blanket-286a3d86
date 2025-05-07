@@ -7,7 +7,7 @@ const CanvassGameSection: React.FC = () => {
   // Define game images with the specific Supabase image
   const gameImages = [
     { 
-      path: 'Vari Sliding Game.gif', 
+      path: 'generic_this-or-that_game.gif', 
       caption: 'Canvass Game Visualization',
       isDefault: false
     }
