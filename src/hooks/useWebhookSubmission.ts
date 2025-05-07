@@ -27,8 +27,8 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
     currentHistoryEntry
   } = useSubmissionHistory();
 
-  // Using the production webhook URL
-  const defaultWebhookUrl = 'https://sonarai.app.n8n.cloud/webhook-test/ff546d84-5999-4dcc-88ee-8ba645810225';
+  // Using the specified webhook URL for PDF processing
+  const defaultWebhookUrl = 'https://sonarai.app.n8n.cloud/webhook/715d27f7-f730-437c-8abe-cda82e04210e';
   const webhookUrl = options?.webhookUrl || defaultWebhookUrl;
   const fallbackGenerator = options?.fallbackGenerator || defaultFallbackGenerator;
 
@@ -43,7 +43,9 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
     
     try {
       console.log('Calling webhook with params:', params);
+      console.log('Using webhook URL:', webhookUrl);
       toast.info("Connecting to webhook...");
+      toast.info("This may take up to 90 seconds to process");
       
       // First try with CORS enabled
       const response = await executeWebhookRequest({
@@ -51,7 +53,8 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
         contentKey,
         contentValue,
         webhookUrl,
-        useNoCors: false
+        useNoCors: false,
+        timeoutSeconds: 90 // Explicitly set timeout to 90 seconds
       }).catch(async error => {
         console.log('Regular request failed, trying with no-cors mode', error);
         toast.info("Standard request failed, trying alternative connection method");
@@ -62,7 +65,8 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
           contentKey,
           contentValue,
           webhookUrl,
-          useNoCors: true
+          useNoCors: true,
+          timeoutSeconds: 90 // Explicitly set timeout to 90 seconds
         });
       });
       

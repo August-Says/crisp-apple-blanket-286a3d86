@@ -7,7 +7,8 @@ export const executeWebhookRequest = async ({
   contentKey,
   contentValue,
   webhookUrl,
-  useNoCors = false
+  useNoCors = false,
+  timeoutSeconds = 90
 }) => {
   // Create a query string from the parameters
   const queryParams = new URLSearchParams();
@@ -29,19 +30,32 @@ export const executeWebhookRequest = async ({
   // Construct the full URL with query params
   const fullUrl = `${webhookUrl}?${queryParams.toString()}`;
   console.log('Executing webhook request to:', fullUrl);
+  console.log('Waiting up to', timeoutSeconds, 'seconds for response');
+
+  // Create a timeout promise
+  const timeout = new Promise((_, reject) => {
+    setTimeout(() => {
+      reject(new Error(`Request timed out after ${timeoutSeconds} seconds`));
+    }, timeoutSeconds * 1000);
+  });
 
   try {
     // First try a standard CORS request
     try {
       console.log('Attempting standard CORS request...');
-      const response = await fetch(fullUrl, {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        mode: 'cors'
-      });
+      
+      // Race between the fetch and the timeout
+      const response = await Promise.race([
+        fetch(fullUrl, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          mode: 'cors'
+        }),
+        timeout
+      ]) as Response;
 
       // If we reach here, the request worked with CORS
       console.log('Standard request succeeded with status:', response.status);
@@ -77,14 +91,17 @@ export const executeWebhookRequest = async ({
       
       if (useNoCors) {
         console.log('Making request with no-cors mode');
-        const response = await fetch(fullUrl, {
-          method: 'GET',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          mode: 'no-cors'
-        });
+        const response = await Promise.race([
+          fetch(fullUrl, {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            mode: 'no-cors'
+          }),
+          timeout
+        ]) as Response;
 
         console.log('No-cors request completed (status details unavailable in no-cors)');
         return {

@@ -15,6 +15,9 @@ const PdfUpload = () => {
   const [textContent, setTextContent] = useState('');
   const [showRawResponse, setShowRawResponse] = useState(false);
   
+  // Use the correct webhook URL for PDF processing
+  const webhookUrl = "https://sonarai.app.n8n.cloud/webhook/715d27f7-f730-437c-8abe-cda82e04210e";
+  
   const generateFallbackCanvas = (content: string) => {
     return `# Generated Marketing Canvas
 
@@ -76,6 +79,7 @@ Potential challenges and mitigation strategies to ensure campaign resilience and
     canGoForward,
     lastRawResponse
   } = useWebhookSubmission({
+    webhookUrl: webhookUrl,
     fallbackGenerator: generateFallbackCanvas
   });
 
@@ -87,8 +91,13 @@ Potential challenges and mitigation strategies to ensure campaign resilience and
       return;
     }
     
-    const params: Record<string, string> = {};
+    const params: Record<string, string> = {
+      source: 'pdf_upload'
+    };
     setTextContent(content);
+    
+    toast.info("Sending content to webhook for processing...");
+    toast.info("This may take up to 90 seconds to complete");
     
     // Always send the content as textContent to the webhook
     await callWebhook(params, 'textContent', content);
