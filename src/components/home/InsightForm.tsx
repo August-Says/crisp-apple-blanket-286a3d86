@@ -10,6 +10,8 @@ import { FormTextarea } from '@/components/ui/form/FormTextarea';
 import { Clipboard } from 'lucide-react';
 import { toast } from 'sonner';
 import { useWebhookSubmission } from '@/hooks/useWebhookSubmission';
+import { Progress } from '@/components/ui/progress';
+import { useProgressAnimation } from '@/hooks/useProgressAnimation';
 
 interface InsightFormProps {
   industries: Array<{ label: string; value: string }>;
@@ -22,12 +24,30 @@ const InsightForm = ({ industries }: InsightFormProps) => {
   const [painPoints, setPainPoints] = useState('Improving customer retention and engagement');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Use the webhook hook for submission
-  const { callWebhook, isLoading } = useWebhookSubmission();
+  // Use the webhook hook for submission with the correct URL
+  const webhookUrl = "https://sonarai.app.n8n.cloud/webhook/ff546d84-5999-4dcc-88ee-8ba645810225";
+  const { callWebhook, isLoading } = useWebhookSubmission({ 
+    webhookUrl: webhookUrl
+  });
+  
+  // Animated progress for the loading state
+  const progress = useProgressAnimation(isLoading || isSubmitting);
+  
+  // Track elapsed time during submission
+  const [elapsedTime, setElapsedTime] = useState(0);
+  let timerInterval = null;
 
   const handleQuickStart = async () => {
     if (companyName && industry) {
       setIsSubmitting(true);
+      setElapsedTime(0);
+      
+      // Start a timer to track elapsed time
+      const startTime = Date.now();
+      timerInterval = setInterval(() => {
+        const timeElapsed = Math.floor((Date.now() - startTime) / 1000);
+        setElapsedTime(timeElapsed);
+      }, 1000);
       
       try {
         // Create the query parameters for the webhook URL
@@ -38,9 +58,10 @@ const InsightForm = ({ industries }: InsightFormProps) => {
         };
         
         toast.info(`Generating FREE report for ${companyName} in ${industry} industry...`);
+        toast.info("This may take up to 2 minutes while our AI agents process your request");
         console.log(`Submitting to webhook with params:`, params);
         
-        // Call the webhook using our hook
+        // Call the webhook using our hook and wait for the complete response
         const webhookResponse = await callWebhook(params);
         console.log(`Webhook response received:`, webhookResponse);
         
@@ -59,10 +80,18 @@ const InsightForm = ({ industries }: InsightFormProps) => {
         toast.error('There was an error generating your report. Please try again.');
       } finally {
         setIsSubmitting(false);
+        if (timerInterval) clearInterval(timerInterval);
       }
     } else {
       toast.error('Please provide both company name and industry');
     }
+  };
+
+  // Format the elapsed time for display
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
   return (
@@ -123,7 +152,19 @@ const InsightForm = ({ industries }: InsightFormProps) => {
               </div>
             </form>
           </CardContent>
-          <CardFooter>
+          <CardFooter className="flex flex-col space-y-4">
+            {(isSubmitting || isLoading) && (
+              <div className="w-full space-y-2">
+                <div className="flex justify-between text-sm text-navy">
+                  <span>Generating report...</span>
+                  <span>{formatTime(elapsedTime)}</span>
+                </div>
+                <Progress value={progress} className="w-full h-2" />
+                <p className="text-xs text-navy/70 text-center">
+                  Please wait while our AI agents process your request (up to 2 minutes)
+                </p>
+              </div>
+            )}
             <Button 
               onClick={handleQuickStart} 
               variant="navyGradient" 
