@@ -27,12 +27,13 @@ const WaitlistForm = () => {
   };
 
   return (
-    <div className="mt-16 py-8 px-6 bg-navy/5 rounded-xl border border-navy/10">
+    <div className="mt-8 py-8 px-6 bg-navy/5 rounded-xl border border-navy/10">
       <h2 className="text-2xl font-bold text-navy text-center mb-4">
         Join our Waitlist
       </h2>
       <p className="text-navy/70 text-center mb-6">
-        Be the first to know when the full version of the August Says Sentiment Analysis Application is available.
+        Be the first to know when the full version of August Says Sentiment Analysis Application is available.
+        Get exclusive early access and special launch pricing!
       </p>
       
       <form onSubmit={handleJoinWaitlist} className="max-w-md mx-auto">
