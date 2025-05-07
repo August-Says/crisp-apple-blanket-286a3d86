@@ -1,18 +1,17 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
+import { GameImageDisplay } from '@/components/result/GameImageDisplay';
 
 const CanvassGameSection: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [gifSrc, setGifSrc] = useState<string | null>(null);
-  
-  // For now, we'll use a placeholder GIF URL
-  // This would be replaced with actual content from the API response
-  const placeholderGif = "https://via.placeholder.com/600x400.gif?text=Canvass+Game+Coming+Soon";
-
-  const handleGifLoad = () => {
-    setIsLoading(false);
-  };
+  // Define default game images - users can upload their own later
+  const defaultGameImages = [
+    { 
+      path: 'canvass-game-placeholder.gif', 
+      caption: 'Canvass Game Visualization',
+      isDefault: true
+    }
+  ];
 
   return (
     <motion.div
@@ -29,20 +28,12 @@ const CanvassGameSection: React.FC = () => {
           to better understand the concepts and share with your team.
         </p>
         
-        {isLoading && (
-          <div className="w-full h-64 bg-navy/5 animate-pulse rounded-lg flex items-center justify-center">
-            <p className="text-navy/50">Loading game content...</p>
-          </div>
-        )}
-        
-        <div className={`relative rounded-lg overflow-hidden shadow-lg ${isLoading ? 'hidden' : 'block'}`}>
-          <img
-            src={gifSrc || placeholderGif}
-            alt="Canvass Game Visualization"
-            className="w-full"
-            onLoad={handleGifLoad}
-          />
-        </div>
+        {/* Use the GameImageDisplay component which handles loading states */}
+        <GameImageDisplay 
+          images={[]} 
+          defaultImages={defaultGameImages}
+          useLocalImages={true} 
+        />
         
         <p className="mt-4 text-sm text-navy/70 italic">
           Note: This game visualization is a simplified representation of your canvas elements.
