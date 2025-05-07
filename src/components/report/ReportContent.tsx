@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import ExecutiveSummary from './ExecutiveSummary';
 import KeyInsights from './KeyInsights';
 import RecommendedActions from './RecommendedActions';
+import CanvassGameSample from './CanvassGameSample';
 import UpgradeSection from './UpgradeSection';
 import WaitlistForm from './WaitlistForm';
 import { processContent } from '@/utils/contentProcessing';
@@ -66,6 +67,10 @@ const ReportContent = ({ formData, handleLogin }: ReportContentProps) => {
           webhookData={formData.webhookResponse}
         />
         <RecommendedActions webhookData={formData.webhookResponse} />
+        <CanvassGameSample
+          companyName={formData.companyName}
+          webhookData={formData.webhookResponse}
+        />
       </div>
       
       <UpgradeSection handleLogin={handleLogin} />

@@ -49,7 +49,7 @@ const MiniInsightSummary = ({
         
         {customerThemes ? (
           <div className="prose prose-sm text-navy/80 max-w-none">
-            <p className="text-navy/80">{Object.values(customerThemes)[0]}</p>
+            <p className="text-navy/80">{String(Object.values(customerThemes)[0] || '')}</p>
           </div>
         ) : executiveSummary ? (
           <div className="prose prose-sm text-navy/80 max-w-none">
@@ -77,7 +77,7 @@ const MiniInsightSummary = ({
                 <div className="bg-peach/30 text-navy font-semibold h-7 w-7 flex items-center justify-center rounded-full shrink-0">
                   {index + 1}
                 </div>
-                <p>"{statement}"</p>
+                <p>{String(statement)}</p>
               </div>
             ))}
           </div>
