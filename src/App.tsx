@@ -14,6 +14,7 @@ import PdfUpload from "./pages/PdfUpload";
 import NotFound from "./pages/NotFound";
 import LandingPage from "./pages/LandingPage";
 import ReportPage from "./pages/ReportPage";
+import MiniReportPage from "./pages/MiniReportPage";
 
 // Import the framer-motion package
 import { AnimatePresence } from "framer-motion";
@@ -45,6 +46,7 @@ const App = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/report" element={<ReportPage />} />
+                <Route path="/mini-report" element={<MiniReportPage />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/fields" element={<FieldsForm />} />
                 <Route path="/pdf" element={<PdfUpload />} />
