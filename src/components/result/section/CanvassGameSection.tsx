@@ -4,12 +4,12 @@ import { motion } from 'framer-motion';
 import { GameImageDisplay } from '@/components/result/GameImageDisplay';
 
 const CanvassGameSection: React.FC = () => {
-  // Define default game images - users can upload their own later
-  const defaultGameImages = [
+  // Define game images with the specific Supabase image
+  const gameImages = [
     { 
-      path: 'canvass-game-placeholder.gif', 
+      path: 'Vari Sliding Game.gif', 
       caption: 'Canvass Game Visualization',
-      isDefault: true
+      isDefault: false
     }
   ];
 
@@ -30,9 +30,9 @@ const CanvassGameSection: React.FC = () => {
         
         {/* Use the GameImageDisplay component which handles loading states */}
         <GameImageDisplay 
-          images={[]} 
-          defaultImages={defaultGameImages}
-          useLocalImages={true} 
+          images={gameImages} 
+          defaultImages={[]}
+          useLocalImages={false} 
         />
         
         <p className="mt-4 text-sm text-navy/70 italic">
