@@ -19,42 +19,50 @@ interface MiniReportContentProps {
 const MiniReportContent = ({ formData }: MiniReportContentProps) => {
   const [processedSections, setProcessedSections] = useState<Section[]>([]);
   
-  // Extract content from webhook response if available
-  const hasWebhookData = formData.webhookResponse && 
-    (formData.webhookResponse.data || formData.webhookResponse.fallbackContent);
+  // Extract content from webhook response
+  const webhookData = formData.webhookResponse;
+  const webhookRawData = Array.isArray(webhookData) ? webhookData : null;
   
-  const webhookContent = hasWebhookData ? 
-    formData.webhookResponse.data || formData.webhookResponse.fallbackContent : null;
-
   // Process the webhook content when available
   useEffect(() => {
-    if (webhookContent) {
+    console.log("MiniReportContent received webhook data:", webhookData);
+    
+    if (webhookData) {
       try {
-        // Check if this is fallback content
-        const isFallback = formData.webhookResponse && formData.webhookResponse.fallbackContent;
+        let contentToProcess = "";
         
-        if (isFallback) {
+        // Handle different response formats
+        if (typeof webhookData === 'string') {
+          contentToProcess = webhookData;
+        } else if (Array.isArray(webhookData)) {
+          contentToProcess = JSON.stringify(webhookData);
+        } else if (webhookData.data) {
+          contentToProcess = JSON.stringify(webhookData.data);
+        } else if (webhookData.fallbackContent) {
+          contentToProcess = webhookData.fallbackContent;
           toast.warning("Using simplified insights. Couldn't connect to data source.");
-          console.log("Using fallback content for mini report due to webhook issues.");
-        } else {
-          toast.success("Successfully loaded mini report!");
-          console.log("Successfully loaded data for mini report:", webhookContent);
         }
         
-        // Process the content into sections
-        const content = typeof webhookContent === 'string' ? webhookContent : JSON.stringify(webhookContent);
-        const sections = processContent(content);
-        setProcessedSections(sections);
-        console.log("Processed sections for mini report:", sections);
+        if (contentToProcess) {
+          // Process the content into sections
+          const sections = processContent(contentToProcess);
+          setProcessedSections(sections);
+          console.log("Processed sections for mini report:", sections);
+          
+          if (sections.length > 0) {
+            toast.success("Successfully loaded mini report!");
+          }
+        } else {
+          toast.error("No content available for mini report");
+        }
       } catch (error) {
         console.error("Error processing webhook content for mini report:", error);
         toast.error("Error processing report data");
       }
     } else {
-      toast.error("No content available for mini report");
-      console.log("No content available from webhook response for mini report");
+      toast.error("No webhook response available for mini report");
     }
-  }, [webhookContent]);
+  }, [webhookData]);
   
   return (
     <motion.div
@@ -77,6 +85,7 @@ const MiniReportContent = ({ formData }: MiniReportContentProps) => {
             industry={formData.industry} 
             painPoints={formData.painPoints}
             processedSections={processedSections}
+            webhookData={webhookRawData}
           />
         </CardContent>
       </Card>

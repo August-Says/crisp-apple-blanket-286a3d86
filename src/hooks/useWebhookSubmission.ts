@@ -72,11 +72,13 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
       
       console.log('Webhook response received:', response);
       setDebugInfo(response);
-      setLastRawResponse(response.rawResponse || JSON.stringify(response));
       
-      // For debugging, log the raw response in full
+      // For debugging, store the raw response 
       if (response.rawResponse) {
         console.log('Full raw response:', response.rawResponse);
+        setLastRawResponse(response.rawResponse);
+      } else if (response.data) {
+        setLastRawResponse(JSON.stringify(response.data));
       }
       
       if (response.data) {
@@ -91,6 +93,8 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
         
         setResult(formattedResult);
         handleSuccessfulResponse('Canvas generated successfully!');
+        
+        // Return the raw data instead of formatted result
         return response.data;
       } else if (response.success && response.rawResponse === 'No response available in no-cors mode') {
         // Handle successful no-cors requests, which don't return data

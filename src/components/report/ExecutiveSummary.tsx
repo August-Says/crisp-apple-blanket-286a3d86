@@ -17,17 +17,22 @@ const ExecutiveSummary = ({ companyName, industry, painPoints, webhookData }: Ex
       try {
         // Check if webhookData is an array (common format from n8n)
         if (Array.isArray(webhookData) && webhookData.length > 0) {
-          // Look for customer themes in the first or second output
+          // Extract company name and customer themes
           const firstOutput = webhookData[0]?.output;
-          const secondOutput = webhookData.length > 1 ? webhookData[1]?.output : null;
           
-          if (firstOutput?.customer_themes || secondOutput?.customer_themes) {
-            const themes = firstOutput?.customer_themes || secondOutput?.customer_themes;
-            if (themes) {
-              // Extract pain points from customer themes
-              const painPoints = Object.values(themes).filter(Boolean).join(' ');
-              setSummary(painPoints);
-            }
+          if (firstOutput?.customer_themes) {
+            // Combine pain points from customer themes into a summary
+            const painPoints = Object.values(firstOutput.customer_themes)
+              .filter(Boolean)
+              .join(' ');
+            
+            setSummary(painPoints);
+          }
+          
+          // If company name is available in the response, use it
+          const responseCompanyName = firstOutput?.company;
+          if (responseCompanyName) {
+            console.log(`Company name found in response: ${responseCompanyName}`);
           }
         }
       } catch (error) {

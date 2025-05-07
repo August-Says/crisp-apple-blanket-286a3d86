@@ -13,12 +13,12 @@ const RecommendedActions = ({ webhookData }: RecommendedActionsProps) => {
     if (webhookData) {
       try {
         // Check if webhookData is an array (common format from n8n)
-        if (Array.isArray(webhookData) && webhookData.length > 1) {
-          // Try to extract empathy canvas from the second output
-          const secondOutput = webhookData[1]?.output;
+        if (Array.isArray(webhookData) && webhookData.length > 0) {
+          // Try to extract empathy canvas from the first output
+          const firstOutput = webhookData[0]?.output;
           
-          if (secondOutput?.empathy_canvass && Array.isArray(secondOutput.empathy_canvass)) {
-            setEmpathyQuestions(secondOutput.empathy_canvass);
+          if (firstOutput?.empathy_canvass && Array.isArray(firstOutput.empathy_canvass)) {
+            setEmpathyQuestions(firstOutput.empathy_canvass);
           }
         }
       } catch (error) {

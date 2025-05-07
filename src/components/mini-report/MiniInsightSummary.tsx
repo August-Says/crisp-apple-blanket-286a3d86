@@ -6,13 +6,15 @@ interface MiniInsightSummaryProps {
   industry: string;
   painPoints: string;
   processedSections: Section[];
+  webhookData?: any;
 }
 
 const MiniInsightSummary = ({ 
   companyName, 
   industry, 
   painPoints,
-  processedSections 
+  processedSections,
+  webhookData 
 }: MiniInsightSummaryProps) => {
   
   // Find the executive summary and key insights sections if available
@@ -27,6 +29,15 @@ const MiniInsightSummary = ({
     section.title.toLowerCase().includes('insights') || 
     section.title.toLowerCase().includes('findings')
   );
+
+  // Extract data directly from webhook response if available
+  const customerThemes = webhookData && 
+    Array.isArray(webhookData) && 
+    webhookData[0]?.output?.customer_themes;
+
+  const emotionalStatements = webhookData && 
+    Array.isArray(webhookData) && 
+    webhookData[0]?.output?.emotional_statements;
   
   return (
     <div className="space-y-6">
@@ -36,7 +47,11 @@ const MiniInsightSummary = ({
           Quick Summary
         </h2>
         
-        {executiveSummary ? (
+        {customerThemes ? (
+          <div className="prose prose-sm text-navy/80 max-w-none">
+            <p className="text-navy/80">{Object.values(customerThemes)[0]}</p>
+          </div>
+        ) : executiveSummary ? (
           <div className="prose prose-sm text-navy/80 max-w-none">
             <p className="text-navy/80">{executiveSummary.content.split('\n')[0]}</p>
           </div>
@@ -55,7 +70,18 @@ const MiniInsightSummary = ({
           Top Insights
         </h2>
         
-        {keyInsights ? (
+        {emotionalStatements && Array.isArray(emotionalStatements) ? (
+          <div className="space-y-3 text-navy/80">
+            {emotionalStatements.slice(0, 3).map((statement, index) => (
+              <div key={index} className="flex gap-3">
+                <div className="bg-peach/30 text-navy font-semibold h-7 w-7 flex items-center justify-center rounded-full shrink-0">
+                  {index + 1}
+                </div>
+                <p>"{statement}"</p>
+              </div>
+            ))}
+          </div>
+        ) : keyInsights ? (
           <div className="space-y-3 text-navy/80">
             {keyInsights.content.split('\n')
               .filter(line => line.trim().length > 0)

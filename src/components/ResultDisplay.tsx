@@ -15,8 +15,35 @@ interface ResultDisplayProps {
 
 const ResultDisplay = ({ result, onBack }: ResultDisplayProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
-  const processedSections = processContent(result);
   const [showRawJson, setShowRawJson] = useState(false);
+  
+  // Parse the result to handle different formats
+  let parsedResult;
+  let processedSections;
+  let rawData;
+  
+  try {
+    // Try to parse as JSON first
+    parsedResult = JSON.parse(result);
+    rawData = parsedResult;
+    
+    // Process the content using our standardized processor
+    processedSections = processContent(result);
+    
+    console.log('Successfully parsed JSON result:', parsedResult);
+    console.log('Processed sections:', processedSections);
+  } catch (e) {
+    // If JSON parsing fails, use the raw string
+    console.log('Failed to parse result as JSON, using as raw text');
+    processedSections = processContent(result);
+    rawData = result;
+  }
+  
+  // Extract company information if available
+  let companyName = '';
+  if (Array.isArray(parsedResult) && parsedResult[0]?.output?.company) {
+    companyName = parsedResult[0].output.company;
+  }
   
   return (
     <motion.div 
@@ -26,7 +53,9 @@ const ResultDisplay = ({ result, onBack }: ResultDisplayProps) => {
       className="w-full max-w-4xl mx-auto glass-morphism rounded-2xl p-8 md:p-10 my-8 shadow-lg overflow-y-auto"
     >
       <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
-        <h2 className="text-2xl md:text-3xl font-bold text-navy mb-4 md:mb-0 text-left">Your Marketing Canvas</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-navy mb-4 md:mb-0 text-left">
+          {companyName ? `Marketing Canvas for ${companyName}` : 'Your Marketing Canvas'}
+        </h2>
         <div className="flex space-x-4">
           <PdfExportButton contentRef={contentRef} />
           <ShareButton contentRef={contentRef} />
@@ -40,7 +69,9 @@ const ResultDisplay = ({ result, onBack }: ResultDisplayProps) => {
       />
       
       {/* Add Canvass Game section after Questions */}
-      <CanvassGameSection />
+      <CanvassGameSection 
+        webhookData={parsedResult} 
+      />
       
       <div className="mt-8 pt-4 border-t border-navy/20 flex justify-between items-center">
         <Button

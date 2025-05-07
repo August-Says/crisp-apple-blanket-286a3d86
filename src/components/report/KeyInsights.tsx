@@ -15,12 +15,12 @@ const KeyInsights = ({ industry, painPoints, webhookData }: KeyInsightsProps) =>
     if (webhookData) {
       try {
         // Check if webhookData is an array (common format from n8n)
-        if (Array.isArray(webhookData) && webhookData.length > 1) {
-          // Try to extract emotional statements from the second output
-          const secondOutput = webhookData[1]?.output;
+        if (Array.isArray(webhookData) && webhookData.length > 0) {
+          // Try to extract emotional statements from the first output
+          const firstOutput = webhookData[0]?.output;
           
-          if (secondOutput?.emotional_statements && Array.isArray(secondOutput.emotional_statements)) {
-            setEmotionalStatements(secondOutput.emotional_statements);
+          if (firstOutput?.emotional_statements && Array.isArray(firstOutput.emotional_statements)) {
+            setEmotionalStatements(firstOutput.emotional_statements);
           }
         }
       } catch (error) {

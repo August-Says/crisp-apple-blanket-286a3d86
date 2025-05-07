@@ -3,12 +3,37 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { GameImageDisplay } from '@/components/result/GameImageDisplay';
 
-const CanvassGameSection: React.FC = () => {
-  // Define game images with the specific Supabase image
+interface CanvassGameSectionProps {
+  webhookData?: any;
+}
+
+const CanvassGameSection: React.FC<CanvassGameSectionProps> = ({ webhookData }) => {
+  // Extract company name if available in the webhook data
+  let companyName = '';
+  if (Array.isArray(webhookData) && webhookData[0]?.output?.company) {
+    companyName = webhookData[0].output.company;
+  }
+  
+  // Determine which game image to show based on company name
+  let gameImagePath = 'generic_this-or-that_game.gif';
+  
+  // If we have company info, try to find a company-specific game
+  if (companyName) {
+    // Convert to lowercase for case-insensitive comparison
+    const companyNameLower = companyName.toLowerCase();
+    
+    // Check for specific companies and assign appropriate games
+    // This would ideally be expanded to a proper lookup table or database
+    if (companyNameLower.includes('apple')) {
+      gameImagePath = 'generic_this-or-that_game.gif'; // You could have a specific Apple game image
+    }
+  }
+  
+  // Define game images with the appropriate image
   const gameImages = [
     { 
-      path: 'generic_this-or-that_game.gif', 
-      caption: 'Canvass Game Visualization',
+      path: gameImagePath, 
+      caption: `${companyName || 'Canvass'} Game Visualization`,
       isDefault: false
     }
   ];
