@@ -11,16 +11,25 @@ const SecondaryCta = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-bold text-navy mb-4">Ready for Deeper Insight?</h2>
+          <h2 className="text-3xl font-bold text-navy mb-4">Ready for Deeper Customer Understanding?</h2>
           <p className="text-xl text-navy/70 mb-8 max-w-2xl mx-auto">
-            Unlock premium features including advanced sentiment analysis, competitor benchmarking, and trend forecasting.
+            Unlock premium features including advanced sentiment analysis, customized empathy canvasses, 
+            and comprehensive customer journey mapping.
           </p>
-          <Button 
-            variant="outline" 
-            className="font-medium text-navy border-navy hover:bg-navy hover:text-peach transition-colors px-8 py-6 text-lg"
-          >
-            Upgrade to Premium
-          </Button>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Button 
+              variant="navyGradient"
+              className="font-medium px-8 py-6 text-lg"
+            >
+              Start Free Trial
+            </Button>
+            <Button 
+              variant="outline" 
+              className="font-medium text-navy border-navy hover:bg-navy hover:text-peach transition-colors px-8 py-6 text-lg"
+            >
+              Schedule Demo
+            </Button>
+          </div>
         </motion.div>
       </div>
     </section>
