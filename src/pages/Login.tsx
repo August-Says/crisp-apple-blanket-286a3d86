@@ -1,6 +1,6 @@
 
 import { Suspense } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import AugustLogo from '@/components/AugustLogo';
 import LoginForm from '@/components/login/LoginForm';
 import { Button } from '@/components/ui/button';
@@ -8,9 +8,17 @@ import { ArrowLeft } from 'lucide-react';
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Check if we came from the free report page
+  const cameFromFreeReport = location.state?.from === 'free-report';
   
   const handleBackToReport = () => {
-    navigate('/report');
+    if (cameFromFreeReport) {
+      navigate('/free-report');
+    } else {
+      navigate('/');
+    }
   };
 
   return (
@@ -22,7 +30,7 @@ const Login = () => {
           onClick={handleBackToReport}
         >
           <ArrowLeft size={16} />
-          Back to Free Report
+          Back to {cameFromFreeReport ? 'Free Report' : 'Home'}
         </Button>
       </div>
       <div className="flex justify-center mb-8">

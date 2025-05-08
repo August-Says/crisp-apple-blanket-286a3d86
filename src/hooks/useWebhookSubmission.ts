@@ -27,10 +27,16 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
     currentHistoryEntry
   } = useSubmissionHistory();
 
-  // Update to use the test webhook URL if provided, or default to production URL
-  const defaultWebhookUrl = 'https://sonarai.app.n8n.cloud/webhook-test/715d27f7-f730-437c-8abe-cda82e04210e';
-  const webhookUrl = options?.webhookUrl || defaultWebhookUrl;
+  // Default URLs for different report types
+  const FREE_REPORT_WEBHOOK_URL = 'https://sonarai.app.n8n.cloud/webhook/ff546d84-5999-4dcc-88ee-8ba645810225';
+  const FULL_REPORT_WEBHOOK_URL = 'https://sonarai.app.n8n.cloud/webhook/715d27f7-f730-437c-8abe-cda82e04210e';
+  
+  // Use the specified webhook URL or default to the full report URL
+  const webhookUrl = options?.webhookUrl || FULL_REPORT_WEBHOOK_URL;
   const fallbackGenerator = options?.fallbackGenerator || defaultFallbackGenerator;
+  
+  // Determine if we're using the FREE report webhook
+  const isUsingFreeReport = webhookUrl === FREE_REPORT_WEBHOOK_URL;
 
   const callWebhook = async (
     params: Record<string, string>,
@@ -44,8 +50,10 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
     try {
       console.log('Calling webhook with params:', params);
       console.log('Using webhook URL:', webhookUrl);
+      console.log('Report type:', isUsingFreeReport ? 'FREE Report' : 'FULL Report');
+      
       toast.info("Connecting to webhook...");
-      toast.info("This may take up to 90 seconds to process");
+      toast.info(`This may take up to ${isUsingFreeReport ? '2' : '90'} seconds to process`);
       
       // First try with CORS enabled
       const response = await executeWebhookRequest({
@@ -54,7 +62,7 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
         contentValue,
         webhookUrl,
         useNoCors: false,
-        timeoutSeconds: 90 // Explicitly set timeout to 90 seconds
+        timeoutSeconds: isUsingFreeReport ? 120 : 90 // Different timeout based on report type
       }).catch(async error => {
         console.log('Regular request failed, trying with no-cors mode', error);
         toast.info("Standard request failed, trying alternative connection method");
@@ -66,7 +74,7 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
           contentValue,
           webhookUrl,
           useNoCors: true,
-          timeoutSeconds: 90 // Explicitly set timeout to 90 seconds
+          timeoutSeconds: isUsingFreeReport ? 120 : 90
         });
       });
       
@@ -92,7 +100,7 @@ export const useWebhookSubmission = (options?: WebhookOptions): WebhookSubmissio
         });
         
         setResult(formattedResult);
-        handleSuccessfulResponse('Canvas generated successfully!');
+        handleSuccessfulResponse('Report generated successfully!');
         
         // Return the raw data instead of formatted result
         return response.data;

@@ -18,8 +18,12 @@ const Layout = ({ children }: LayoutProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   
-  // Check if we're on a public page
-  const isPublicPage = location.pathname === '/' || location.pathname === '/login' || location.pathname === '/report';
+  // Check if we're on a public page - now includes free-report
+  const isPublicPage = 
+    location.pathname === '/' || 
+    location.pathname === '/login' || 
+    location.pathname === '/signup' || 
+    location.pathname === '/free-report';
 
   useEffect(() => {
     // Check if user is authenticated with Supabase

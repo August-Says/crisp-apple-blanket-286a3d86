@@ -1,9 +1,8 @@
-
 import { useState } from 'react';
 import { FormInput } from '@/components/ui/form/FormInput';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { PartyPopper } from 'lucide-react';
 
@@ -12,6 +11,10 @@ const WaitlistForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Determine if we're on the free report page
+  const isOnFreeReport = location.pathname === '/free-report';
 
   const handleJoinWaitlist = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,7 +48,9 @@ const WaitlistForm = () => {
       
       // Redirect to login page after displaying success for 2 seconds
       setTimeout(() => {
-        navigate('/login');
+        navigate('/login', { 
+          state: { from: isOnFreeReport ? 'free-report' : 'report' }
+        });
       }, 2000);
     } catch (error) {
       console.error('Error submitting waitlist form:', error);
