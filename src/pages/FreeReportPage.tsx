@@ -31,6 +31,7 @@ const FreeReportPage = () => {
     // Simulate loading the report
     const timer = setTimeout(() => {
       setIsLoading(false);
+      toast.success('Free report generated successfully!');
     }, 2000);
     
     return () => clearTimeout(timer);
@@ -41,7 +42,8 @@ const FreeReportPage = () => {
   };
 
   const handleLogin = () => {
-    navigate('/login');
+    // Pass along that we came from the free report page
+    navigate('/login', { state: { from: 'free-report' } });
   };
 
   const handleSignUp = () => {

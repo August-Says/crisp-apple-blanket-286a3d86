@@ -10,7 +10,7 @@ interface FreeReportHeaderProps {
 
 const FreeReportHeader = ({ handleBack, handleLogin, handleSignUp }: FreeReportHeaderProps) => {
   return (
-    <div className="flex justify-between items-center mb-8">
+    <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
       <Button variant="ghost" className="flex items-center gap-2" onClick={handleBack}>
         <ArrowLeft size={16} />
         Back to Home
@@ -21,7 +21,7 @@ const FreeReportHeader = ({ handleBack, handleLogin, handleSignUp }: FreeReportH
           <LogIn size={16} />
           Login
         </Button>
-        <Button variant="outline" className="flex items-center gap-2" onClick={handleSignUp}>
+        <Button variant="default" className="flex items-center gap-2 bg-navy text-white hover:bg-navy/80" onClick={handleSignUp}>
           <UserPlus size={16} />
           Sign Up
         </Button>
