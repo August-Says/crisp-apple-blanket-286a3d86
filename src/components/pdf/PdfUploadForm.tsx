@@ -1,6 +1,8 @@
+
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 import PdfUploadTab from './PdfUploadTab';
 import TextInputTab from './TextInputTab';
 
@@ -10,6 +12,7 @@ interface PdfUploadFormProps {
 }
 
 const PdfUploadForm = ({ onSubmit, initialTextContent = '' }: PdfUploadFormProps) => {
+  const navigate = useNavigate();
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [textContent, setTextContent] = useState(initialTextContent);
   const [extractedPdfText, setExtractedPdfText] = useState('');
@@ -77,12 +80,22 @@ const PdfUploadForm = ({ onSubmit, initialTextContent = '' }: PdfUploadFormProps
     }
   };
 
+  const handleUseFields = () => {
+    navigate('/fields');
+  };
+
   return (
     <div className="glass-morphism rounded-2xl p-6 sm:p-8 shadow-lg">
       <Tabs 
         defaultValue="upload" 
         className="w-full"
-        onValueChange={(value) => setActiveTab(value as 'upload' | 'text')}
+        onValueChange={(value) => {
+          if (value === "text") {
+            handleUseFields();
+            return;
+          }
+          setActiveTab(value as 'upload' | 'text');
+        }}
       >
         <TabsList className="grid w-full grid-cols-2 bg-navy/10 text-navy">
           <TabsTrigger 
@@ -95,7 +108,7 @@ const PdfUploadForm = ({ onSubmit, initialTextContent = '' }: PdfUploadFormProps
             value="text" 
             className="data-[state=active]:bg-navy/20 data-[state=active]:text-navy font-medium"
           >
-            Paste Text
+            Use Fields
           </TabsTrigger>
         </TabsList>
         
@@ -112,16 +125,7 @@ const PdfUploadForm = ({ onSubmit, initialTextContent = '' }: PdfUploadFormProps
           />
         </TabsContent>
         
-        <TabsContent value="text" className="mt-6">
-          <TextInputTab 
-            textContent={textContent}
-            additionalNotes={additionalNotes}
-            errors={errors}
-            onTextContentChange={(e) => setTextContent(e.target.value)}
-            onAdditionalNotesChange={(e) => setAdditionalNotes(e.target.value)}
-            onSubmit={(e) => handleSubmit(e, 'text')}
-          />
-        </TabsContent>
+        {/* TabsContent for "text" removed since we're navigating away instead */}
       </Tabs>
     </div>
   );
