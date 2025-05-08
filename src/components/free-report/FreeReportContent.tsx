@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import WaitlistForm from '@/components/report/WaitlistForm';
 import CanvassGameSample from '@/components/report/CanvassGameSample';
-import { Company, Industry, MessageSquare, MessageSquareHeart, List, Image, Play } from 'lucide-react';
+import { Building, Briefcase, MessageSquare, MessageSquareHeart, List, Image, Play } from 'lucide-react';
 
 interface FreeReportContentProps {
   formData: {
@@ -75,7 +75,7 @@ const FreeReportContent = ({ formData }: FreeReportContentProps) => {
       {/* Company and Industry Section */}
       <div className="glass-morphism rounded-xl p-6 border border-navy/10">
         <div className="flex items-center gap-2 mb-4">
-          <Company size={24} className="text-navy" />
+          <Building size={24} className="text-navy" />
           <h2 className="text-xl font-bold text-navy">Company Overview</h2>
         </div>
         
