@@ -19,7 +19,7 @@ const CustomerThemesSection = ({ themes, fallbackText }: CustomerThemesProps) =>
         <div className="space-y-4">
           {Object.entries(themes).map(([key, value], index) => (
             <div key={key} className="bg-white/30 p-4 rounded-lg">
-              <h3 className="font-medium text-navy mb-2">Pain Point {index + 1}</h3>
+              <h3 className="font-medium text-navy mb-2">Customer Concern {index + 1}</h3>
               <p className="text-navy/80">{value}</p>
             </div>
           ))}
