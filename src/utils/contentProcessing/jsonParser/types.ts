@@ -20,6 +20,8 @@ export interface ActivationAddon {
 export interface OutputStructure {
   summary?: string;
   objective?: string;
+  insights?: InsightItem[];
+  strategic_implications?: string[];
   outcome?: {
     insights?: InsightItem[];
     strategic_implications?: string[];
