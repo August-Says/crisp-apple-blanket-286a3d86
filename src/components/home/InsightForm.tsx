@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -23,8 +24,8 @@ const InsightForm = ({ industries }: InsightFormProps) => {
   const [painPoints, setPainPoints] = useState('Improving customer retention and engagement');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Use the webhook hook for submission with the FREE report webhook URL
-  const webhookUrl = "https://sonarai.app.n8n.cloud/webhook/ff546d84-5999-4dcc-88ee-8ba645810225";
+  // Use the webhook hook for submission with the NEW webhook URL
+  const webhookUrl = "https://sonarai.app.n8n.cloud/webhook-test/e5c29c05-b468-4d0f-a2b8-5a78f580e951";
   const { callWebhook, isLoading } = useWebhookSubmission({ 
     webhookUrl: webhookUrl
   });
