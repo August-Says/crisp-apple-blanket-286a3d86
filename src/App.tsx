@@ -41,8 +41,8 @@ const App = () => {
           <AnimatePresence mode="wait">
             <Layout>
               <Routes>
-                {/* Redirect root path to the PDF upload page */}
-                <Route path="/" element={<Navigate to="/pdf" replace />} />
+                {/* Redirect root path to the login page */}
+                <Route path="/" element={<Navigate to="/login" replace />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/report" element={<ReportPage />} />
