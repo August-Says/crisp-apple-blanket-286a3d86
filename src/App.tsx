@@ -43,7 +43,7 @@ const App = () => {
             <Layout>
               <Routes>
                 {/* Redirect root path to the login page */}
-                <Route path="/" element={<Navigate to="/login" replace />} />
+                <Route path="/" element={<Navigate to="/landingpage" replace />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/report" element={<ReportPage />} />
