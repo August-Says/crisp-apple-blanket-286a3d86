@@ -13,6 +13,7 @@ import FieldsForm from "./pages/FieldsForm";
 import PdfUpload from "./pages/PdfUpload";
 import NotFound from "./pages/NotFound";
 import LandingPage from "./pages/LandingPage";
+import AugustLandingPage from "./pages/AugustLandingPage";
 import ReportPage from "./pages/ReportPage";
 import FreeReportPage from "./pages/FreeReportPage";
 
@@ -50,6 +51,7 @@ const App = () => {
                 <Route path="/home" element={<Home />} />
                 <Route path="/fields" element={<FieldsForm />} />
                 <Route path="/pdf" element={<PdfUpload />} />
+                <Route path="/landingpage" element={<AugustLandingPage />} />
                 {/* Redirect any other paths to the 404 page */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

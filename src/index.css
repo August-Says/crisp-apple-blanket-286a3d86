@@ -3,3 +3,22 @@
 @import './styles/base.css';
 @import './styles/animations.css';
 @import './styles/progress-bar.css';
+
+/* Additional styles for August landing page */
+@layer components {
+  .august-gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-navy to-navy-light;
+  }
+  
+  .august-card {
+    @apply bg-white/20 backdrop-blur-sm border border-navy/10 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300;
+  }
+  
+  .august-button {
+    @apply rounded-full px-6 py-3 font-medium transition-all duration-300;
+  }
+  
+  .august-nav-link {
+    @apply relative text-navy/70 hover:text-navy transition-colors duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-navy hover:after:w-full after:transition-all after:duration-300;
+  }
+}
