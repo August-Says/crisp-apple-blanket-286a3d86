@@ -41,8 +41,8 @@ const App = () => {
           <AnimatePresence mode="wait">
             <Layout>
               <Routes>
-                {/* Set the LandingPage as the default route */}
-                <Route path="/" element={<LandingPage />} />
+                {/* Redirect root path to the PDF upload page */}
+                <Route path="/" element={<Navigate to="/pdf" replace />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/report" element={<ReportPage />} />
@@ -50,7 +50,7 @@ const App = () => {
                 <Route path="/home" element={<Home />} />
                 <Route path="/fields" element={<FieldsForm />} />
                 <Route path="/pdf" element={<PdfUpload />} />
-                {/* Redirect any other paths to the landing page */}
+                {/* Redirect any other paths to the 404 page */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Layout>
