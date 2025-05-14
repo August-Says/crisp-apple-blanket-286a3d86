@@ -84,7 +84,7 @@ const AugustLandingPage = () => {
               >
                 <Button 
                   className="bg-navy hover:bg-navy-light text-peach px-6 py-6 rounded-full text-lg"
-                  onClick={() => navigate('/free-report')}
+                  onClick={() => navigate('/pdf')}
                 >
                   Try Our Free Empathy Report
                   <ArrowRight className="ml-2 h-5 w-5" />
