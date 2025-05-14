@@ -19,6 +19,9 @@ export const processSecondOutput = (output: string | OutputStructure): Section[]
       // Process structured object
       if (parsedOutput.outcome) {
         return processOutcomeObject(parsedOutput.outcome);
+      } else if (parsedOutput.insights || parsedOutput.strategic_implications) {
+        // Direct insights and implications at root level
+        return processDirectInsights(parsedOutput);
       }
     } catch (e) {
       sections.push({
@@ -31,8 +34,11 @@ export const processSecondOutput = (output: string | OutputStructure): Section[]
     // Process structured outcome object
     if (output.outcome) {
       return processOutcomeObject(output.outcome);
+    } else if (output.insights || output.strategic_implications) {
+      // Direct insights and implications at root level
+      return processDirectInsights(output);
     } else {
-      logger.info("No outcome object found in second output");
+      logger.info("No insights or strategic implications found in second output");
     }
   }
   
@@ -78,6 +84,47 @@ const processOutcomeObject = (outcome: any): Section[] => {
     logger.info("Added strategic implications section without bolding");
   } else {
     logger.info("No strategic_implications array found in outcome");
+  }
+  
+  return sections;
+};
+
+/**
+ * Process direct insights and strategic implications at root level
+ */
+const processDirectInsights = (data: any): Section[] => {
+  const sections: Section[] = [];
+  
+  // Process insights
+  if (data.insights && Array.isArray(data.insights)) {
+    logger.info(`Processing ${data.insights.length} direct insights`);
+    
+    const insights = data.insights.map(
+      (insight: any, i: number) => `${i+1}. <strong>${insight.category}</strong>: ${insight.description}`
+    ).join('\n\n');
+    
+    sections.push({
+      title: "Key Insights",
+      content: insights
+    });
+    logger.info("Added direct insights section");
+  }
+  
+  // Process strategic implications
+  if (data.strategic_implications && Array.isArray(data.strategic_implications)) {
+    logger.info(`Processing ${data.strategic_implications.length} direct strategic implications`);
+    
+    const implications = data.strategic_implications.map((imp: any, i: number) => {
+      // Handle both string and object formats
+      const implicationText = typeof imp === 'string' ? imp : imp.implication || JSON.stringify(imp);
+      return `${i+1}. ${implicationText}`;
+    }).join('\n\n');
+    
+    sections.push({
+      title: "Strategic Implications",
+      content: implications
+    });
+    logger.info("Added direct strategic implications section");
   }
   
   return sections;
