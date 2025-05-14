@@ -54,7 +54,7 @@ const ResultDisplay = ({ result, onBack }: ResultDisplayProps) => {
     >
       <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
         <h2 className="text-2xl md:text-3xl font-bold text-navy mb-4 md:mb-0 text-left">
-          {companyName ? `Marketing Canvas for ${companyName}` : 'Your Marketing Canvas'}
+          Your Canvass Report
         </h2>
         <div className="flex space-x-4">
           <PdfExportButton contentRef={contentRef} />
