@@ -1,8 +1,8 @@
+
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import { MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
@@ -61,12 +61,6 @@ const Layout = ({ children }: LayoutProps) => {
   // Check if we're on the landing page
   const isLandingPage = location.pathname === '/';
 
-  const openSupportChat = () => {
-    // Production webhook URL
-    window.open('https://sonarai.app.n8n.cloud/webhook/715d27f7-f730-437c-8abe-cda82e04210e/chat', '_blank');
-    toast.success("Support chat opened in a new window!");
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-peach overflow-hidden relative">
       {/* Only show navbar when authenticated and not on landing page */}
@@ -76,17 +70,7 @@ const Layout = ({ children }: LayoutProps) => {
         {children}
       </main>
       
-      {/* Support chat button (only show when authenticated and not on landing page) */}
-      {isAuthenticated && !isLandingPage && (
-        <div className="fixed bottom-6 right-6 z-40">
-          <Button 
-            onClick={openSupportChat}
-            className="rounded-full w-14 h-14 bg-navy hover:bg-navy-light text-peach shadow-lg"
-          >
-            <MessageCircle size={24} />
-          </Button>
-        </div>
-      )}
+      {/* Support chat button removed as we now have the ChatWindow component */}
       
       {/* Only show footer when authenticated and not on landing page */}
       {isAuthenticated && !isLandingPage && <Footer />}

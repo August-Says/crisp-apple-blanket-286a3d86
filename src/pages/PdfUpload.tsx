@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useWebhookSubmission } from '@/hooks/useWebhookSubmission';
@@ -9,6 +8,7 @@ import UploadFormContent from '@/components/pdf/UploadFormContent';
 import { Button } from '@/components/ui/button';
 import { processContent } from '@/utils/contentProcessing';
 import { toast } from 'sonner';
+import ChatWindow from '@/components/chat/ChatWindow';
 
 const PdfUpload = () => {
   const navigate = useNavigate();
@@ -17,6 +17,9 @@ const PdfUpload = () => {
   
   // Use the production webhook URL for PDF processing instead of test URL
   const webhookUrl = "https://sonarai.app.n8n.cloud/webhook/715d27f7-f730-437c-8abe-cda82e04210e";
+  
+  // Chat webhook URL
+  const chatWebhookUrl = "https://sonarai.app.n8n.cloud/webhook/898cef2e-e667-4160-b53d-34177e97e493/chat";
   
   const generateFallbackCanvas = (content: string) => {
     return `# Generated Marketing Canvas
@@ -130,7 +133,12 @@ Potential challenges and mitigation strategies to ensure campaign resilience and
   };
 
   if (isLoading) {
-    return <LoadingContent loadingProgress={loadingProgress} />;
+    return (
+      <>
+        <LoadingContent loadingProgress={loadingProgress} />
+        <ChatWindow webhookUrl={chatWebhookUrl} />
+      </>
+    );
   }
   
   const shouldUseRawResponse = lastRawResponse && hasValidData();
@@ -174,16 +182,21 @@ Potential challenges and mitigation strategies to ensure campaign resilience and
             )}
           </div>
         )}
+        
+        <ChatWindow webhookUrl={chatWebhookUrl} />
       </div>
     );
   }
 
   return (
-    <UploadFormContent
-      onBack={handleBack}
-      onSubmit={handleFormSubmit}
-      textContent={textContent}
-    />
+    <>
+      <UploadFormContent
+        onBack={handleBack}
+        onSubmit={handleFormSubmit}
+        textContent={textContent}
+      />
+      <ChatWindow webhookUrl={chatWebhookUrl} />
+    </>
   );
 };
 
