@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, Send, X } from 'lucide-react';
@@ -13,10 +12,11 @@ interface Message {
 
 interface ChatWindowProps {
   webhookUrl: string;
+  initiallyOpen?: boolean;
 }
 
-const ChatWindow = ({ webhookUrl }: ChatWindowProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+const ChatWindow = ({ webhookUrl, initiallyOpen = false }: ChatWindowProps) => {
+  const [isOpen, setIsOpen] = useState(initiallyOpen);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -114,6 +114,77 @@ const ChatWindow = ({ webhookUrl }: ChatWindowProps) => {
     }
   };
 
+  // If initiallyOpen is true, render the full chat without the toggle button
+  if (initiallyOpen) {
+    return (
+      <div className="w-full h-full bg-white rounded-lg shadow-xl border border-navy/20 overflow-hidden flex flex-col">
+        {/* Chat header */}
+        <div className="bg-navy text-peach p-4 flex justify-between items-center">
+          <h3 className="font-medium">August Says AI Assistant</h3>
+        </div>
+        
+        {/* Chat messages */}
+        <div className="flex-1 p-4 overflow-y-auto bg-gray-50">
+          {messages.map((msg) => (
+            <div 
+              key={msg.id} 
+              className={`mb-4 ${msg.role === 'user' ? 'text-right' : 'text-left'}`}
+            >
+              <div 
+                className={`inline-block rounded-lg px-4 py-2 max-w-[80%] ${
+                  msg.role === 'user' 
+                    ? 'bg-navy text-peach' 
+                    : 'bg-peach-light text-navy'
+                }`}
+              >
+                {msg.content}
+              </div>
+              <div className="text-xs text-gray-500 mt-1">
+                {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+              </div>
+            </div>
+          ))}
+          <div ref={messagesEndRef} />
+          
+          {/* Loading indicator */}
+          {isLoading && (
+            <div className="text-center py-2">
+              <div className="inline-flex gap-1">
+                <div className="w-2 h-2 rounded-full bg-navy animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                <div className="w-2 h-2 rounded-full bg-navy animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                <div className="w-2 h-2 rounded-full bg-navy animate-bounce" style={{ animationDelay: '300ms' }}></div>
+              </div>
+            </div>
+          )}
+        </div>
+        
+        {/* Chat input */}
+        <div className="p-3 border-t border-gray-200 bg-white">
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              placeholder="Type a message..."
+              value={inputValue}
+              onChange={handleInputChange}
+              onKeyDown={handleKeyPress}
+              className="flex-1 border rounded-full py-2 px-4 focus:outline-none focus:ring-1 focus:ring-navy"
+              disabled={isLoading}
+            />
+            <Button 
+              onClick={sendMessage} 
+              disabled={!inputValue.trim() || isLoading}
+              size="icon"
+              className="rounded-full bg-navy hover:bg-navy-light text-peach"
+            >
+              <Send size={18} />
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Default floating chat window
   return (
     <>
       {/* Chat toggle button */}

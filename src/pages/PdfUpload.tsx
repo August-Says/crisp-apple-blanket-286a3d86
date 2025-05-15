@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useWebhookSubmission } from '@/hooks/useWebhookSubmission';
 import { useProgressAnimation } from '@/hooks/useProgressAnimation';
@@ -134,10 +134,7 @@ Potential challenges and mitigation strategies to ensure campaign resilience and
 
   if (isLoading) {
     return (
-      <>
-        <LoadingContent loadingProgress={loadingProgress} />
-        <ChatWindow webhookUrl={chatWebhookUrl} />
-      </>
+      <LoadingContent loadingProgress={loadingProgress} />
     );
   }
   
@@ -182,21 +179,30 @@ Potential challenges and mitigation strategies to ensure campaign resilience and
             )}
           </div>
         )}
-        
-        <ChatWindow webhookUrl={chatWebhookUrl} />
       </div>
     );
   }
 
   return (
-    <>
+    <div className="flex flex-col items-center">
       <UploadFormContent
         onBack={handleBack}
         onSubmit={handleFormSubmit}
         textContent={textContent}
       />
-      <ChatWindow webhookUrl={chatWebhookUrl} />
-    </>
+      
+      <div className="w-full max-w-3xl mx-auto mt-10 mb-20">
+        <div className="text-center mb-6">
+          <h2 className="text-2xl font-bold text-navy">Need Help? Chat with Our AI Assistant</h2>
+          <p className="text-navy/70 mt-2">
+            Our AI can help you with your marketing canvas or answer any questions you might have.
+          </p>
+        </div>
+        <div className="relative h-[400px]">
+          <ChatWindow webhookUrl={chatWebhookUrl} initiallyOpen={true} />
+        </div>
+      </div>
+    </div>
   );
 };
 
