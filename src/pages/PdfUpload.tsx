@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useWebhookSubmission } from '@/hooks/useWebhookSubmission';
@@ -8,7 +9,7 @@ import UploadFormContent from '@/components/pdf/UploadFormContent';
 import { Button } from '@/components/ui/button';
 import { processContent } from '@/utils/contentProcessing';
 import { toast } from 'sonner';
-import ChatWindow from '@/components/chat/ChatWindow';
+import N8nChatWindow from '@/components/chat/N8nChatWindow';
 
 const PdfUpload = () => {
   const navigate = useNavigate();
@@ -198,8 +199,8 @@ Potential challenges and mitigation strategies to ensure campaign resilience and
             Our AI can help you with your marketing canvas or answer any questions you might have.
           </p>
         </div>
-        <div className="relative h-[400px]">
-          <ChatWindow webhookUrl={chatWebhookUrl} initiallyOpen={true} />
+        <div className="relative h-[400px] border border-navy/20 rounded-lg shadow-lg overflow-hidden">
+          <N8nChatWindow webhookUrl={chatWebhookUrl} initiallyOpen={true} />
         </div>
       </div>
     </div>
