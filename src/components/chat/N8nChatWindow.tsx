@@ -25,7 +25,6 @@ const N8nChatWindow = ({ webhookUrl, initiallyOpen = false, className = '' }: N8
         primaryColor: '#18222f', // Navy color
       },
       // Display the chat directly in the container
-      showPopoutButton: false,  // Disable popup button if supported
       fullscreen: true          // Try to use the full container
     });
     
