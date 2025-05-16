@@ -1,6 +1,6 @@
 
 import { useEffect, useRef } from 'react';
-import { Chat } from '@n8n/chat';
+import { createChat } from '@n8n/chat';
 import '@n8n/chat/style.css';
 
 interface N8nChatWindowProps {
@@ -16,7 +16,7 @@ const N8nChatWindow = ({ webhookUrl, initiallyOpen = false, className = '' }: N8
     if (!chatContainerRef.current || !webhookUrl) return;
 
     // Initialize N8n Chat
-    const chatInstance = new Chat({
+    const chatInstance = createChat({
       webhookUrl: webhookUrl,
       container: chatContainerRef.current,
       showTitle: true,
