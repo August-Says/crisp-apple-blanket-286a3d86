@@ -17,22 +17,16 @@ const N8nChatWindow = ({ webhookUrl, initiallyOpen = false, className = '' }: N8
 
     const containerElement = chatContainerRef.current;
     
-    // Initialize N8n Chat with only supported configuration options
+    // Initialize N8n Chat with supported configuration options
     const chatInstance = createChat({
       webhookUrl: webhookUrl,
       target: containerElement,
       theme: {
         primaryColor: '#18222f', // Navy color
       },
-      // The initiallyOpen prop is used here but not passed directly to createChat
+      // Set defaultOpen directly since that's the supported property
+      defaultOpen: initiallyOpen,
     });
-    
-    // Manually open the chat if initiallyOpen is true
-    if (initiallyOpen && chatInstance.open) {
-      setTimeout(() => {
-        chatInstance.open();
-      }, 500);
-    }
     
     // Clean up on unmount
     return () => {
