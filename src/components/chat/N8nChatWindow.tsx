@@ -24,7 +24,6 @@ const N8nChatWindow = ({ webhookUrl, initiallyOpen = false, className = '' }: N8
       theme: {
         primaryColor: '#18222f', // Navy color
       }
-      // Remove unsupported options
     });
     
     // Clean up on unmount
@@ -33,14 +32,14 @@ const N8nChatWindow = ({ webhookUrl, initiallyOpen = false, className = '' }: N8
         chatInstance.unmount();
       }
     };
-  }, [webhookUrl, initiallyOpen]);
+  }, [webhookUrl]);
 
   return (
     <div 
       ref={chatContainerRef} 
       className={`w-full h-full flex flex-col ${className}`}
       data-testid="n8n-chat-container"
-      style={{ minHeight: "500px" }}
+      style={{ minHeight: "600px", width: "100%" }}
     />
   );
 };
