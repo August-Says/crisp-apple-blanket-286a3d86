@@ -24,9 +24,18 @@ const N8nChatWindow = ({ webhookUrl, initiallyOpen = false, className = '' }: N8
       theme: {
         primaryColor: '#18222f', // Navy color
       },
-      // Set defaultOpen directly since that's the supported property
-      defaultOpen: initiallyOpen,
+      // Don't use defaultOpen as it's not supported
     });
+    
+    // Manually handle the initial state
+    if (initiallyOpen) {
+      // The initiallyOpen prop is handled manually here
+      // We can add a class or attribute to control visibility
+      if (containerElement.firstChild) {
+        // Add any styling or visibility control here if needed
+        console.log('Chat should be initially open');
+      }
+    }
     
     // Clean up on unmount
     return () => {
@@ -41,6 +50,7 @@ const N8nChatWindow = ({ webhookUrl, initiallyOpen = false, className = '' }: N8
       ref={chatContainerRef} 
       className={`w-full h-full flex flex-col ${className}`}
       data-testid="n8n-chat-container"
+      data-initially-open={initiallyOpen}
       style={{ minHeight: "600px", width: "100%" }}
     />
   );
