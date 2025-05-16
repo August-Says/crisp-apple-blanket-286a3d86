@@ -23,7 +23,8 @@ const N8nChatWindow = ({ webhookUrl, initiallyOpen = false, className = '' }: N8
       target: containerElement,
       theme: {
         primaryColor: '#18222f', // Navy color
-      }
+      },
+      defaultOpen: initiallyOpen
     });
     
     // Clean up on unmount
@@ -32,7 +33,7 @@ const N8nChatWindow = ({ webhookUrl, initiallyOpen = false, className = '' }: N8
         chatInstance.unmount();
       }
     };
-  }, [webhookUrl]);
+  }, [webhookUrl, initiallyOpen]);
 
   return (
     <div 
