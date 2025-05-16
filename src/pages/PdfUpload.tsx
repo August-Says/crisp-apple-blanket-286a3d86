@@ -9,7 +9,6 @@ import UploadFormContent from '@/components/pdf/UploadFormContent';
 import { Button } from '@/components/ui/button';
 import { processContent } from '@/utils/contentProcessing';
 import { toast } from 'sonner';
-import N8nChatWindow from '@/components/chat/N8nChatWindow';
 
 const PdfUpload = () => {
   const navigate = useNavigate();
@@ -18,9 +17,6 @@ const PdfUpload = () => {
   
   // Use the production webhook URL for PDF processing instead of test URL
   const webhookUrl = "https://sonarai.app.n8n.cloud/webhook/715d27f7-f730-437c-8abe-cda82e04210e";
-  
-  // Chat webhook URL
-  const chatWebhookUrl = "https://sonarai.app.n8n.cloud/webhook/898cef2e-e667-4160-b53d-34177e97e493/chat";
   
   const generateFallbackCanvas = (content: string) => {
     return `# Generated Marketing Canvas
@@ -191,18 +187,6 @@ Potential challenges and mitigation strategies to ensure campaign resilience and
         onSubmit={handleFormSubmit}
         textContent={textContent}
       />
-      
-      <div className="w-full max-w-3xl mx-auto mt-10 mb-20">
-        <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold text-navy">Need Help? Chat with Our AI Assistant</h2>
-          <p className="text-navy/70 mt-2">
-            Our AI can help you with your marketing canvas or answer any questions you might have.
-          </p>
-        </div>
-        <div className="relative h-[400px] border border-navy/20 rounded-lg shadow-lg overflow-hidden">
-          <N8nChatWindow webhookUrl={chatWebhookUrl} initiallyOpen={true} />
-        </div>
-      </div>
     </div>
   );
 };
