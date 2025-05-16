@@ -17,28 +17,23 @@ const N8nChatWindow = ({ webhookUrl, initiallyOpen = false, className = '' }: N8
 
     const containerElement = chatContainerRef.current;
     
-    // Initialize N8n Chat with supported configuration options
+    // Initialize N8n Chat with only officially supported properties
+    // According to the @n8n/chat library types
     const chatInstance = createChat({
       webhookUrl: webhookUrl,
       target: containerElement,
       theme: {
         primaryColor: '#18222f', // Navy color
-      },
-      // Don't use defaultOpen as it's not supported
+      }
     });
     
-    // Manually handle the initial state
-    if (initiallyOpen) {
-      // The initiallyOpen prop is handled manually here
-      // We can add a class or attribute to control visibility
-      if (containerElement.firstChild) {
-        // Add any styling or visibility control here if needed
-        console.log('Chat should be initially open');
-      }
-    }
+    // Note: The library doesn't expose a method to programmatically control the initial state
+    // We maintain the initiallyOpen prop for backward compatibility
+    // but it doesn't actually control whether the chat is open initially
     
     // Clean up on unmount
     return () => {
+      // Check if chatInstance has an unmount or cleanup method
       if (typeof chatInstance.unmount === 'function') {
         chatInstance.unmount();
       }
@@ -48,10 +43,8 @@ const N8nChatWindow = ({ webhookUrl, initiallyOpen = false, className = '' }: N8
   return (
     <div 
       ref={chatContainerRef} 
-      className={`w-full h-full flex flex-col ${className}`}
+      className={`w-full h-full ${className}`}
       data-testid="n8n-chat-container"
-      data-initially-open={initiallyOpen}
-      style={{ minHeight: "600px", width: "100%" }}
     />
   );
 };
