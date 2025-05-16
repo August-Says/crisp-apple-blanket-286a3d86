@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
-import ChatWindow from '@/components/chat/ChatWindow';
+import N8nChatWindow from '@/components/chat/N8nChatWindow';
 import QuestionSummary from '@/components/chatbot/QuestionSummary';
 import CanvassQuestions from '@/components/chatbot/CanvassQuestions';
 
@@ -53,7 +53,7 @@ const ChatbotPage = () => {
         {/* Main Chat Window - 60% */}
         <ResizablePanel defaultSize={60} minSize={40}>
           <div className="h-full p-1">
-            <ChatWindow webhookUrl="https://sonarai.app.n8n.cloud/webhook/898cef2e-e667-4160-b53d-34177e97e493/chat" initiallyOpen={true} />
+            <N8nChatWindow webhookUrl="https://sonarai.app.n8n.cloud/webhook/898cef2e-e667-4160-b53d-34177e97e493/chat" initiallyOpen={true} />
           </div>
         </ResizablePanel>
         
