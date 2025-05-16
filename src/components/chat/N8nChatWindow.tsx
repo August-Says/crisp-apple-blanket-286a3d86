@@ -17,20 +17,14 @@ const N8nChatWindow = ({ webhookUrl, initiallyOpen = false, className = '' }: N8
 
     const containerElement = chatContainerRef.current;
     
-    // Initialize N8n Chat - using proper API
+    // Initialize N8n Chat with only supported properties
     const chatInstance = createChat({
       webhookUrl: webhookUrl,
-      target: containerElement, // Use 'target' instead of 'container'
-      showTitle: true,
-      title: 'August Says AI Assistant',
-      titleColor: '#18222f', // Navy color
-      primaryColor: '#18222f', // Navy color
-      initiallyOpen: initiallyOpen,
-      containerWidth: '100%',
-      containerHeight: '100%',
-      avatar: {
-        imageUrl: null, // You can add a logo URL here if desired
-      },
+      target: containerElement,
+      defaultOpen: initiallyOpen,
+      theme: {
+        primaryColor: '#18222f', // Navy color
+      }
     });
     
     // Clean up on unmount
