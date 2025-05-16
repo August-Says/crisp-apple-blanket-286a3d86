@@ -23,7 +23,9 @@ const N8nChatWindow = ({ webhookUrl, initiallyOpen = false, className = '' }: N8
       target: containerElement,
       theme: {
         primaryColor: '#18222f', // Navy color
-      }
+      },
+      alwaysShowChat: true, // Force chat to always be open
+      showWidget: false // Hide the chat button
     });
     
     // Clean up on unmount

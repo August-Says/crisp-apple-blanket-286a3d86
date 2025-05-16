@@ -52,7 +52,7 @@ const ChatbotPage = () => {
       >
         {/* Main Chat Window - 60% */}
         <ResizablePanel defaultSize={60} minSize={40}>
-          <div className="h-full p-1">
+          <div className="h-full p-1 chat-container">
             <N8nChatWindow webhookUrl="https://sonarai.app.n8n.cloud/webhook/898cef2e-e667-4160-b53d-34177e97e493/chat" initiallyOpen={true} />
           </div>
         </ResizablePanel>
@@ -83,6 +83,35 @@ const ChatbotPage = () => {
           </ResizablePanelGroup>
         </ResizablePanel>
       </ResizablePanelGroup>
+
+      <style jsx>{`
+        /* Custom CSS to force n8n chat to be always visible */
+        :global(.chat-container .n8n-chat__widget) {
+          position: relative;
+          top: 0;
+          right: 0;
+          height: 100%;
+          width: 100%;
+          max-height: none;
+          max-width: none;
+          border-radius: 8px;
+          box-shadow: none;
+        }
+        
+        :global(.chat-container .n8n-chat__window) {
+          position: relative;
+          height: 100%;
+          width: 100%;
+          max-height: none;
+          max-width: none;
+          display: flex;
+          flex-direction: column;
+        }
+        
+        :global(.chat-container .n8n-chat__button) {
+          display: none;
+        }
+      `}</style>
     </motion.div>
   );
 };
