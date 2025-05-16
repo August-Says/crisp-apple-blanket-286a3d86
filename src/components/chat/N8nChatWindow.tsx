@@ -27,10 +27,6 @@ const N8nChatWindow = ({ webhookUrl, initiallyOpen = false, className = '' }: N8
       }
     });
     
-    // Note: The library doesn't expose a method to programmatically control the initial state
-    // We maintain the initiallyOpen prop for backward compatibility
-    // but it doesn't actually control whether the chat is open initially
-    
     // Clean up on unmount
     return () => {
       // Check if chatInstance has an unmount or cleanup method
