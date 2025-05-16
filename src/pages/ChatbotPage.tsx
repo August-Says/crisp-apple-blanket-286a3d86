@@ -13,7 +13,7 @@ const ChatbotPage = () => {
     >
       <h1 className="text-2xl font-bold text-navy mb-6">August Says Chatbot</h1>
       
-      <div className="h-[calc(100vh-230px)] w-full border rounded-lg overflow-hidden bg-white shadow-md">
+      <div className="h-[calc(100vh-230px)] w-full border border-gray-300 rounded-lg overflow-hidden bg-white shadow-md">
         <N8nChatWindow 
           webhookUrl="https://sonarai.app.n8n.cloud/webhook/898cef2e-e667-4160-b53d-34177e97e493/chat" 
           initiallyOpen={true}
