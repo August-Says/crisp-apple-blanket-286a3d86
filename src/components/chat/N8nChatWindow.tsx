@@ -18,7 +18,7 @@ const N8nChatWindow = ({ webhookUrl, initiallyOpen = false, className = '' }: N8
     const containerElement = chatContainerRef.current;
     
     // Initialize N8n Chat with only officially supported properties
-    // According to the library's types, we don't have direct control over the initial open state
+    // According to the @n8n/chat library types
     const chatInstance = createChat({
       webhookUrl: webhookUrl,
       target: containerElement,
@@ -27,9 +27,9 @@ const N8nChatWindow = ({ webhookUrl, initiallyOpen = false, className = '' }: N8
       }
     });
     
-    // Note: Since the `open` method doesn't exist on the chat instance according to TypeScript,
-    // we can't programmatically control the initial state.
-    // The library likely handles this through its own internal mechanism.
+    // Note: The library doesn't expose a method to programmatically control the initial state
+    // We maintain the initiallyOpen prop for backward compatibility
+    // but it doesn't actually control whether the chat is open initially
     
     // Clean up on unmount
     return () => {

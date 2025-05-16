@@ -1,0 +1,90 @@
+
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
+import ChatWindow from '@/components/chat/ChatWindow';
+import QuestionSummary from '@/components/chatbot/QuestionSummary';
+import CanvassQuestions from '@/components/chatbot/CanvassQuestions';
+
+const ChatbotPage = () => {
+  // Sample data for demonstration
+  const [askedQuestions, setAskedQuestions] = useState<string[]>([
+    "What are the main pain points for our target audience?",
+    "How does our product address customer needs?",
+    "What emotional triggers drive purchase decisions?"
+  ]);
+  
+  const [potentialCanvassQuestions, setPotentialCanvassQuestions] = useState([
+    {
+      id: "1",
+      question: "How do you feel when you can't find the information you need quickly?",
+      category: "Pain Point"
+    },
+    {
+      id: "2",
+      question: "What emotions arise when using our product for the first time?",
+      category: "User Experience"
+    },
+    {
+      id: "3",
+      question: "Which features make you feel most confident in our solution?",
+      category: "Value Proposition"
+    }
+  ]);
+  
+  const handleAddToCanvass = (questionId: string) => {
+    console.log(`Adding question ${questionId} to canvass`);
+    // Implementation for adding to canvas would go here
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="container mx-auto py-6 h-[calc(100vh-64px)]"
+    >
+      <h1 className="text-2xl font-bold text-navy mb-6">August Says Chatbot</h1>
+      
+      <ResizablePanelGroup 
+        direction="horizontal" 
+        className="min-h-[500px] h-[calc(100%-60px)] rounded-lg border"
+      >
+        {/* Main Chat Window - 60% */}
+        <ResizablePanel defaultSize={60} minSize={40}>
+          <div className="h-full p-1">
+            <ChatWindow webhookUrl="https://us-east-1.aws.webhooks.n8n.cloud/webhook/9cda1060-88d3-4ad4-985e-67e915006e56" initiallyOpen={true} />
+          </div>
+        </ResizablePanel>
+        
+        <ResizableHandle withHandle />
+        
+        {/* Right side panels */}
+        <ResizablePanel defaultSize={40} minSize={30}>
+          <ResizablePanelGroup direction="vertical">
+            {/* Question Summary - Top Right */}
+            <ResizablePanel defaultSize={50}>
+              <div className="h-full p-1">
+                <QuestionSummary questions={askedQuestions} />
+              </div>
+            </ResizablePanel>
+            
+            <ResizableHandle withHandle />
+            
+            {/* Canvass Questions - Bottom Right */}
+            <ResizablePanel defaultSize={50}>
+              <div className="h-full p-1">
+                <CanvassQuestions 
+                  questions={potentialCanvassQuestions} 
+                  onAddToCanvass={handleAddToCanvass}
+                />
+              </div>
+            </ResizablePanel>
+          </ResizablePanelGroup>
+        </ResizablePanel>
+      </ResizablePanelGroup>
+    </motion.div>
+  );
+};
+
+export default ChatbotPage;

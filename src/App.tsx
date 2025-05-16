@@ -16,6 +16,7 @@ import LandingPage from "./pages/LandingPage";
 import AugustLandingPage from "./pages/AugustLandingPage";
 import ReportPage from "./pages/ReportPage";
 import FreeReportPage from "./pages/FreeReportPage";
+import ChatbotPage from "./pages/ChatbotPage";
 
 // Import the framer-motion package
 import { AnimatePresence } from "framer-motion";
@@ -52,6 +53,7 @@ const App = () => {
                 <Route path="/fields" element={<FieldsForm />} />
                 <Route path="/pdf" element={<PdfUpload />} />
                 <Route path="/landingpage" element={<AugustLandingPage />} />
+                <Route path="/chatbot" element={<ChatbotPage />} />
                 {/* Redirect any other paths to the 404 page */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
