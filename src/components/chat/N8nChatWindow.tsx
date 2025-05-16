@@ -17,19 +17,21 @@ const N8nChatWindow = ({ webhookUrl, initiallyOpen = false, className = '' }: N8
 
     const containerElement = chatContainerRef.current;
     
-    // Initialize N8n Chat with only officially supported properties
-    // According to the @n8n/chat library types
+    // Initialize N8n Chat with appropriate configuration
     const chatInstance = createChat({
       webhookUrl: webhookUrl,
       target: containerElement,
       theme: {
         primaryColor: '#18222f', // Navy color
-      }
+      },
+      // This ensures the chat window is open by default
+      defaultOpen: initiallyOpen,
+      // Make sure UI elements are visible
+      showPopupButton: true
     });
     
     // Clean up on unmount
     return () => {
-      // Check if chatInstance has an unmount or cleanup method
       if (typeof chatInstance.unmount === 'function') {
         chatInstance.unmount();
       }
@@ -41,6 +43,7 @@ const N8nChatWindow = ({ webhookUrl, initiallyOpen = false, className = '' }: N8
       ref={chatContainerRef} 
       className={`w-full h-full ${className}`}
       data-testid="n8n-chat-container"
+      style={{ minHeight: "500px" }}
     />
   );
 };

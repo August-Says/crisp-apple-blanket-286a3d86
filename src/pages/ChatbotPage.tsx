@@ -53,7 +53,10 @@ const ChatbotPage = () => {
         {/* Main Chat Window - 60% */}
         <ResizablePanel defaultSize={60} minSize={40}>
           <div className="h-full p-1">
-            <N8nChatWindow webhookUrl="https://sonarai.app.n8n.cloud/webhook/898cef2e-e667-4160-b53d-34177e97e493/chat" />
+            <N8nChatWindow 
+              webhookUrl="https://sonarai.app.n8n.cloud/webhook/898cef2e-e667-4160-b53d-34177e97e493/chat" 
+              initiallyOpen={true}
+            />
           </div>
         </ResizablePanel>
         
