@@ -42,13 +42,13 @@ const ChatbotPage = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="container mx-auto py-6 h-[calc(100vh-128px)]" // Increased padding at bottom to avoid footer overlap
+      className="container mx-auto py-6 max-h-[calc(100vh-160px)]" // Adjusted max-height to ensure no footer overlap
     >
       <h1 className="text-2xl font-bold text-navy mb-6">August Says Chatbot</h1>
       
       <ResizablePanelGroup 
         direction="horizontal" 
-        className="min-h-[500px] h-[calc(100%-60px)] rounded-lg border mb-6" // Added bottom margin
+        className="min-h-[500px] h-[calc(100%-60px)] rounded-lg border mb-12" // Increased bottom margin to avoid footer
       >
         {/* Main Chat Window - 60% */}
         <ResizablePanel defaultSize={60} minSize={40}>
