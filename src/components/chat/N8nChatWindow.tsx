@@ -24,17 +24,10 @@ const N8nChatWindow = ({ webhookUrl, initiallyOpen = false, className = '' }: N8
       theme: {
         primaryColor: '#18222f', // Navy color
       },
-      // Based on the library's supported options
-      showPopupButton: true
+      // Display the chat directly in the container
+      showPopoutButton: false,  // Disable popup button if supported
+      fullscreen: true          // Try to use the full container
     });
-    
-    // If initiallyOpen is true, we need to manually open the chat
-    // since defaultOpen is not supported
-    if (initiallyOpen && chatInstance.open && typeof chatInstance.open === 'function') {
-      setTimeout(() => {
-        chatInstance.open();
-      }, 500);
-    }
     
     // Clean up on unmount
     return () => {
@@ -47,7 +40,7 @@ const N8nChatWindow = ({ webhookUrl, initiallyOpen = false, className = '' }: N8
   return (
     <div 
       ref={chatContainerRef} 
-      className={`w-full h-full ${className}`}
+      className={`w-full h-full flex flex-col ${className}`}
       data-testid="n8n-chat-container"
       style={{ minHeight: "500px" }}
     />
