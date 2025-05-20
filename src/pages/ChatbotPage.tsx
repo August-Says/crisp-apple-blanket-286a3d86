@@ -84,9 +84,10 @@ const ChatbotPage = () => {
         </ResizablePanel>
       </ResizablePanelGroup>
 
-      <style jsx>{`
+      <style>
+        {`
         /* Custom CSS to force n8n chat to be always visible */
-        :global(.chat-container .n8n-chat__widget) {
+        .chat-container .n8n-chat__widget {
           position: relative;
           top: 0;
           right: 0;
@@ -98,7 +99,7 @@ const ChatbotPage = () => {
           box-shadow: none;
         }
         
-        :global(.chat-container .n8n-chat__window) {
+        .chat-container .n8n-chat__window {
           position: relative;
           height: 100%;
           width: 100%;
@@ -108,10 +109,11 @@ const ChatbotPage = () => {
           flex-direction: column;
         }
         
-        :global(.chat-container .n8n-chat__button) {
+        .chat-container .n8n-chat__button {
           display: none;
         }
-      `}</style>
+        `}
+      </style>
     </motion.div>
   );
 };
